@@ -198,3 +198,43 @@ async function parseGithubProj(data){
     console.log(parsedGithubData);
     
 }
+
+let touchstartX, touchstartY, touchendX, touchendY;
+document.querySelector("#carrousel").addEventListener('touchstart', function (event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+}, false);
+
+document.querySelector("#carrousel").addEventListener('touchend', function (event) {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    handleGesture();
+}, false);
+
+
+function handleGesture() {
+    let delta = window.innerWidth*10/100;
+    let vDelta = window.innerHeight*15/100;
+    let target = document.querySelector(".active");
+    let children = target.parentElement.children
+    let activeId;
+    for(let i = 0; i < children.length; ++i){
+        if(children[i] == target){
+            activeId = i;
+        }
+    }
+    let targetId;
+    if(Math.abs(touchstartX-touchendX) > delta && Math.abs(touchstartY-touchendY) < vDelta){
+        if (touchstartX > touchendX) {
+            // console.log('Swiped Left');
+            targetId = activeId == children.length-1 ? 0 : activeId+1
+            startScroll(children[targetId])
+        }
+        
+        if (touchendX > touchstartX) {
+            // console.log('Swiped Right');
+            targetId = activeId == 0 ? children.length-1 : activeId-1
+            startScroll(children[targetId])
+        }
+    }
+}
