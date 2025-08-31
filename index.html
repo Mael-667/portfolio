@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Protest+Revolution&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <button class="liquidGlass" id="btnBurger" ><i class="fa-solid fa-bars"></i></button>
+            <ul>
+                <li class="liquidGlass"><a href="#intro">Accueil</a></li>
+                <li class="liquidGlass"><a href="#presentation">Présentation</a></li>
+                <li class="liquidGlass"><a href="#projets">Projets</a></li>
+                <li class="liquidGlass"><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="intro">
+            <div id="titre">
+                <h2>Sous-titre</h2>
+                <h1>Portfolio de Mael</h1>
+            </div>
+        </section>
+
+        <section id="presentation">
+            <h2>À propos de moi</h2>
+            
+            <div id="presentationMain">
+                <div id="caroussel">
+    
+                    <article class="liquidGlass darkGlassMode liquidGlassLarge articleLeft" id="s">
+                        <h3>euh</h3>
+                        <p>
+                            oui
+                        </p>
+                    </article>
+    
+                    <article class="liquidGlass darkGlassMode liquidGlassLarge articleFocus" id="aboutMe">
+                        <h3>Présentation</h3>
+                        <p>
+                            salam et toi
+                            <!-- Étant passionné par l'informatique, j'ai appris à développer en autodidacte. Aujourd'hui, je poursuis une formation de développeur/intégrateur web au sein du Pole S -->
+                        </p>
+                    </article>
+        
+                    <article class="liquidGlass darkGlassMode liquidGlassLarge articleRight" id="skills">
+                        <h3>Mes compétences</h3>
+                        <p>
+                            oui
+                        </p>
+                    </article>
+                </div>
+    
+    
+                <nav class="liquidGlass darkGlassMode">
+                    <ul>
+                        <li id="btn1" class="" onclick="startScroll(this)"><i class="fa-solid fa-fire"></i></li>
+                        <li id="btn2" class="active" onclick="startScroll(this)"><i class="fa-solid fa-image-portrait"></i></li>
+                        <li id="btn3" class="" onclick="startScroll(this)"><i class="fa-solid fa-suitcase"></i></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </section>
+
+        <section id="projets">
+
+        </section>
+
+    </main>
+
+    <!-- <div class="liquidGlass" id="liquidGlass"></div> -->
+
+    <svg height="0" width="0" display="block" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="filter" color-interpolation-filters="sRGB" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.009 0.011" numOctaves="2" seed="8" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"/>
+                    <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="55" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" result="displacementMap1"/>
+            </filter>
+            <filter id="filter2" color-interpolation-filters="linearRGB" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                <feBlend mode="screen" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" in2="SourceGraphic" result="blend"/>
+                <feTurbulence type="fractalNoise" baseFrequency="0.009 0.008" numOctaves="2" seed="8" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"/>
+                <feDisplacementMap in="blend" in2="turbulence" scale="55" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" result="displacementMap1"/>
+            </filter>
+        </defs>
+    </svg>
+    
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
