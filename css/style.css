@@ -34,6 +34,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+    right: 0;
 }
 
 header nav{
@@ -284,7 +285,7 @@ h3{
     height: 100%;
 }
 
-#caroussel{
+#carrousel{
     height: 83%;
     /* display: grid;
     grid-template-columns: repeat(10, 10%); */
@@ -292,7 +293,7 @@ h3{
     overflow-x: clip;
 }
 
-#caroussel article{
+#carrousel article{
     /* width: 100%; */
     transition: 400ms;
     animation-timing-function: ease-out;
@@ -499,8 +500,9 @@ ul:has(>li:hover)>.active{
 
     #presentation>h2 {
         align-self: baseline;
+        padding-top: 1rem;
     }   
-    #caroussel{
+    #carrousel{
         height: 90%;
     }
     .articleFocus {
@@ -536,7 +538,7 @@ ul:has(>li:hover)>.active{
 }
 
 @media (orientation: portrait) and (max-width:1024px), (min-resolution: 200dpi), (max-width:768px) {
-    #caroussel article{
+    #carrousel article{
         transition: 300ms;
     }
     .articleRight, .articleLeft{
@@ -586,7 +588,7 @@ ul:has(>li:hover)>.active{
 }
 
 .appear{
-    animation: appear 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: appear 0.3s both;
 }
 
 
@@ -595,7 +597,7 @@ ul:has(>li:hover)>.active{
 }
 
 .Reverseappear{
-    animation: reverse-appear 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: reverse-appear 0.3s both;
 }
 
 

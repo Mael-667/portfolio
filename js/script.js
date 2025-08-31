@@ -34,7 +34,7 @@ function b64DecodeUnicode(str) {
 }
 
 function scroll(direction){
-    let articles = document.querySelector("#caroussel").children
+    let articles = document.querySelector("#carrousel").children
     if(direction == "left"){
         for(let i = 0; i < articles.length; ++i){
             let e = articles[i];
