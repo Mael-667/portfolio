@@ -166,7 +166,7 @@ async function getGithubData() {
 
     for (let index = 0; index < result.length; index++) {
         insertProject(await parseGithubProj(result[index]));
-        document.querySelector("#projScroll").innerHTML += `<div class="miniBar"><span class="bar"></span><i class="fa-solid fa-circle"></i></div>`
+        document.querySelector("#elements").innerHTML += `<div class="miniBar"><span class="bar"></span><i class="fa-solid fa-circle"></i></div>`
     }
 
   } catch (error) {
@@ -328,5 +328,12 @@ document.querySelector("#carProjet").addEventListener("scroll", function(e){
 
 function scrollbar(){
     let carrousel = document.querySelector("#carProjet");
-    let scrollWidth = carrousel.scrollWidth;
+    let scrollBar = document.querySelector("#elements")
+    let scrollBarWidth = scrollBar.offsetWidth;
+    let scrollWidth = carrousel.scrollWidth; //taille totale de l'élément
+    let scrollPos = carrousel.scrollLeft //a quel pt l'élément a été scroll
+    let renderWidth = carrousel.offsetWidth //taille affichée a l'écran
+    let cursor = document.querySelector("#cursor")
+    cursor.style.width = `${renderWidth*scrollBarWidth/scrollWidth}px`
 }
+
