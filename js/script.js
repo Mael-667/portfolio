@@ -1,4 +1,6 @@
 document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`
+getGithubData()
+
 
 document.addEventListener("scroll", function(e){
     let euh = isElementInViewport(document.querySelector("#intro")); 
@@ -160,10 +162,11 @@ async function getGithubData() {
     }
 
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
 
     for (let index = 0; index < result.length; index++) {
-        parseGithubProj(result[index]);
+        insertProject(await parseGithubProj(result[index]));
+        document.querySelector("#projScroll").innerHTML += `<div class="miniBar"><span class="bar"></span><i class="fa-solid fa-circle"></i></div>`
     }
 
   } catch (error) {
@@ -192,12 +195,50 @@ async function parseGithubProj(data){
     parsedGithubData.name = capitalizeFirstLetter(data.name);
 
     parsedGithubData.url = data.html_url;
+    parsedGithubData.img = getProjectIcon(parsedGithubData.name);
     parsedGithubData.primaryLanguage = data.language;
+    parsedGithubData.languageIcon = getLanguageIcon(data.language);
     parsedGithubData.stars = data.stargazers_count; //one day.
     parsedGithubData.readme = await getReadme(`${data.url}/readme`)
-    console.log(parsedGithubData);
+    // console.log(parsedGithubData);
+    
+    return(parsedGithubData)
     
 }
+
+
+function insertProject(data) {
+    let readme;
+    // console.log(data.readme);
+    
+    if(data.readme.length < 350){
+        readme = data.readme.substring(0, data.readme.length);
+    } else {
+        readme = `${data.readme.substring(0, 150)}...`;
+    }
+    let toInsert= `
+                    <article class="liquidGlass liquidGlassLarge darkGlassMode projet">
+
+                        <div class="minia" style="background-image: url('${data.img}');"> </div>
+
+                        <div class="projText">
+                            <div class="projEntete">
+                                <h3>${data.name}</h3> <p>${data.languageIcon}</p>
+                            </div>
+                            <p>${readme}</p>
+                        </div>
+                        <a href="${data.url}" target="_blank"><button class="liquidBtn">En voir plus</button></a>
+                    </article>
+                   `
+    let parent = document.querySelector("#carProjet")
+    parent.innerHTML = toInsert + parent.innerHTML;
+}
+
+
+
+
+
+
 
 let touchstartX, touchstartY, touchendX, touchendY;
 document.querySelector("#carrousel").addEventListener('touchstart', function (event) {
@@ -237,4 +278,55 @@ function handleGesture() {
             startScroll(children[targetId])
         }
     }
+}
+
+
+function getProjectIcon(project){
+    let link ="";
+    switch(project){
+        case("Stateur"):
+            link = "./img/stateur.jpg"
+            break;
+        case("Interstalla"):
+            link = "./img/interstella.jpg"
+            break;
+        case("Flex"):
+            link = "./img/flex.jpg"
+            break;
+        case("Diskype"):
+            link = "./img/diskype.jpg"
+            break;
+    }
+    return link;
+}
+
+
+function getLanguageIcon(language){
+    console.log(language);
+    
+    switch(language){
+        case("Java"):
+            return `<i class="fa-brands fa-java"></i>`
+            break;
+        case("HTML"):
+            return `<i class="fa-brands fa-html5"></i>`
+            break;
+        case("JavaScript"):
+            return `<i class="fa-brands fa-square-js"></i>`
+            break;
+        case("CSS"):
+            return `<i class="fa-brands fa-css"></i>`
+            break;
+    }
+}
+
+
+document.querySelector("#carProjet").addEventListener("scroll", function(e){
+    // console.log(e);
+    
+})
+
+function scrollbar(){
+    let carrousel = document.querySelector("#carProjet");
+    let scrollWidth = carrousel.scrollWidth;
 }
