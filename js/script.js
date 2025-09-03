@@ -187,6 +187,7 @@ async function getReadme(url) {
     
   } catch (error) {
     console.error(error.message);
+    return "";
   }
 }
 
