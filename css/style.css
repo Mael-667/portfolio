@@ -130,7 +130,7 @@ main{
 h1{
     font-family: "Protest Revolution", sans-serif;
     font-size: 4.7em;
-    margin: 1rem;
+    margin: 2rem 1rem;
     text-align: center;
 }
 
@@ -144,6 +144,8 @@ h3{
 
 #intro h2{
     filter: none;
+    text-indent: -4rem;
+    margin: 1.8rem 0;
 }
 
 .liquidGlass, .liquidGlass::after, .liquidGlass::before{
@@ -559,30 +561,32 @@ ul:has(>li:hover)>.active{
 
 #projScroll{
     margin: 1rem auto;
+    font-size: 1.4rem;
 }
 
 #projScroll::after{
-    background-color: #d500ff1f;
-    box-shadow: inset 2px 3px 5px 0px rgb(236 116 255 / 47%);
+    background-color: #c144d91f;
+    box-shadow: inset 1px 2px 4px 0px rgb(237 120 255 / 47%);
 }
 
 #elements{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.7rem;
+    padding: 0.7rem 0;
+    margin: 0 0.7rem;
 }
 
 #projScroll i{
     /* padding: 1rem 0; */
     left: -3px;
+    text-shadow: none;
     /* z-index: 999; */
 }
 
 .miniBar{
     position: relative;
-    padding-left: 1rem;
-    text-shadow: none;
+    padding-left: 1em;
     z-index: 999;
 }
 
@@ -598,14 +602,42 @@ ul:has(>li:hover)>.active{
     z-index: 900;
 }
 
+#cursor, #cursor::before, #cursor::after{
+    transition: 200ms;
+    border-radius: 1rem;
+}
+
 #cursor{
-    padding-left: 0.6rem;
+    padding-left: 0.4em;
     width: 1rem;
-    height: 2rem;
+    height: 1.5em;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 12;
+}
+
+#cursor::before{
+    backdrop-filter: blur(0);
+}
+
+#cursor::after{
+    background-color: rgba(255, 255, 255, 0.055);
+    box-shadow: inset 0px 0px 5px 0px rgb(255 255 255);
+}
+
+#projScroll:has(>#elements:hover) #cursor::before{
+    border-radius: 1.3rem;
+}
+
+#projScroll:has(>#elements:hover) #cursor{
+    height: 1.7em;
+    border-radius: 1.3rem;
+}
+
+#projScroll:has(>#elements:hover) #cursor::after{
+    box-shadow: inset 0px 0px 0.7rem 1px rgb(255 255 255);
+    border-radius: 1.3rem;
 }
 
 .notInFocus{
@@ -615,6 +647,22 @@ ul:has(>li:hover)>.active{
 }
 
 
+@media screen and (max-width: 1439px){
+    h1{
+        font-size: 4rem;
+    }
+
+    h2{
+        font-size: 2.8rem;
+    }
+
+    h3{
+        font-size: 2.5rem;
+    }
+    section p{
+        font-size: 1.1rem;
+    }
+}
 
 @media screen and (max-width:768px){
     
@@ -637,19 +685,27 @@ ul:has(>li:hover)>.active{
     }
 
     h1{
-        font-size: 3rem;
+        font-size: 3.5rem;
     }
 
     h2{
-        font-size: 1.8rem;
+        font-size: 2em;
     }
 
     h3{
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     section{
         grid-template-rows: 17% 83%;
+    }
+
+    section p{
+        font-size: 1.1rem !important;
+    }
+
+    #intro h2{
+        text-indent: 0;
     }
 
     section>h2 {
@@ -739,22 +795,6 @@ ul:has(>li:hover)>.active{
 
 }
 
-@media screen and (max-width: 1439px){
-    h1{
-        font-size: 4rem;
-    }
-
-    h2{
-        font-size: 2.8rem;
-    }
-
-    h3{
-        font-size: 2.5rem;
-    }
-    section p{
-        font-size: 1.1rem;
-    }
-}
 
 @media screen and (min-width:1440px){
     #presentationMain{
