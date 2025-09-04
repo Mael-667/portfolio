@@ -559,6 +559,15 @@ ul:has(>li:hover)>.active{
     border-radius: 2rem;
 }
 
+.no-drag {
+    user-drag: none; /* For Safari */
+    -webkit-user-drag: none; /* For WebKit browsers */
+    user-select: none; /* Prevent text/image selection */
+    -moz-user-select: none; /* For Firefox */
+    -webkit-user-select: none; /* For WebKit browsers */
+    -ms-user-select: none; /* For Internet Explorer/Edge */
+}
+
 #projScroll{
     margin: 1rem auto;
     font-size: 1.4rem;

@@ -153,23 +153,33 @@ function resetBurger(){
 
 window.onclick = removeBurger
 
+
+let scrollBar;
+var rect;
+let barPos;
+let scrollBarWidth;
 async function getGithubData() {
   const url = "https://api.github.com/users/Mael-667/repos";
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+    // const response = await fetch(url);
+    // if (!response.ok) {
+    //   throw new Error(`Response status: ${response.status}`);
+    // }
 
-    const result = await response.json();
+    // const result = await response.json();
+    // localStorage.setItem("github", result);
     // console.log(result);
-
-    for (let index = 0; index < result.length; index++) {
+    const result = localStorage.getItem("github")
+    for (let index = 0; index < 7; index++) {
         insertProject(await parseGithubProj(result[index]));
         document.querySelector("#elements").innerHTML += `<div class="miniBar"><span class="bar"></span><i class="fa-solid fa-circle"></i></div>`
     }
-
-  } catch (error) {
+    scrollBar = document.querySelector("#elements");
+    rect = scrollBar.getBoundingClientRect();
+    barPos = rect.left;
+    scrollBarWidth = scrollBar.offsetWidth; 
+    scrollbar()
+} catch (error) {
     console.error(error.message);
   }
 }
@@ -323,18 +333,45 @@ function getLanguageIcon(language){
 
 
 document.querySelector("#carProjet").addEventListener("scroll", function(e){
-    // console.log(e);
-    
+    // scrollbar();
 })
 
+let cursor = document.querySelector("#cursor")
+let carrousel = document.querySelector("#carProjet");
+document.querySelector("#elements").addEventListener("mousemove", function(e){
+    let cursorPos = e.clientX;
+    let cursorRelativePos = cursorPos-barPos
+    let offset = (cursorRelativePos*carrousel.scrollWidth/scrollBarWidth)-carrousel.offsetWidth;
+    let barposition;
+    if(cursorRelativePos-(cursor.offsetWidth/2) < 0){
+        barposition = 0;
+    } else if (cursorRelativePos-(cursor.offsetWidth/2) > scrollBarWidth-cursor.offsetWidth){
+        barposition = scrollBarWidth-cursor.offsetWidth;
+    } else {
+        barposition = cursorRelativePos-(cursor.offsetWidth/2)
+    }
+    cursor.style.transform = `translate(${barposition}px, -50%)`
+    // console.log(offset, carrousel.scrollWidth);
+    
+    carrousel.scrollTo(offset, 0);
+})
+
+
+
+
+let firstSetup = true;
+
 function scrollbar(){
-    let carrousel = document.querySelector("#carProjet");
-    let scrollBar = document.querySelector("#elements")
-    let scrollBarWidth = scrollBar.offsetWidth;
+    // let scrollBar = document.querySelector("#elements")
+    let scrollBarWidth = scrollBar.offsetWidth; //taille du scrollbar
     let scrollWidth = carrousel.scrollWidth; //taille totale de l'élément
     let scrollPos = carrousel.scrollLeft //a quel pt l'élément a été scroll
     let renderWidth = carrousel.offsetWidth //taille affichée a l'écran
     let cursor = document.querySelector("#cursor")
-    cursor.style.width = `${renderWidth*scrollBarWidth/scrollWidth}px`
+    if(firstSetup){
+        cursor.style.width = `${renderWidth*scrollBarWidth/scrollWidth}px`
+        // firstSetup = false;
+    }
+    let offset = scrollPos*scrollBarWidth/scrollWidth;
+    cursor.style.transform = `translate(${offset}px, -50%)`
 }
-
