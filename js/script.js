@@ -1,3 +1,8 @@
+//TODO : menu burger déroulant avec des bouton en liquidglassbtn
+//TODO : gray out les indicateurs des card hors screen sur la scrollbar des projets
+//TODO : scroll automatique du carrousel projet
+
+
 document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`;
 getGithubData()
 
