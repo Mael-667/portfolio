@@ -1,17 +1,29 @@
-document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`
+document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`;
 getGithubData()
 
+
+function addEvt(target, event, fun){
+    target.addEventListener(event, fun);
+}
+
+function delEvt(target, event, fun){
+    target.removeEventListener(event, fun);
+}
+
+function get(element){
+    return document.querySelector(element);
+}
 
 document.addEventListener("scroll", function(e){
     let euh = isElementInViewport(document.querySelector("#intro")); 
     if(euh){
         document.querySelectorAll("header .liquidGlass").forEach(e => 
             e.classList.contains("glassDarkMode") ? e.classList.remove("glassDarkMode") : 0
-        )
+        );
     } else {
         document.querySelectorAll("header .liquidGlass").forEach(e =>
                 e.classList.add("glassDarkMode")
-        )
+        );
     }
 })
 
@@ -19,7 +31,7 @@ function isElementInViewport (el) {
     var rect = el.getBoundingClientRect();
 
     // console.log(window.innerHeight, window.innerWidth, rect);
-    return rect.bottom > 1
+    return rect.bottom > 1;
     
 }
 
@@ -36,7 +48,7 @@ function b64DecodeUnicode(str) {
 }
 
 function scroll(direction){
-    let articles = document.querySelector("#carrousel").children
+    let articles = document.querySelector("#carrousel").children;
     if(direction == "left"){
         for(let i = 0; i < articles.length; ++i){
             let e = articles[i];
@@ -154,30 +166,41 @@ function resetBurger(){
 window.onclick = removeBurger
 
 
-let scrollBar;
+let scrollBar = document.querySelector("#elements");
 var rect;
 let barPos;
 let scrollBarWidth;
+let scrollBarRight;
+let maxSpaceLeft;
+let cursor = document.querySelector("#cursor");
+let cursorRight;
+let scrollLeft;
 async function getGithubData() {
   const url = "https://api.github.com/users/Mael-667/repos";
   try {
-    // const response = await fetch(url);
-    // if (!response.ok) {
-    //   throw new Error(`Response status: ${response.status}`);
-    // }
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
 
-    // const result = await response.json();
-    // localStorage.setItem("github", result);
-    // console.log(result);
-    const result = localStorage.getItem("github")
-    for (let index = 0; index < 7; index++) {
+    const result = await response.json();
+    localStorage.setItem("github", result);
+    console.log(result);
+
+
+    // const result = localStorage.getItem("github")
+
+
+    let limit = result.length > 7 ? 7 : result.length;
+    for (let index = 0; index < limit; index++) {
         insertProject(await parseGithubProj(result[index]));
         document.querySelector("#elements").innerHTML += `<div class="miniBar"><span class="bar"></span><i class="fa-solid fa-circle"></i></div>`
     }
-    scrollBar = document.querySelector("#elements");
     rect = scrollBar.getBoundingClientRect();
     barPos = rect.left;
     scrollBarWidth = scrollBar.offsetWidth; 
+    scrollBarRight = scrollBar.getBoundingClientRect().right
+    scrollLeft = Math.floor(carrousel.scrollWidth) - Math.floor(carrousel.offsetWidth);
     scrollbar()
 } catch (error) {
     console.error(error.message);
@@ -331,33 +354,66 @@ function getLanguageIcon(language){
     }
 }
 
+let carProjet = get("#carProjet");
+addEvt(carProjet, "scroll", scrollbar);
 
-document.querySelector("#carProjet").addEventListener("scroll", function(e){
-    // scrollbar();
+let carrousel = document.querySelector("#carProjet");
+
+
+//clic support pour la touchbar sur pc
+addEvt(scrollBar, "mousedown", function(e){
+    delEvt(carProjet, "scroll", scrollbar);
+    addEvt(scrollBar, "mousemove", updateCursor);
 })
 
-let cursor = document.querySelector("#cursor")
-let carrousel = document.querySelector("#carProjet");
-document.querySelector("#elements").addEventListener("mousemove", function(e){
-    let cursorPos = e.clientX;
+addEvt(document, "mouseup", function(){
+    delEvt(scrollBar, "mousemove", updateCursor);
+    addEvt(carProjet, "scroll", scrollbar);
+})
+
+
+
+
+//touch support pour la scrollbar sur mobile
+addEvt(scrollBar, "touchstart", function(e){
+    delEvt(carProjet, "scroll", scrollbar);
+    addEvt(scrollBar, "touchmove", updateCursor);
+    cursor.classList.toggle("touched");    
+})
+
+addEvt(document, "touchend", function(e){
+    delEvt(scrollBar, "touchmove", updateCursor);
+    cursor.classList.toggle("touched");
+    addEvt(carProjet, "scroll", scrollbar);
+})
+
+
+
+function updateCursor(e){
+    let cursorPos;
+    if(e.type == "touchmove"){
+        cursorPos = e.changedTouches[0].clientX
+    } else {
+        cursorPos = e.clientX;
+    }
     let cursorRelativePos = cursorPos-barPos
-    let offset = (cursorRelativePos*carrousel.scrollWidth/scrollBarWidth)-carrousel.offsetWidth;
+    let actualCursorRight = Math.floor(cursor.getBoundingClientRect().right);
+    let actualSpaceLeft = scrollBarRight - actualCursorRight;
+    let spaceTotal = scrollBarWidth - cursor.offsetWidth;
+    let trueOffset = actualSpaceLeft*100/maxSpaceLeft;
+    trueOffset = Math.abs(trueOffset-100);
+    trueOffset = (trueOffset*scrollLeft/100);
     let barposition;
     if(cursorRelativePos-(cursor.offsetWidth/2) < 0){
         barposition = 0;
-    } else if (cursorRelativePos-(cursor.offsetWidth/2) > scrollBarWidth-cursor.offsetWidth){
-        barposition = scrollBarWidth-cursor.offsetWidth;
+    } else if (cursorRelativePos-(cursor.offsetWidth/2) > spaceTotal){
+        barposition = spaceTotal;
     } else {
         barposition = cursorRelativePos-(cursor.offsetWidth/2)
     }
     cursor.style.transform = `translate(${barposition}px, -50%)`
-    // console.log(offset, carrousel.scrollWidth);
-    
-    carrousel.scrollTo(offset, 0);
-})
-
-
-
+    carrousel.scrollTo(trueOffset, 0);
+}
 
 let firstSetup = true;
 
@@ -370,8 +426,15 @@ function scrollbar(){
     let cursor = document.querySelector("#cursor")
     if(firstSetup){
         cursor.style.width = `${renderWidth*scrollBarWidth/scrollWidth}px`
-        // firstSetup = false;
+        addEvt(cursor, "transitionend", setupScrollBarSpaceLeft)
+        firstSetup = false;
     }
     let offset = scrollPos*scrollBarWidth/scrollWidth;
     cursor.style.transform = `translate(${offset}px, -50%)`
+}
+
+function setupScrollBarSpaceLeft(){
+    cursorRight = Math.floor(cursor.getBoundingClientRect().right);
+    maxSpaceLeft = scrollBarRight - cursorRight;
+    delEvt(cursor, "transitionend", setupScrollBarSpaceLeft)
 }
