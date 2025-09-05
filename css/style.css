@@ -511,6 +511,7 @@ ul:has(>li:hover)>.active{
 }
 
 .projet::after{
+    background: rgb(44 0 59 / 18%) !important;
     box-shadow: inset 1px 1px 3px 1px rgb(240 189 255 / 56%), 0px 0px 7px 1px rgb(0 0 0 / 46%) !important;
 }
 
@@ -610,7 +611,7 @@ ul:has(>li:hover)>.active{
     left: -3px;
     text-shadow: none;
     /* z-index: 999; */
-    color: rgba(255, 255, 255, 0);
+    color: rgb(255 0 174 / 11%);
     width: fit-content;
 }
 

@@ -18,9 +18,11 @@ function delEvt(target, event, fun){
 function get(element){
     return document.querySelector(element);
 }
-
+let intro = document.querySelector("#intro");
+let divProjet = get("#projets");
+let projetsAnimSetuped = false;
 document.addEventListener("scroll", function(e){
-    let euh = isElementInViewport(document.querySelector("#intro")); 
+    let euh = isElementInViewport(intro); 
     if(euh){
         document.querySelectorAll("header .liquidGlass").forEach(e => 
             e.classList.contains("glassDarkMode") ? e.classList.remove("glassDarkMode") : 0
@@ -183,20 +185,20 @@ let scrollLeft;
 async function getGithubData() {
   const url = "https://api.github.com/users/Mael-667/repos";
   try {
-    // const response = await fetch(url);
-    // if (!response.ok) {
-    //   throw new Error(`Response status: ${response.status}`);
-    // }
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
 
-    // const result = await response.json();
-    // localStorage.setItem("github", result);
-    // console.log(result);
-
-
-    const result = localStorage.getItem("github")
+    const result = await response.json();
+    localStorage.setItem("github", result);
+    console.log(result);
 
 
-    let limit = result.length > 7 ? 7 : result.length;
+    // const result = localStorage.getItem("github")
+
+
+    let limit = result.length > 6 ? 6 : result.length;
     for (let index = 0; index < limit; index++) {
         insertProject(await parseGithubProj(result[index]));
         document.querySelector("#elements").innerHTML += `<i class="fa-solid fa-circle"></i>`
@@ -472,7 +474,6 @@ addEvt(document, "DOMContentLoaded", function(){
     }, 7777)
 });
 
-let tour = 0;
 let target = 0;
 let incr = 0;
 let decr = carrousel.scrollWidth/77;
@@ -491,7 +492,6 @@ function autoScroll(){
     }
     incr = nextStep/77;
     scrollAnim();
-    ++tour;
 }
 let animId;
 function scrollAnim(){
@@ -500,11 +500,11 @@ function scrollAnim(){
         animId = requestAnimationFrame(scrollAnim);
     }
 }
-
+let animId2;
 function scrollAnimTo0(){
     if(target > 0){
         target = target-decr;
         carrousel.scrollTo(target, 0);
-        animId = requestAnimationFrame(scrollAnimTo0);
+        animId2 = requestAnimationFrame(scrollAnimTo0);
     }
 }
