@@ -511,7 +511,7 @@ ul:has(>li:hover)>.active{
 }
 
 .projet::after{
-    box-shadow: inset 1px 1px 3px 1px rgb(240 189 255 / 56%), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 7px 1px rgb(0 0 0 / 46%) !important;
+    box-shadow: inset 1px 1px 3px 1px rgb(240 189 255 / 56%), 0px 0px 7px 1px rgb(0 0 0 / 46%) !important;
 }
 
 #carProjet article>*{
@@ -585,29 +585,51 @@ ul:has(>li:hover)>.active{
     justify-content: center;
     padding: 0.4em 0;
     margin: 0 0.7rem;
+    background: linear-gradient(80deg, rgb(45, 0, 54) 100%, rgb(250, 228, 255) 0%);
+    background-clip: text;
+
+}
+
+
+#line{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - ((0.85rem)*2));
+    margin-left: calc(0.7rem + 1px);
+    height: 0.18em;
+    display: inline-block;
+    z-index: 80;
+    background: linear-gradient(80deg, rgb(45, 0, 54) 100%, rgb(250, 232, 255) 0%);
 }
 
 #projScroll i{
-    /* padding: 1rem 0; */
+    padding-right: 1rem;
     left: -3px;
     text-shadow: none;
     /* z-index: 999; */
+    color: rgba(255, 255, 255, 0);
+    width: fit-content;
 }
 
+#elements i:last-of-type{
+    padding-right: 1px;
+}
 .miniBar{
     position: relative;
     padding-left: 1em;
     z-index: 999;
+    background: inherit;
 }
 
 .bar{
     position: absolute;
-    right: 1em;
+    /* right: 1em; */
     top: 45%;
     transform: translateY(-50%);
-    width: 100%;
+    width: 2em;
     height: 0.18em;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     display: inline-block;
     z-index: 900;
 }

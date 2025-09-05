@@ -183,30 +183,26 @@ let scrollLeft;
 async function getGithubData() {
   const url = "https://api.github.com/users/Mael-667/repos";
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+    // const response = await fetch(url);
+    // if (!response.ok) {
+    //   throw new Error(`Response status: ${response.status}`);
+    // }
 
-    const result = await response.json();
-    localStorage.setItem("github", result);
-    console.log(result);
+    // const result = await response.json();
+    // localStorage.setItem("github", result);
+    // console.log(result);
 
 
-    // const result = localStorage.getItem("github")
+    const result = localStorage.getItem("github")
 
 
     let limit = result.length > 7 ? 7 : result.length;
     for (let index = 0; index < limit; index++) {
         insertProject(await parseGithubProj(result[index]));
-        document.querySelector("#elements").innerHTML += `<div class="miniBar"><span class="bar"></span><i class="fa-solid fa-circle"></i></div>`
+        document.querySelector("#elements").innerHTML += `<i class="fa-solid fa-circle"></i>`
     }
-    rect = scrollBar.getBoundingClientRect();
-    barPos = rect.left;
-    scrollBarWidth = scrollBar.offsetWidth; 
-    scrollBarRight = scrollBar.getBoundingClientRect().right
-    scrollLeft = Math.floor(carrousel.scrollWidth) - Math.floor(carrousel.offsetWidth);
-    scrollbar()
+    scrollbarSetup();
+    scrollbar();
 } catch (error) {
     console.error(error.message);
   }
@@ -438,8 +434,23 @@ function scrollbar(){
     cursor.style.transform = `translate(${offset}px, -50%)`
 }
 
+function scrollbarSetup(){
+    rect = scrollBar.getBoundingClientRect();
+    barPos = rect.left;
+    scrollBarWidth = scrollBar.offsetWidth; 
+    scrollBarRight = scrollBar.getBoundingClientRect().right
+    scrollLeft = Math.floor(carrousel.scrollWidth) - Math.floor(carrousel.offsetWidth);
+}
+
 function setupScrollBarSpaceLeft(){
     cursorRight = Math.floor(cursor.getBoundingClientRect().right);
     maxSpaceLeft = scrollBarRight - cursorRight;
     delEvt(cursor, "transitionend", setupScrollBarSpaceLeft)
 }
+
+addEvt(window, "resize", function(){
+    console.log("euh");
+    scrollbarSetup()
+    firstSetup = true;
+    scrollbar();
+})
