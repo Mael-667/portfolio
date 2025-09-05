@@ -183,17 +183,17 @@ let scrollLeft;
 async function getGithubData() {
   const url = "https://api.github.com/users/Mael-667/repos";
   try {
-    // const response = await fetch(url);
-    // if (!response.ok) {
-    //   throw new Error(`Response status: ${response.status}`);
-    // }
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
 
-    // const result = await response.json();
-    // localStorage.setItem("github", result);
-    // console.log(result);
+    const result = await response.json();
+    localStorage.setItem("github", result);
+    console.log(result);
 
 
-    const result = localStorage.getItem("github")
+    // const result = localStorage.getItem("github")
 
 
     let limit = result.length > 6 ? 6 : result.length;
