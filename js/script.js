@@ -363,6 +363,7 @@ let carrousel = document.querySelector("#carProjet");
 
 //clic support pour la touchbar sur pc
 addEvt(scrollBar, "mousedown", function(e){
+    clearInterval(intervalAnim);
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "mousemove", updateCursor);
 })
@@ -377,6 +378,7 @@ addEvt(document, "mouseup", function(){
 
 //touch support pour la scrollbar sur mobile
 addEvt(scrollBar, "touchstart", function(e){
+    clearInterval(intervalAnim);
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "touchmove", updateCursor);
     cursor.classList.toggle("touched");    
@@ -393,13 +395,11 @@ addEvt(document, "touchend", function(e){
 function updateCursor(e){
     let cursorPos;
     if(e.type == "touchmove"){
-        cursorPos = e.changedTouches[0].clientX
+        cursorPos = e.changedTouches[0].clientX;
     } else {
         cursorPos = e.clientX;
     }
-    let cursorRelativePos = cursorPos-barPos
-    get("#elements").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
-    get("#line").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
+    let cursorRelativePos = cursorPos-barPos;
     let actualCursorRight = Math.floor(cursor.getBoundingClientRect().right);
     let actualSpaceLeft = scrollBarRight - actualCursorRight;
     let spaceTotal = scrollBarWidth - cursor.offsetWidth;
@@ -407,14 +407,19 @@ function updateCursor(e){
     trueOffset = Math.abs(trueOffset-100);
     trueOffset = (trueOffset*scrollLeft/100);
     let barposition;
+    let gradientPos = cursorRelativePos;
     if(cursorRelativePos-(cursor.offsetWidth/2) < 0){
         barposition = 0;
+        gradientPos = cursor.offsetWidth/2-5;
     } else if (cursorRelativePos-(cursor.offsetWidth/2) > spaceTotal){
         barposition = spaceTotal;
+        gradientPos = scrollBar.offsetWidth - cursor.offsetWidth/2 + 5;
     } else {
-        barposition = cursorRelativePos-(cursor.offsetWidth/2)
+        barposition = cursorRelativePos-(cursor.offsetWidth/2);
     }
-    cursor.style.transform = `translate(${barposition}px, -50%)`
+    get("#elements").style = `background-image : radial-gradient(circle at ${gradientPos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
+    get("#line").style = `background-image : radial-gradient(circle at ${gradientPos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
+    cursor.style.transform = `translate(${barposition}px, -50%)`;
     carrousel.scrollTo(trueOffset, 0);
 }
 
@@ -455,7 +460,51 @@ function setupScrollBarSpaceLeft(){
 
 addEvt(window, "resize", function(){
     console.log("euh");
-    scrollbarSetup()
+    scrollbarSetup();
     firstSetup = true;
     scrollbar();
 })
+
+let intervalAnim;
+addEvt(document, "DOMContentLoaded", function(){
+    intervalAnim = setInterval(() => {
+        autoScroll();
+    }, 7777)
+});
+
+let tour = 0;
+let target = 0;
+let incr = 0;
+let decr = carrousel.scrollWidth/77;
+function autoScroll(){
+    if(target == carrousel.scrollWidth-carrousel.offsetWidth){
+        scrollAnimTo0();
+        return;
+    }
+    let carrouselWidth = carrousel.scrollWidth;
+    let steps = carrousel.childElementCount;
+    let nextStep = carrouselWidth/steps;
+    let scrollPos = carrousel.scrollLeft; //a quel pt l'élément a été scroll
+    target = scrollPos+nextStep;
+    if(target > carrousel.scrollWidth-carrousel.offsetWidth){
+        target = carrousel.scrollWidth-carrousel.offsetWidth 
+    }
+    incr = nextStep/77;
+    scrollAnim();
+    ++tour;
+}
+let animId;
+function scrollAnim(){
+    if(carrousel.scrollLeft < target){
+        carrousel.scrollTo(carrousel.scrollLeft+incr, 0);
+        animId = requestAnimationFrame(scrollAnim);
+    }
+}
+
+function scrollAnimTo0(){
+    if(target > 0){
+        target = target-decr;
+        carrousel.scrollTo(target, 0);
+        animId = requestAnimationFrame(scrollAnimTo0);
+    }
+}
