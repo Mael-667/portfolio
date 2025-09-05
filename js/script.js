@@ -398,6 +398,8 @@ function updateCursor(e){
         cursorPos = e.clientX;
     }
     let cursorRelativePos = cursorPos-barPos
+    get("#elements").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgb(255, 157, 198) 35%, rgba(31, 0, 23, 1) 40%) !important;`
+    get("#line").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgb(255, 157, 198) 35%, rgba(31, 0, 23, 1) 40%) !important;`
     let actualCursorRight = Math.floor(cursor.getBoundingClientRect().right);
     let actualSpaceLeft = scrollBarRight - actualCursorRight;
     let spaceTotal = scrollBarWidth - cursor.offsetWidth;

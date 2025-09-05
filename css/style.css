@@ -585,7 +585,8 @@ ul:has(>li:hover)>.active{
     justify-content: center;
     padding: 0.4em 0;
     margin: 0 0.7rem;
-    background: linear-gradient(80deg, rgb(45, 0, 54) 100%, rgb(250, 228, 255) 0%);
+    background: radial-gradient(circle at 0%,rgb(255, 157, 198) 35%, rgba(31, 0, 23, 1) 40%);
+    transition: 200ms;
     background-clip: text;
 
 }
@@ -600,7 +601,8 @@ ul:has(>li:hover)>.active{
     height: 0.18em;
     display: inline-block;
     z-index: 80;
-    background: linear-gradient(80deg, rgb(45, 0, 54) 100%, rgb(250, 232, 255) 0%);
+    background: radial-gradient(circle at 0%,rgb(255, 157, 198) 35%, rgba(31, 0, 23, 1) 40%);
+    transition: 200ms;
 }
 
 #projScroll i{
