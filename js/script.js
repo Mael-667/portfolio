@@ -359,15 +359,15 @@ function getLanguageIcon(language){
 
 let carProjet = get("#carProjet");
 addEvt(carProjet, "scroll", scrollbar);
-
+addEvt(carProjet, "touchstart", cancelCarAnim);
+addEvt(carProjet, "mousedown", cancelCarAnim);
 let carrousel = document.querySelector("#carProjet");
 
-
+let stoptt = false;
 //clic support pour la touchbar sur pc
 addEvt(scrollBar, "mousedown", function(e){
     clearInterval(intervalAnim);
-    cancelAnimationFrame(animId);
-    cancelAnimationFrame(animId2);
+    cancelCarAnim();
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "mousemove", updateCursor);
 })
@@ -383,8 +383,7 @@ addEvt(document, "mouseup", function(){
 //touch support pour la scrollbar sur mobile
 addEvt(scrollBar, "touchstart", function(e){
     clearInterval(intervalAnim);
-    cancelAnimationFrame(animId);
-    cancelAnimationFrame(animId2);
+    cancelCarAnim();
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "touchmove", updateCursor);
     cursor.classList.toggle("touched");    
@@ -396,7 +395,11 @@ addEvt(document, "touchend", function(e){
     addEvt(carProjet, "scroll", scrollbar);
 })
 
-
+function cancelCarAnim(){
+    stoptt = true;
+    cancelAnimationFrame(animId);
+    cancelAnimationFrame(animId2);
+}
 
 function updateCursor(e){
     let cursorPos;
@@ -499,6 +502,11 @@ function autoScroll(){
 }
 let animId;
 function scrollAnim(){
+    console.log(stoptt);
+    
+    if(stoptt){
+        return;
+    }
     if(carrousel.scrollLeft < target){
         carrousel.scrollTo(carrousel.scrollLeft+incr, 0);
         animId = requestAnimationFrame(scrollAnim);
@@ -506,6 +514,9 @@ function scrollAnim(){
 }
 let animId2;
 function scrollAnimTo0(){
+    if(stoptt){
+        return;
+    }
     if(target > 0){
         target = target-decr;
         carrousel.scrollTo(target, 0);
