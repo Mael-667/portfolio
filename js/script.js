@@ -1,7 +1,7 @@
 //TODO : menu burger déroulant avec des bouton en liquidglassbtn
 //TODO : gray out les indicateurs des card hors screen sur la scrollbar des projets
 //TODO : scroll automatique du carrousel projet
-
+//TODO : effet hover sur le bouton en voir plus
 
 document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`;
 getGithubData()
@@ -366,6 +366,8 @@ let carrousel = document.querySelector("#carProjet");
 //clic support pour la touchbar sur pc
 addEvt(scrollBar, "mousedown", function(e){
     clearInterval(intervalAnim);
+    cancelAnimationFrame(animId);
+    cancelAnimationFrame(animId2);
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "mousemove", updateCursor);
 })
@@ -381,6 +383,8 @@ addEvt(document, "mouseup", function(){
 //touch support pour la scrollbar sur mobile
 addEvt(scrollBar, "touchstart", function(e){
     clearInterval(intervalAnim);
+    cancelAnimationFrame(animId);
+    cancelAnimationFrame(animId2);
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "touchmove", updateCursor);
     cursor.classList.toggle("touched");    
