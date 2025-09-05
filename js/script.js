@@ -398,8 +398,8 @@ function updateCursor(e){
         cursorPos = e.clientX;
     }
     let cursorRelativePos = cursorPos-barPos
-    get("#elements").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgb(255, 157, 198) 35%, rgba(31, 0, 23, 1) 40%) !important;`
-    get("#line").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgb(255, 157, 198) 35%, rgba(31, 0, 23, 1) 40%) !important;`
+    get("#elements").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
+    get("#line").style = `background-image : radial-gradient(circle at ${cursorRelativePos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
     let actualCursorRight = Math.floor(cursor.getBoundingClientRect().right);
     let actualSpaceLeft = scrollBarRight - actualCursorRight;
     let spaceTotal = scrollBarWidth - cursor.offsetWidth;
@@ -434,6 +434,9 @@ function scrollbar(){
     }
     let offset = scrollPos*scrollBarWidth/scrollWidth;
     cursor.style.transform = `translate(${offset}px, -50%)`
+
+    get("#elements").style = `background-image : radial-gradient(circle at ${offset+(cursor.offsetWidth/2)-1}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)+2}px) !important;`
+    get("#line").style = `background-image : radial-gradient(circle at ${offset+(cursor.offsetWidth/2)-1}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)+2}px) !important;`
 }
 
 function scrollbarSetup(){
