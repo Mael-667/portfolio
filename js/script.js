@@ -1,6 +1,4 @@
 //TODO : menu burger déroulant avec des bouton en liquidglassbtn
-//TODO : gray out les indicateurs des card hors screen sur la scrollbar des projets
-//TODO : scroll automatique du carrousel projet
 //TODO : effet hover sur le bouton en voir plus
 
 document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`;
@@ -185,17 +183,17 @@ let scrollLeft;
 async function getGithubData() {
   const url = "https://api.github.com/users/Mael-667/repos";
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+    // const response = await fetch(url);
+    // if (!response.ok) {
+    //   throw new Error(`Response status: ${response.status}`);
+    // }
 
-    const result = await response.json();
-    localStorage.setItem("github", result);
-    console.log(result);
+    // const result = await response.json();
+    // localStorage.setItem("github", result);
+    // console.log(result);
 
 
-    // const result = localStorage.getItem("github")
+    const result = localStorage.getItem("github")
 
 
     let limit = result.length > 6 ? 6 : result.length;
@@ -413,6 +411,8 @@ function updateCursor(e){
     let actualSpaceLeft = scrollBarRight - actualCursorRight;
     let spaceTotal = scrollBarWidth - cursor.offsetWidth;
     let trueOffset = actualSpaceLeft*100/maxSpaceLeft;
+    console.log(actualSpaceLeft, maxSpaceLeft);
+    
     trueOffset = Math.abs(trueOffset-100);
     trueOffset = (trueOffset*scrollLeft/100);
     let barposition;
@@ -433,6 +433,7 @@ function updateCursor(e){
 }
 
 let firstSetup = true;
+let intervalAnim;
 
 function scrollbar(){
     // let scrollBar = document.querySelector("#elements")
@@ -441,9 +442,13 @@ function scrollbar(){
     let scrollPos = carrousel.scrollLeft //a quel pt l'élément a été scroll
     let renderWidth = carrousel.offsetWidth //taille affichée a l'écran
     let cursor = document.querySelector("#cursor")
-    if(firstSetup){
-        cursor.style.width = `${renderWidth*scrollBarWidth/scrollWidth}px`
-        addEvt(cursor, "transitionend", setupScrollBarSpaceLeft)
+    if(firstSetup){        
+        cursor.style.width = `${renderWidth*scrollBarWidth/scrollWidth}px`;
+        setupScrollBarSpaceLeft();
+        
+        intervalAnim = setInterval(() => {
+                autoScroll();
+            }, 7777);
         firstSetup = false;
     }
     let offset = scrollPos*scrollBarWidth/scrollWidth;
@@ -464,22 +469,15 @@ function scrollbarSetup(){
 function setupScrollBarSpaceLeft(){
     cursorRight = Math.floor(cursor.getBoundingClientRect().right);
     maxSpaceLeft = scrollBarRight - cursorRight;
-    delEvt(cursor, "transitionend", setupScrollBarSpaceLeft)
+    // delEvt(cursor, "transitionend", setupScrollBarSpaceLeft)
 }
 
-addEvt(window, "resize", function(){
-    console.log("euh");
-    scrollbarSetup();
-    firstSetup = true;
-    scrollbar();
-})
-
-let intervalAnim;
-addEvt(document, "DOMContentLoaded", function(){
-    intervalAnim = setInterval(() => {
-        autoScroll();
-    }, 7777)
-});
+// addEvt(window, "resize", function(){
+//     console.log("euh");
+//     scrollbarSetup();
+//     firstSetup = true;
+//     scrollbar();
+// })
 
 let target = 0;
 let incr = 0;
@@ -501,9 +499,7 @@ function autoScroll(){
     scrollAnim();
 }
 let animId;
-function scrollAnim(){
-    console.log(stoptt);
-    
+function scrollAnim(){    
     if(stoptt){
         return;
     }
