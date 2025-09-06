@@ -342,6 +342,9 @@ function getProjectIcon(project){
         case("Diskype"):
             link = "./img/diskype.jpg"
             break;
+        case("Portfolio"):
+            link = "./img/portfolio.png"
+            break;
     }
     return link;
 }
@@ -375,7 +378,6 @@ let carrousel = document.querySelector("#carProjet");
 let stoptt = false;
 //clic support pour la touchbar sur pc
 addEvt(scrollBar, "mousedown", function(e){
-    clearInterval(intervalAnim);
     cancelCarAnim();
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "mousemove", updateCursor);
@@ -391,7 +393,6 @@ addEvt(document, "mouseup", function(){
 
 //touch support pour la scrollbar sur mobile
 addEvt(scrollBar, "touchstart", function(e){
-    clearInterval(intervalAnim);
     cancelCarAnim();
     delEvt(carProjet, "scroll", scrollbar);
     addEvt(scrollBar, "touchmove", updateCursor);
@@ -406,6 +407,7 @@ addEvt(document, "touchend", function(e){
 
 function cancelCarAnim(){
     stoptt = true;
+    clearInterval(intervalAnim);
     cancelAnimationFrame(animId);
     cancelAnimationFrame(animId2);
 }
