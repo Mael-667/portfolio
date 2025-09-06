@@ -226,6 +226,11 @@ h3{
     padding: 0.5rem;
     font-size: 1.1rem;
     border-radius: 0.5rem;
+    transition: 150ms;
+}
+
+.liquidBtn:hover{
+    background: #ffffff59;
 }
 
 /* .glassDarkMode::before{
@@ -554,7 +559,12 @@ ul:has(>li:hover)>.active{
 }
 
 .projet a{
-    padding: 0 calc(1rem + 5%) !important;
+    padding: 0 0.8em !important;
+    height: 2.2em;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-left: calc(1rem + 5%);
 }
 
 #projScroll, #projScroll::before, #projScroll::after{

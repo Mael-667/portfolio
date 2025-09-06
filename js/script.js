@@ -262,7 +262,7 @@ function insertProject(data) {
                             </div>
                             <p>${readme}</p>
                         </div>
-                        <a href="${data.url}" target="_blank"><button class="liquidBtn">En voir plus</button></a>
+                        <a href="${data.url}" target="_blank" class="liquidBtn">En voir plus</a>
                     </article>
                    `
     let parent = document.querySelector("#carProjet")
@@ -411,7 +411,7 @@ function updateCursor(e){
     let actualSpaceLeft = scrollBarRight - actualCursorRight;
     let spaceTotal = scrollBarWidth - cursor.offsetWidth;
     let trueOffset = actualSpaceLeft*100/maxSpaceLeft;
-    console.log(actualSpaceLeft, maxSpaceLeft);
+    // console.log(actualSpaceLeft, maxSpaceLeft);
     
     trueOffset = Math.abs(trueOffset-100);
     trueOffset = (trueOffset*scrollLeft/100);
