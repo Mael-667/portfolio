@@ -1,6 +1,3 @@
-//TODO : menu burger déroulant avec des bouton en liquidglassbtn
-//TODO : effet hover sur le bouton en voir plus
-
 document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`;
 getGithubData()
 
@@ -16,6 +13,18 @@ function delEvt(target, event, fun){
 function get(element){
     return document.querySelector(element);
 }
+
+function toggleAnim(target, cssClass){
+    function removeAnim(){
+        delEvt(target, "animationend", removeAnim);
+        target.classList.toggle(cssClass);
+    }
+    addEvt(target, "animationend", removeAnim)
+    target.classList.toggle(cssClass);
+}
+
+
+
 let intro = document.querySelector("#intro");
 let divProjet = get("#projets");
 let projetsAnimSetuped = false;
@@ -34,7 +43,8 @@ document.addEventListener("scroll", function(e){
 
 function isElementInViewport (el) {
     var rect = el.getBoundingClientRect();
-
+    // console.log(get("#projets").getBoundingClientRect());
+    
     // console.log(window.innerHeight, window.innerWidth, rect);
     return rect.bottom > 1;
     
@@ -109,19 +119,20 @@ function startScroll(e){
         }
 
     } else {
-        cantSelectActive(e);
+        // cantSelectActive(e);
+        toggleAnim(e, "wobble-hor-bottom")
     }
 }
 
-function cantSelectActive(e){
-    e.classList.toggle("wobble-hor-bottom");
-    e.addEventListener("animationend", adios);
+// function cantSelectActive(e){
+//     e.classList.toggle("wobble-hor-bottom");
+//     e.addEventListener("animationend", adios);
 
-    function adios(){
-        e.removeEventListener("animationend", adios);
-        e.classList.toggle("wobble-hor-bottom");
-    }
-}
+//     function adios(){
+//         e.removeEventListener("animationend", adios);
+//         e.classList.toggle("wobble-hor-bottom");
+//     }
+// }
 
 
 

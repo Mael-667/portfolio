@@ -35,6 +35,7 @@ header{
     align-items: center;
     justify-content: center;
     right: 0;
+    transition: 150ms;
 }
 
 header nav{
@@ -238,7 +239,7 @@ h3{
     } */
     
 section{
-    height: 105vh;
+    height: 101vh;
     position: relative;
     background-size: cover;
     background-position: center;
@@ -531,6 +532,7 @@ ul:has(>li:hover)>.active{
 
 .projet h3{
     margin-top: 0;
+    margin-bottom: 7%;
     padding-top: 0;
 }
 
@@ -711,7 +713,7 @@ ul:has(>li:hover)>.active{
         padding: 5px calc(1rem + 5%);
     }
     .projet {
-        grid-template-rows: 34% 1fr 2.5rem !important;
+        grid-template-rows: 34% 1fr 3.5rem !important;
     }
 }
 
@@ -771,6 +773,7 @@ ul:has(>li:hover)>.active{
 
     section p{
         font-size: 1rem !important;
+        margin-bottom: 10px;
     }
 
     #intro h2{
@@ -824,7 +827,7 @@ ul:has(>li:hover)>.active{
 
     .projet {
         width: calc(100vw - 2em);
-        grid-template-rows: 40% 1fr 3.5rem;
+        grid-template-rows: 38% 1fr 3.5rem;
     }
 
     .minia {
@@ -880,6 +883,9 @@ ul:has(>li:hover)>.active{
     animation: appear 0.3s both;
 }
 
+.appear>.glassDarkMode{
+    box-shadow: 0 0 13px #000000b0;
+}
 
 .rotate-out-2-ccw {
 	animation: rotate-out-2-ccw 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
