@@ -234,6 +234,11 @@ h3{
     background: #ffffff59;
 }
 
+.dynamic::after{
+    background: var(--background) !important;
+    box-shadow: var(--shadow) !important;
+}
+
 /* .glassDarkMode::before{
     backdrop-filter: blur(1px);
     } */
