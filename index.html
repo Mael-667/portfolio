@@ -7,19 +7,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400..700;1,400..700&family=Indie+Flower&family=Protest+Revolution&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="js/liquidGlass.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <title>Portfolio de Mael Flament</title>
 </head>
 <body>
 
     <header>
-        <nav>
-            <button class="liquidGlass" id="btnBurger" ><i class="fa-solid fa-bars"></i></button>
+        <nav class="dynamicHueHvr">
+            <button class="liquidGlass glassLightMode" id="btnBurger" ><i class="fa-solid fa-bars"></i></button>
             <ul>
-                <li class="liquidGlass"><a href="#intro">Accueil</a></li>
-                <li class="liquidGlass"><a href="#presentation">Présentation</a></li>
-                <li class="liquidGlass"><a href="#projets">Projets</a></li>
-                <li class="liquidGlass"><a href="#contact">Contact</a></li>
+                <li class="liquidGlass glassLightMode"><a href="#intro">Accueil</a></li>
+                <li class="liquidGlass glassLightMode"><a href="#presentation">Présentation</a></li>
+                <li class="liquidGlass glassLightMode"><a href="#projets">Projets</a></li>
+                <li class="liquidGlass glassLightMode"><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -33,20 +34,20 @@
             </div>
         </section>
 
-        <section id="presentation">
+        <section id="presentation" data-hue="#52ef9b">
             <h2>À propos de moi</h2>
             
             <div id="presentationMain">
                 <div id="carrousel">
     
-                    <article class="liquidGlass darkGlassMode liquidGlassLarge articleLeft" id="interets">
+                    <article class="liquidGlassLarge articleLeft" id="interets">
                         <h3>Centres d'intérêt</h3>
                         <p>
                             oui
                         </p>
                     </article>
     
-                    <article class="liquidGlass darkGlassMode liquidGlassLarge articleFocus" id="aboutMe">
+                    <article class="liquidGlassLarge articleFocus" id="aboutMe">
                         <h3>Présentation</h3>
                         <p>
                             salam et toi
@@ -54,7 +55,7 @@
                         </p>
                     </article>
         
-                    <article class="liquidGlass darkGlassMode liquidGlassLarge articleRight" id="skills">
+                    <article class="liquidGlassLarge articleRight" id="skills">
                         <h3>Mes compétences</h3>
                         <p>
                             oui
@@ -63,7 +64,7 @@
                 </div>
     
     
-                <nav class="liquidGlass darkGlassMode">
+                <nav class="liquidGlass">
                     <ul>
                         <li id="btn1" class="" onclick="startScroll(this)"><i class="fa-solid fa-heart"></i></li>
                         <li id="btn2" class="active" onclick="startScroll(this)"><i class="fa-solid fa-image-portrait"></i></li>
@@ -74,11 +75,11 @@
 
         </section>
 
-        <section id="projets">
+        <section id="projets" data-hue="#ce63ef">
             <h2>Mes projets</h2>
             <div>
                 <div id="carProjet">
-                    <article class="liquidGlass liquidGlassLarge darkGlassMode projet">
+                    <article class="liquidGlassLarge projet">
 
                         <div class="minia" style="background-image: url('./img/more.jpg');"> </div>
 
@@ -90,32 +91,18 @@
                         </div>
                     </article>
                 </div>
-                <div id="projScroll" class="liquidGlass darkGlassMode no-drag">
+                <div id="projScroll" class="liquidGlass no-drag">
                     <div id="elements">
                         <i class="fa-solid fa-circle"></i>
                     </div>
                     <div id="line"></div>
-                    <div id="cursor" class="liquidGlass darkGlassMode"></div>
+                    <div id="cursor" class="liquidGlass"></div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <svg height="0" width="0" display="block" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <filter id="filter" color-interpolation-filters="sRGB" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.009 0.011" numOctaves="2" seed="8" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"/>
-                    <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="55" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" result="displacementMap1"/>
-            </filter>
-            <filter id="filter2" color-interpolation-filters="linearRGB" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
-                <feBlend mode="screen" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" in2="SourceGraphic" result="blend"/>
-                <feTurbulence type="fractalNoise" baseFrequency="0.009 0.008" numOctaves="2" seed="8" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"/>
-                <feDisplacementMap in="blend" in2="turbulence" scale="55" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" result="displacementMap1"/>
-            </filter>
-        </defs>
-    </svg>
-    
     <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

@@ -59,8 +59,7 @@ header ul{
 li a{
     display: block;
     padding: 0.6rem;
-    filter: drop-shadow(0 0 2px white);
-    transition: 270ms;
+    transition: 170ms;
 }
 
 li, li::after{
@@ -78,7 +77,7 @@ li:hover{
 
 header li:hover{
     transform: scale(1.05);
-    box-shadow: 1px 2px 3px -1px rgb(0 0 0 / 27%);
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.589);
 }
 
 header li:active{
@@ -86,28 +85,30 @@ header li:active{
 }
 
 header li:hover::after{
+    background: #ffffff23;
+}
+
+header li.glassLightMode:hover{
+    box-shadow: 1px 2px 3px -1px rgb(0 0 0 / 27%);
+}
+
+header li.glassLightMode:hover::after{
     background: #ffffff93;
 }
 
-header li.glassDarkMode:hover{
-    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.589);
-}
-
-header li.glassDarkMode:hover::after{
-    background: #ffffff23 !important;
-}
-
-header li.glassDarkMode a{
+a{ 
+    text-decoration: none;
     color: white;
-    /* padding: 0.7em 1em; */
-    filter: none;
     filter: drop-shadow(0 0 2px rgb(0, 0, 0));
 }
 
-a{  
+header li.glassLightMode a{
     color: black;
-    text-decoration: none;
+    filter: none;
+    filter: drop-shadow(0 0 2px white);
 }
+
+
 
 main{
     position: relative;
@@ -149,95 +150,6 @@ h3{
     margin: 1.8rem 0;
 }
 
-.liquidGlass, .liquidGlass::after, .liquidGlass::before{
-    transform: translate3d(0, 0, 0);
-    border-radius: 0.9rem;
-    top: 0;
-    
-}
-
-.liquidGlass{
-    position: relative;
-    z-index: 10;
-    box-shadow: 1px 2px 4px -2px rgb(0 0 0 / 27%);
-    width: fit-content;
-}
-
-.liquidGlass::after, .liquidGlass::before{
-    pointer-events: none;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-
-.liquidGlass>*{
-    position: relative;
-    z-index: 99;
-}
-
-.liquidGlass::after{
-    content: "";
-    display: block;
-    z-index: 11;
-    box-shadow: inset 2px 3px 5px 0px rgb(255 255 255 / 28%);
-    background-color: #00000009;
-}
-
-
-.liquidGlass::before{
-    content: " ";
-    display: block;
-    z-index: 9;
-    filter: url(#filter2);
-    backdrop-filter: blur(3px);
-}
-
-.glassDarkMode{
-    color: white !important;
-    font-size: 1.1em;
-    text-shadow: 0 0 4px black !important;
-}
-
-.glassDarkMode::after{
-    box-shadow: inset 1px 1px 2px 0px rgb(255 255 255 / 87%), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 6px 1px rgb(0 0 0 / 38%) !important;
-    background: rgb(255 255 255 / 3%) !important;
-}
-
-.liquidGlassLarge, .liquidGlassLarge::after, .liquidGlassLarge::before{
-    border-radius: 3rem;
-}
-
-.liquidGlassLarge::before{
-    filter: url(#filter);
-    backdrop-filter: blur(3px);
-}
-
-.liquidGlassLarge::after{
-    /* background: rgba(0, 0, 0, 0.14) !important; */
-    box-shadow:inset 1px 1px 3px 1px rgb(255 255 255 / 38%), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 7px 1px rgb(0 0 0 / 46%) !important;
-}
-
-.liquidBtn{
-    background: #ffffff36;
-    border: 1px solid #ffffff78;
-    backdrop-filter: blur(3px);
-    color: white;
-    text-shadow: 0 0 7px black;
-    padding: 0.5rem;
-    font-size: 1.1rem;
-    border-radius: 0.5rem;
-    transition: 150ms;
-}
-
-.liquidBtn:hover{
-    background: #ffffff59;
-}
-
-.dynamic::after{
-    background: var(--background) !important;
-    box-shadow: var(--shadow) !important;
-}
 
 /* .glassDarkMode::before{
     backdrop-filter: blur(1px);
@@ -606,7 +518,7 @@ ul:has(>li:hover)>.active{
     background: radial-gradient(circle at 0%,rgba(255, 221, 235, 1) 35%, rgba(31, 0, 23, 1) 40%);
     /* transition: 200ms; */
     background-clip: text;
-
+    z-index: 15;
 }
 
 
@@ -618,7 +530,7 @@ ul:has(>li:hover)>.active{
     margin-left: calc(0.7rem + 1px);
     height: 0.18em;
     display: inline-block;
-    z-index: 80;
+    z-index: 14;
     background: radial-gradient(circle at 0%,rgba(255, 221, 235, 1) 35%, rgba(31, 0, 23, 1) 40%);
     /* transition: 200ms; */
 }
@@ -685,7 +597,7 @@ ul:has(>li:hover)>.active{
 }
 
 #projScroll:has(>#elements:hover) #cursor{
-    height: 1.7em;
+    height: 1.6em;
     border-radius: 1.3em;
 }
 
