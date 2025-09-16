@@ -141,7 +141,7 @@ h2{
 }
 
 h3{
-    font-size: 2.8em;
+    font-size: 2.7em;
 }
 
 #intro h2{
@@ -441,6 +441,11 @@ ul:has(>li:hover)>.active{
 #carProjet article>*{
     padding: 1rem calc(1rem + 5%) 0 calc(1rem + 5%);
     box-sizing: border-box;
+}
+
+.projEntete{
+    display: flex;
+    align-items: center;
 }
 
 .projet p{

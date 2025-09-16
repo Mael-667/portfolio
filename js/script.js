@@ -261,7 +261,7 @@ async function getGithubData() {
 
     let limit = result.length > 6 ? 6 : result.length;
     for (let index = 0; index < limit; index++) {
-        insertProject(await parseGithubProj(result[index]));
+        await insertProject(await parseGithubProj(result[index]));
         document.querySelector("#elements").innerHTML += `<i class="fa-solid fa-circle"></i>`
     }
     scrollbarSetup();
@@ -297,7 +297,8 @@ async function parseGithubProj(data){
     parsedGithubData.primaryLanguage = data.language;
     parsedGithubData.languageIcon = getLanguageIcon(data.language);
     parsedGithubData.stars = data.stargazers_count; //one day.
-    parsedGithubData.readme = await getReadme(`${data.url}/readme`)
+    parsedGithubData.readme = `${data.url}/readme`
+    parsedGithubData.desc = data.description;
     // console.log(parsedGithubData);
     
     return(parsedGithubData)
@@ -305,14 +306,16 @@ async function parseGithubProj(data){
 }
 
 
-function insertProject(data) {
+async function insertProject(data) {
     let readme;
     // console.log(data.readme);
-    
-    if(data.readme.length < 350){
-        readme = data.readme.substring(0, data.readme.length);
+    if(data.desc == null){
+        data.desc = await getReadme(data.readme);
+    }
+    if(data.desc.length < 300){
+        readme = data.desc.substring(0, data.desc.length);
     } else {
-        readme = `${data.readme.substring(0, 150)}...`;
+        readme = `${data.desc.substring(0, 300)}...`;
     }
     let toInsert= `
                     <article class="liquidGlassLarge projet">
