@@ -658,7 +658,7 @@ ul:has(>li:hover)>.active{
 }
 
 #contact i{
-    font-size: 5rem;
+    font-size: 4.5rem;
 }
 
 #contactCards{
@@ -700,6 +700,7 @@ ul:has(>li:hover)>.active{
 #email form input{
     box-sizing: border-box;
     width: 100%;
+    text-shadow: 0 0 5px black !important;
 }
 #email form textarea{
     box-sizing: border-box;
@@ -707,6 +708,7 @@ ul:has(>li:hover)>.active{
     height: 100%;
     resize: none;
     transition-delay: 50ms;
+    text-shadow: 0 0 5px black !important;
 }
 
 #sendMail{
@@ -814,6 +816,9 @@ ul:has(>li:hover)>.active{
     }
     #dlcv p{
         display: none;
+    }
+    #email button i {
+        font-size: 2rem;
     }
 }
 
@@ -944,18 +949,13 @@ ul:has(>li:hover)>.active{
     .projet h3{
         margin-bottom: 1.2rem;
     }
-    #contact{
-        display: flex;
-        flex-direction: column;
-    }
-
     #contact h2{
-        padding: 3rem 0 1rem 0;
         font-size: 4rem;
     }
     #contact h3{
         font-size: 1.5rem !important;
-        margin-bottom: 1rem;
+        margin-bottom: 0.7rem;
+        padding-top: 7px;
     }
     #contactCards{
         flex-direction: column;
@@ -1042,6 +1042,19 @@ ul:has(>li:hover)>.active{
     }
     #reseaux i{
         font-size: 3rem;
+    }
+}
+
+@media screen and (max-width:1200px){
+    #contact{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #contact h2{
+        padding: 3rem 0 1rem 0;
+        width: 100%;
+        text-align: center;
     }
 }
 
