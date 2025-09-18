@@ -637,8 +637,11 @@ ul:has(>li:hover)>.active{
 #contact h2{
     font-family: "Nanum Brush Script", cursive;
     font-size: calc(4rem + 2vw);
-    margin: auto;
-    padding-top: 1.5em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-self: end;
+    width: auto;
 }
 
 #contact h2::after{
@@ -647,6 +650,11 @@ ul:has(>li:hover)>.active{
 
 #contact h3{
     font-size: 2.2rem;
+    margin: 0;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    height: fit-content;
+    align-self: center;
 }
 
 #contact i{
@@ -656,10 +664,11 @@ ul:has(>li:hover)>.active{
 #contactCards{
     display: flex;
     gap: 2em;
-    width: 70%;
+    width: 100%;
     height: 75%;
     margin: 0 auto;
     align-self: center;
+    justify-content: center;
 }
 
 #contactCards .liquidBtn{
@@ -673,6 +682,7 @@ ul:has(>li:hover)>.active{
 }
 
 #email>h3{
+    margin: 0;
     margin-left: 2rem;
 }
 
@@ -689,9 +699,11 @@ ul:has(>li:hover)>.active{
 }
 
 #email form input{
+    box-sizing: border-box;
     width: 100%;
 }
 #email form textarea{
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     resize: none;
@@ -706,7 +718,7 @@ ul:has(>li:hover)>.active{
     height: fit-content;
     top: auto;
     bottom: 3rem;
-    right: 0rem;
+    right: 1rem;
     transition: cubic-bezier(.33,.02,.35,.93) 200ms;
 }
 
@@ -730,10 +742,11 @@ ul:has(>li:hover)>.active{
 
 #email input::placeholder, textarea::placeholder{
     color: white;
+    text-shadow: 0 0 3px black;
 }
 
 #reseaux{
-    width: 40%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -805,6 +818,9 @@ ul:has(>li:hover)>.active{
     }
     section p{
         font-size: 1.1rem;
+    }
+    #contact h3{
+        font-size: 2rem !important;
     }
 }
 
@@ -912,7 +928,30 @@ ul:has(>li:hover)>.active{
     .projet h3{
         margin-bottom: 1.2rem;
     }
+    #contact{
+        display: flex;
+        flex-direction: column;
+    }
 
+    #contact h2{
+        padding: 3rem 0 2rem 0;
+    }
+    #contactCards{
+        flex-direction: column;
+        width: 90%;
+    }
+    #reseaux{
+        flex-direction: row;
+        width: 100%;
+        height: 25%;
+    }
+    #reseaux>*{
+        height: 100% !important;
+    }
+    #email{
+        height: 65%;
+        width: 100%;
+    }
 }
 
 @media (orientation: portrait) and (max-width:1024px), (min-resolution: 200dpi), (max-width:768px) {
@@ -949,6 +988,15 @@ ul:has(>li:hover)>.active{
     }
     #projScroll{
         font-size: 2rem;
+    }
+    #contactCards{
+        width: 80%;
+    }
+}
+
+@media screen and (min-width:1920px){
+    #contactCards{
+        width: 70%;
     }
 }
 
