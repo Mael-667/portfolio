@@ -656,13 +656,20 @@ ul:has(>li:hover)>.active{
 #contactCards{
     display: flex;
     gap: 2em;
-    width: 80%;
-    height: 85%;
+    width: 70%;
+    height: 75%;
     margin: 0 auto;
     align-self: center;
 }
+
+#contactCards .liquidBtn{
+    text-shadow: none;
+}
+
 #email{
     width: 60%;
+    display: grid;
+    grid-template-rows: 20% 80%;
 }
 
 #email>h3{
@@ -671,30 +678,49 @@ ul:has(>li:hover)>.active{
 
 #email form{
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     width: 80%;
     margin: auto;
     gap: 1rem;
     position: relative;
+    height: 100%;
+    padding-bottom: 2rem;
 }
 
-#email form input:nth-of-type(1){
+#email form input{
     width: 100%;
 }
-#email form input:nth-of-type(2){
+#email form textarea{
     width: 100%;
-    height: 15em;
+    height: 100%;
+    resize: none;
+    transition-delay: 50ms;
 }
 
-#email button{
+#sendMail{
     background: none;
     padding: 0;
     border: none;
     position: absolute;
     height: fit-content;
     top: auto;
-    bottom: 1rem;
+    bottom: 3rem;
     right: 0rem;
+    transition: cubic-bezier(.33,.02,.35,.93) 200ms;
+}
+
+#sendMail::after{
+    transition: cubic-bezier(.33,.02,.35,.93) 200ms;
+}
+
+#sendMail:hover{
+    transform: scale(1.05);
+}
+
+#sendMail:hover::after{
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: inset 1px 1px 2px 0 rgb(255 255 255 / 87%), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0 0 8px 1px rgb(0 0 0 / 70%);
 }
 
 #email button i{
@@ -702,7 +728,7 @@ ul:has(>li:hover)>.active{
     font-size: 2.5rem;
 }
 
-#email input::placeholder{
+#email input::placeholder, textarea::placeholder{
     color: white;
 }
 
@@ -724,12 +750,31 @@ ul:has(>li:hover)>.active{
 #reseaux>div:nth-of-type(1){
     height: 60%;
 }
+
+#reseaux>div:nth-of-type(1) a{
+    transition: 150ms ease-out;
+}
+
+#reseaux>div:nth-of-type(1) a:hover{
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
+}
+
+#reseaux>div:nth-of-type(1)>a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    gap: 6px;
+}
+
 #reseaux>div:nth-of-type(2){
     height: 40%;
 }
 
 #reseaux>div:nth-of-type(2)>a{
     display: block;
+    width: fit-content;
+    padding-right: 1.3rem;
 }
 #dlcv{
     display: flex;
