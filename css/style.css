@@ -650,8 +650,7 @@ ul:has(>li:hover)>.active{
 
 #contact h3{
     font-size: 2.2rem;
-    margin: 0;
-    margin-left: 2rem;
+    margin: 0 2rem;
     margin-bottom: 1rem;
     height: fit-content;
     align-self: center;
@@ -683,7 +682,6 @@ ul:has(>li:hover)>.active{
 }
 
 #email>h3{
-    margin: 0;
     margin-left: calc(2rem + 1vw);
 }
 
@@ -758,7 +756,7 @@ ul:has(>li:hover)>.active{
 }
 
 #reseaux>*>*{
-    margin-left: 2rem;
+    margin: 2rem;
 }
 
 #reseaux>div:nth-of-type(1){
@@ -779,6 +777,8 @@ ul:has(>li:hover)>.active{
     align-items: center;
     width: fit-content;
     gap: 6px;
+    margin: 1rem;
+    margin-left: 2rem;
 }
 
 #reseaux>div:nth-of-type(2){
@@ -804,6 +804,20 @@ ul:has(>li:hover)>.active{
     }
 }
 
+@media screen and (max-width: 520px){
+    #reseaux>div:nth-of-type(2)>a{
+        margin: auto;
+    }
+    #reseaux>div:nth-of-type(2)>a {
+        width: fit-content !important;
+        padding: 0.3rem !important;
+    }
+    #dlcv p{
+        display: none;
+    }
+}
+
+
 
 @media screen and (max-width: 1439px){
     h1{
@@ -823,6 +837,7 @@ ul:has(>li:hover)>.active{
     #contact h3{
         font-size: 2rem !important;
     }
+
 }
 
 @media screen and (max-width:768px){
@@ -940,7 +955,6 @@ ul:has(>li:hover)>.active{
     }
     #contact h3{
         font-size: 1.5rem !important;
-        margin: 0 2rem;
         margin-bottom: 1rem;
     }
     #contactCards{
@@ -971,16 +985,9 @@ ul:has(>li:hover)>.active{
     #reseaux>div:nth-of-type(2){
         width: 40%;
     }
-    #reseaux i{
-        font-size: 3rem;
-    }
     #reseaux>div:nth-of-type(2)>a{
         padding: 0;
         width: 7rem;
-    }
-    #dlcv{
-        flex-direction: column;
-        text-align: center;
     }
 }
 
@@ -1010,6 +1017,33 @@ ul:has(>li:hover)>.active{
 
 }
 
+@media screen and (max-width: 400px) and (max-height:740px){
+    #contact h2 {
+        font-size: 3.5rem !important;
+        padding: 1rem 0 0rem 0 !important;
+    }
+    #contact h3{
+        font-size: 1.3rem !important;
+        margin-bottom: 0.5rem;
+    }
+    #reseaux>div:nth-of-type(1)>a{
+        margin: 0;
+        margin-left: 2rem;
+    }
+}
+
+@media screen and (max-width:1024px){
+    #reseaux>div:nth-of-type(2)>a {
+        padding: 5px;
+    }
+    #dlcv{
+        flex-direction: column;
+        text-align: center;
+    }
+    #reseaux i{
+        font-size: 3rem;
+    }
+}
 
 @media screen and (min-width:1440px){
     #presentationMain{
