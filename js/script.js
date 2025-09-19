@@ -587,27 +587,8 @@ function scrollAnimTo0(){
 }
 
 
-
-
-
-function tst(nb){
-    let array = new Array(nb);
-    for(let i = 0; i < nb; ++i){
-        array[i] = Math.floor(Math.random() * nb);
-    }
-
-    let euh = [
-        {age:2},
-        {age:50},
-        {age:14},
-        {age:90},
-        {age:1}
-    ]
-
-    let start = Date.now();
-    // console.log(triFusion(euh, (g, d) => g.age < d.age));
-    triFusion(array);
-    let fin = Date.now();
-    console.log(`TEMPS DEXEC + ${fin-start}MS`);
-    // console.log(triFusion(array));
-}
+addEvt(get("form"), "submit", function(e){
+    e.preventDefault();
+    let sujet = get("#sujet");
+    let obj = get("#text");
+})
