@@ -642,6 +642,7 @@ ul:has(>li:hover)>.active{
     text-align: center;
     align-self: end;
     width: auto;
+    bottom: -14px;
 }
 
 #contact h2::after{
@@ -655,6 +656,7 @@ ul:has(>li:hover)>.active{
     height: fit-content;
     align-self: center;
     overflow: hidden;
+    padding-bottom: 3px;
 }
 
 #contact i{
@@ -678,7 +680,7 @@ ul:has(>li:hover)>.active{
 #email{
     width: 60%;
     display: grid;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 23% 77%;
 }
 
 #email>h3{
@@ -791,6 +793,8 @@ ul:has(>li:hover)>.active{
     display: block;
     width: fit-content;
     padding-right: 1.3rem;
+    margin: 1rem;
+    margin-left: 2rem;
 }
 #dlcv{
     display: flex;
@@ -1052,9 +1056,10 @@ ul:has(>li:hover)>.active{
     }
 
     #contact h2{
-        padding: 3rem 0 1rem 0;
+        padding: 4rem 0 1rem 0;
         width: 100%;
         text-align: center;
+        bottom: 0;
     }
 }
 
