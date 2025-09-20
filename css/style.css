@@ -618,8 +618,9 @@ ul:has(>li:hover)>.active{
     margin-bottom: 1rem;
     height: fit-content;
     align-self: center;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding-bottom: 3px;
+    align-self: flex-start;
 }
 
 #contact i{
@@ -643,8 +644,10 @@ ul:has(>li:hover)>.active{
 
 #email{
     width: 60%;
-    display: grid;
-    grid-template-rows: 23% 77%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* grid-template-rows: 23% 77%; */
 }
 
 #email>h3{
@@ -783,27 +786,6 @@ ul:has(>li:hover)>.active{
     }
 }
 
-@media screen and (max-width: 520px){
-    #reseaux>div:nth-of-type(2)>a{
-        margin: auto;
-    }
-    #reseaux>div:nth-of-type(2)>a {
-        width: fit-content !important;
-        padding: 0.3rem !important;
-    }
-    #dlcv p{
-        display: none;
-    }
-    #email button i {
-        font-size: 2rem;
-    }
-    #email{
-        grid-template-rows: 26% 74%;
-    }
-}
-
-
-
 @media screen and (max-width: 1439px){
     h1{
         font-size: 4rem;
@@ -935,7 +917,7 @@ ul:has(>li:hover)>.active{
     #contact h3{
         font-size: 1.5rem !important;
         margin-bottom: 0.7rem;
-        padding: 10px 0;
+        padding: 11px 0;
     }
     #contactCards{
         flex-direction: column;
@@ -953,7 +935,7 @@ ul:has(>li:hover)>.active{
         margin-bottom: 0px;
     }
     #reseaux a{
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     #reseaux>*{
         height: 100% !important;
@@ -1006,6 +988,28 @@ ul:has(>li:hover)>.active{
 
 }
 
+@media screen and (max-width: 520px){
+    #reseaux>div:nth-of-type(2)>a{
+        margin: auto;
+    }
+    #reseaux>div:nth-of-type(2)>a {
+        width: fit-content !important;
+        padding: 0.3rem !important;
+    }
+    #dlcv p{
+        display: none;
+    }
+    #email button i {
+        font-size: 2rem;
+    }
+    #email{
+        grid-template-rows: 26% 74%;
+    }
+    #contact h3{
+        font-size: 1.4rem !important;
+    }
+}
+
 @media screen and (max-width: 400px){
     #contact h2 {
         font-size: 3.5rem !important;
@@ -1019,6 +1023,9 @@ ul:has(>li:hover)>.active{
         margin: 1.2rem;
     }
 }
+
+
+
 
 @media screen and (max-width:1024px){
     #reseaux>div:nth-of-type(2)>a {
