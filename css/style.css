@@ -949,6 +949,12 @@ ul:has(>li:hover)>.active{
         height: auto;
         gap: 1rem;
     }
+    #reseaux p{
+        margin-bottom: 0px;
+    }
+    #reseaux a{
+        font-size: 1.1rem;
+    }
     #reseaux>*{
         height: 100% !important;
     }
@@ -959,11 +965,14 @@ ul:has(>li:hover)>.active{
     #email form{
         padding-top: 0.5rem;
     }
-    #reseaux>div:nth-of-type(1){
-        width: 60%;
-    }
+    /* #reseaux>div:nth-of-type(1){
+        width: 57%;
+    } */
     #reseaux>div:nth-of-type(2){
-        width: 40%;
+        width: fit-content;
+    }
+    #reseaux>div:nth-of-type(2) h3{
+        text-wrap: nowrap;
     }
     #reseaux>div:nth-of-type(2)>a{
         padding: 0;
@@ -1003,8 +1012,11 @@ ul:has(>li:hover)>.active{
         padding: 2rem 0 0rem 0 !important;
     }
     #contact h3{
-        font-size: 1.3rem !important;
+        font-size: 1.2rem !important;
         margin-bottom: 0.5rem;
+    }
+    #reseaux>*>* {
+        margin: 1.2rem;
     }
 }
 
