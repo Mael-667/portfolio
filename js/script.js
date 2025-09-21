@@ -1,7 +1,3 @@
-document.querySelector("#intro").style.height = `${window.innerHeight - 25}px`;
-getGithubData()
-
-
 function addEvt(target, event, fun){
     target.addEventListener(event, fun);
 }
@@ -24,7 +20,6 @@ function toggleAnim(target, cssClass){
 }
 
 function triFusion(array, fun = (leftEntry, rightEntry) => leftEntry > rightEntry ){
-
     function defusion(arrayCopy){
         if(arrayCopy.length == 1){
             return arrayCopy;
@@ -75,13 +70,27 @@ function isTargetInElement(target, element){
     return true;
 }
 
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
+function b64DecodeUnicode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+}
+
+
+
 
 let intro = document.querySelector("#intro");
+intro.style.height = `${window.innerHeight - 25}px`;
 let divProjet = get("#projets");
 let projetsAnimSetuped = false;
+getGithubData()
 document.addEventListener("scroll", function(e){
-    let euh = isElementInViewport(intro); 
-    if(euh){
+    if(isTargetInElement(get("header li"), intro)){
         document.querySelectorAll("header .liquidGlass").forEach(e => 
             e.classList.add("glassLightMode")
         );
@@ -92,26 +101,8 @@ document.addEventListener("scroll", function(e){
     }
 })
 
-function isElementInViewport (el) {
-    var rect = el.getBoundingClientRect();
-    // console.log(get("#projets").getBoundingClientRect());
-    
-    // console.log(window.innerHeight, window.innerWidth, rect);
-    return rect.bottom > 1;
-    
-}
-
-function capitalizeFirstLetter(val) {
-    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
-}
 
 
-function b64DecodeUnicode(str) {
-    // Going backwards: from bytestream, to percent-encoding, to original string.
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-}
 
 function scroll(direction){
     let articles = document.querySelector("#carrousel").children;
@@ -170,27 +161,49 @@ function startScroll(e){
         }
 
     } else {
-        // cantSelectActive(e);
         toggleAnim(e, "wobble-hor-bottom")
     }
 }
 
-// function cantSelectActive(e){
-//     e.classList.toggle("wobble-hor-bottom");
-//     e.addEventListener("animationend", adios);
+let touchstartX, touchstartY, touchendX, touchendY;
+document.querySelector("#carrousel").addEventListener('touchstart', function (event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+}, false);
 
-//     function adios(){
-//         e.removeEventListener("animationend", adios);
-//         e.classList.toggle("wobble-hor-bottom");
-//     }
-// }
+document.querySelector("#carrousel").addEventListener('touchend', function (event) {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    handleGesture();
+}, false);
 
+function handleGesture() {
+    let delta = window.innerWidth*10/100;
+    let vDelta = window.innerHeight*15/100;
+    let target = document.querySelector(".active");
+    let children = target.parentElement.children
+    let activeId;
+    for(let i = 0; i < children.length; ++i){
+        if(children[i] == target){
+            activeId = i;
+        }
+    }
+    let targetId;
+    if(Math.abs(touchstartX-touchendX) > delta && Math.abs(touchstartY-touchendY) < vDelta){
+        if (touchstartX > touchendX) {
+            // console.log('Swiped Left');
+            targetId = activeId == children.length-1 ? 0 : activeId+1
+            startScroll(children[targetId])
+        }
+        
+        if (touchendX > touchstartX) {
+            // console.log('Swiped Right');
+            targetId = activeId == 0 ? children.length-1 : activeId-1
+            startScroll(children[targetId])
+        }
+    }
+}
 
-
-// document.addEventListener("click", function(e){
-//      console.log(e);
-
-// })
 
 let menuOpened = false;
 
@@ -202,6 +215,7 @@ document.querySelector("#btnBurger").addEventListener("click", function(e){
     ul.style.display = "flex";
     ul.classList.toggle("appear");
     menuOpened = true;
+    addEvt(document, "click", removeBurger)
 })
 
 
@@ -219,6 +233,7 @@ function removeBurger(){
         ul.addEventListener("animationend", resetBurger);
 
         menuOpened = false;
+        delEvt(document, "click", removeBurger)
     }
 }
 
@@ -229,8 +244,6 @@ function resetBurger(){
     document.querySelector("#btnBurger").classList.remove("Reverserotate-out-2-ccw")
     ul.removeEventListener("animationend", resetBurger)
 }
-
-window.onclick = removeBurger
 
 
 let scrollBar = document.querySelector("#elements");
@@ -252,12 +265,6 @@ async function getGithubData() {
 
     let result = await response.json();
     result = triFusion(result, (g, d) => g.id < d.id)
-    localStorage.setItem("github", result);
-    console.log(result);
-
-
-    // const result = localStorage.getItem("github")
-
 
     let limit = result.length > 6 ? 6 : result.length;
     for (let index = 0; index < limit; index++) {
@@ -335,53 +342,6 @@ async function insertProject(data) {
     parent.innerHTML = toInsert + parent.innerHTML;
 }
 
-
-
-
-
-
-
-let touchstartX, touchstartY, touchendX, touchendY;
-document.querySelector("#carrousel").addEventListener('touchstart', function (event) {
-    touchstartX = event.changedTouches[0].screenX;
-    touchstartY = event.changedTouches[0].screenY;
-}, false);
-
-document.querySelector("#carrousel").addEventListener('touchend', function (event) {
-    touchendX = event.changedTouches[0].screenX;
-    touchendY = event.changedTouches[0].screenY;
-    handleGesture();
-}, false);
-
-
-function handleGesture() {
-    let delta = window.innerWidth*10/100;
-    let vDelta = window.innerHeight*15/100;
-    let target = document.querySelector(".active");
-    let children = target.parentElement.children
-    let activeId;
-    for(let i = 0; i < children.length; ++i){
-        if(children[i] == target){
-            activeId = i;
-        }
-    }
-    let targetId;
-    if(Math.abs(touchstartX-touchendX) > delta && Math.abs(touchstartY-touchendY) < vDelta){
-        if (touchstartX > touchendX) {
-            // console.log('Swiped Left');
-            targetId = activeId == children.length-1 ? 0 : activeId+1
-            startScroll(children[targetId])
-        }
-        
-        if (touchendX > touchstartX) {
-            // console.log('Swiped Right');
-            targetId = activeId == 0 ? children.length-1 : activeId-1
-            startScroll(children[targetId])
-        }
-    }
-}
-
-
 function getProjectIcon(project){
     let link ="";
     switch(project){
@@ -424,32 +384,29 @@ function getLanguageIcon(language){
     }
 }
 
-let carProjet = get("#carProjet");
-addEvt(carProjet, "scroll", scrollbar);
-addEvt(carProjet, "touchstart", cancelCarAnim);
-addEvt(carProjet, "mousedown", cancelCarAnim);
-let carrousel = document.querySelector("#carProjet");
+
+let carrousel = get("#carProjet");
+addEvt(carrousel, "scroll", scrollbar);
+addEvt(carrousel, "touchstart", cancelCarAnim);
+addEvt(carrousel, "mousedown", cancelCarAnim);
 
 let stoptt = false;
 //clic support pour la touchbar sur pc
 addEvt(scrollBar, "mousedown", function(e){
     cancelCarAnim();
-    delEvt(carProjet, "scroll", scrollbar);
+    delEvt(carrousel, "scroll", scrollbar);
     addEvt(scrollBar, "mousemove", updateCursor);
 })
 
 addEvt(document, "mouseup", function(){
     delEvt(scrollBar, "mousemove", updateCursor);
-    addEvt(carProjet, "scroll", scrollbar);
+    addEvt(carrousel, "scroll", scrollbar);
 })
-
-
-
 
 //touch support pour la scrollbar sur mobile
 addEvt(scrollBar, "touchstart", function(e){
     cancelCarAnim();
-    delEvt(carProjet, "scroll", scrollbar);
+    delEvt(carrousel, "scroll", scrollbar);
     addEvt(scrollBar, "touchmove", updateCursor);
     cursor.classList.toggle("touched");    
 })
@@ -457,7 +414,7 @@ addEvt(scrollBar, "touchstart", function(e){
 addEvt(document, "touchend", function(e){
     delEvt(scrollBar, "touchmove", updateCursor);
     cursor.classList.toggle("touched");
-    addEvt(carProjet, "scroll", scrollbar);
+    addEvt(carrousel, "scroll", scrollbar);
 })
 
 function cancelCarAnim(){
@@ -535,15 +492,7 @@ function scrollbarSetup(){
 function setupScrollBarSpaceLeft(){
     cursorRight = Math.floor(cursor.getBoundingClientRect().right);
     maxSpaceLeft = scrollBarRight - cursorRight;
-    // delEvt(cursor, "transitionend", setupScrollBarSpaceLeft)
 }
-
-// addEvt(window, "resize", function(){
-//     console.log("euh");
-//     scrollbarSetup();
-//     firstSetup = true;
-//     scrollbar();
-// })
 
 let target = 0;
 let incr = 0;
