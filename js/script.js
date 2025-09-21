@@ -340,7 +340,7 @@ function getLanguageIcon(language){
 }
 
 class HorizontalScrollBar{
-    constructor(scrollarea, scrollbar, bar){
+    constructor(scrollarea, scrollbar, bar, transformMethod = (barposition) => `translate(${barposition}px, -50%)`){
         this.scrollarea = scrollarea;
         this.scrollbar = scrollbar;
         this.bar = bar;
@@ -354,7 +354,7 @@ class HorizontalScrollBar{
         this.bar.style.width = `${this.renderWidth*this.scrollBarWidth/this.scrollWidth}px`;
         this.barRight = Math.floor(this.bar.getBoundingClientRect().right);
         this.maxSpaceLeft = this.scrollBarRight - this.barRight;
-        this.setTransform();
+        this.transform = transformMethod;
         this.onScroll();
 
         let updatesbBind = this.#updatescrollbar.bind(this);
@@ -392,8 +392,8 @@ class HorizontalScrollBar{
         this.#updatescrollbar();
     }
 
-    setTransform(fun = (barposition) => `translate(${barposition}px, -50%)`){
-        this.transform = fun;
+    setTransform(transformMethod = (barposition) => `translate(${barposition}px, -50%)`){
+        this.transform = transformMethod;
     }
 
 

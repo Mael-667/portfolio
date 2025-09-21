@@ -207,8 +207,6 @@ section h3::after{
 
 #presentation{
     background-image: url(../221425.jpg);
-    background-color: #080f12;
-    background-blend-mode: lighten;
 }
 
 
@@ -372,8 +370,6 @@ ul:has(>li:hover)>.active{
 
 #projets{
     background-image: url(../bg3.webp);
-    background-color: #080f12;
-    background-blend-mode: lighten;
 }
 
 #projets h2, #projets h3{
