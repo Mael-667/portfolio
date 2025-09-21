@@ -89,6 +89,7 @@ intro.style.height = `${window.innerHeight - 25}px`;
 let divProjet = get("#projets");
 let projetsAnimSetuped = false;
 getGithubData()
+
 document.addEventListener("scroll", function(e){
     if(isTargetInElement(get("header li"), intro)){
         document.querySelectorAll("header .liquidGlass").forEach(e => 
@@ -106,33 +107,18 @@ document.addEventListener("scroll", function(e){
 
 function scroll(direction){
     let articles = document.querySelector("#carrousel").children;
-    if(direction == "left"){
-        for(let i = 0; i < articles.length; ++i){
-            let e = articles[i];
-            if(e.classList.contains("articleFocus")){
-                e.classList.remove("articleFocus");
-                e.classList.add("articleLeft");
-            } else if(e.classList.contains("articleLeft")){
-                e.classList.remove("articleLeft");
-                e.classList.add("articleRight");
-            } else if(e.classList.contains("articleRight")){
-                e.classList.remove("articleRight");
-                e.classList.add("articleFocus");
-            }
-        }
-    } else if(direction == "right"){
-        for(let i = 0; i < articles.length; ++i){
-            let e = articles[i];
-            if(e.classList.contains("articleFocus")){
-                e.classList.remove("articleFocus");
-                e.classList.add("articleRight");
-            } else if(e.classList.contains("articleLeft")){
-                e.classList.remove("articleLeft");
-                e.classList.add("articleFocus");
-            } else if(e.classList.contains("articleRight")){
-                e.classList.remove("articleRight");
-                e.classList.add("articleLeft");
-            }
+    let toLeft = direction == "left" ? true : false;
+    for(let i = 0; i < articles.length; ++i){
+        let e = articles[i];
+        if(e.classList.contains("articleFocus")){
+            e.classList.remove("articleFocus");
+            toLeft ? e.classList.add("articleLeft") : e.classList.add("articleRight");
+        } else if(e.classList.contains("articleLeft")){
+            e.classList.remove("articleLeft");
+            toLeft ? e.classList.add("articleRight") : e.classList.add("articleFocus");
+        } else if(e.classList.contains("articleRight")){
+            e.classList.remove("articleRight");
+            toLeft ? e.classList.add("articleFocus") : e.classList.add("articleLeft");
         }
     }
 }
@@ -191,13 +177,11 @@ function handleGesture() {
     let targetId;
     if(Math.abs(touchstartX-touchendX) > delta && Math.abs(touchstartY-touchendY) < vDelta){
         if (touchstartX > touchendX) {
-            // console.log('Swiped Left');
             targetId = activeId == children.length-1 ? 0 : activeId+1
             startScroll(children[targetId])
         }
         
         if (touchendX > touchstartX) {
-            // console.log('Swiped Right');
             targetId = activeId == 0 ? children.length-1 : activeId-1
             startScroll(children[targetId])
         }
@@ -215,7 +199,7 @@ document.querySelector("#btnBurger").addEventListener("click", function(e){
     ul.style.display = "flex";
     ul.classList.toggle("appear");
     menuOpened = true;
-    addEvt(document, "click", removeBurger)
+    document.addEventListener("click", removeBurger)
 })
 
 
@@ -246,53 +230,47 @@ function resetBurger(){
 }
 
 
-let scrollBar = document.querySelector("#elements");
-var rect;
-let barPos;
-let scrollBarWidth;
-let scrollBarRight;
-let maxSpaceLeft;
-let cursor = document.querySelector("#cursor");
-let cursorRight;
-let scrollLeft;
 async function getGithubData() {
-  const url = "https://api.github.com/users/Mael-667/repos";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+    const url = "https://api.github.com/users/Mael-667/repos";
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
 
-    let result = await response.json();
-    result = triFusion(result, (g, d) => g.id < d.id)
+        let result = await response.json();
+        result = triFusion(result, (g, d) => g.id < d.id)
 
-    let limit = result.length > 6 ? 6 : result.length;
-    for (let index = 0; index < limit; index++) {
-        await insertProject(await parseGithubProj(result[index]));
-        document.querySelector("#elements").innerHTML += `<i class="fa-solid fa-circle"></i>`
+        let limit = result.length > 6 ? 6 : result.length;
+        for (let index = 0; index < limit; index++) {
+            await insertProject(await parseGithubProj(result[index]));
+            document.querySelector("#elements").innerHTML += `<i class="fa-solid fa-circle"></i>`
+        }
+        let sb = new HorizontalScrollBar(get("#carProjet"), get("#elements"), get("#cursor"));
+        let elements = get("#elements"), line = get("#line");
+        sb.onScroll(function(center, end){
+            elements.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end-5}px, rgba(31, 0, 23, 1) ${end}px) !important;`
+            line.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end-5}px, rgba(31, 0, 23, 1) ${end}px) !important;`
+        })
+    } catch (error) {
+        console.error(error.message);
     }
-    scrollbarSetup();
-    scrollbar();
-} catch (error) {
-    console.error(error.message);
-  }
 }
 
 async function getReadme(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
 
-    const result = await response.json();
-    
-    return b64DecodeUnicode(result.content);
-    
-  } catch (error) {
-    console.error(error.message);
-    return "";
-  }
+        const result = await response.json(); 
+        return b64DecodeUnicode(result.content);
+        
+    } catch (error) {
+        console.error(error.message);
+        return "";
+    }
 }
 
 async function parseGithubProj(data){
@@ -306,8 +284,7 @@ async function parseGithubProj(data){
     parsedGithubData.stars = data.stargazers_count; //one day.
     parsedGithubData.readme = `${data.url}/readme`
     parsedGithubData.desc = data.description;
-    // console.log(parsedGithubData);
-    
+
     return(parsedGithubData)
     
 }
@@ -315,7 +292,6 @@ async function parseGithubProj(data){
 
 async function insertProject(data) {
     let readme;
-    // console.log(data.readme);
     if(data.desc == null){
         data.desc = await getReadme(data.readme);
     }
@@ -326,9 +302,7 @@ async function insertProject(data) {
     }
     let toInsert= `
                     <article class="liquidGlassLarge projet">
-
                         <div class="minia" style="background-image: url('${data.img}');"> </div>
-
                         <div class="projText">
                             <div class="projEntete">
                                 <h3>${data.name}</h3> <p>${data.languageIcon}</p>
@@ -343,155 +317,157 @@ async function insertProject(data) {
 }
 
 function getProjectIcon(project){
-    let link ="";
-    switch(project){
-        case("Stateur"):
-            link = "./img/stateur.jpg"
-            break;
-        case("Interstalla"):
-            link = "./img/interstella.jpg"
-            break;
-        case("Flex"):
-            link = "./img/flex.jpg"
-            break;
-        case("Diskype"):
-            link = "./img/diskype.jpg"
-            break;
-        case("Portfolio"):
-            link = "./img/portfolio.png"
-            break;
-    }
-    return link;
+    let link = {
+        "Stateur": "./img/stateur.jpg",
+        "Interstalla": "./img/interstella.jpg",
+        "Flex": "./img/flex.jpg",
+        "Diskype": "./img/diskype.jpg",
+        "Portfolio": "./img/portfolio.png",
+        "Liquid-Glass-CSS": "./img/lgcss.gif"
+    };
+    return link[project];
 }
 
 
 function getLanguageIcon(language){
-    console.log(language);
+    let icons = {
+        "Java": `<i class="fa-brands fa-java"></i>`,
+        "HTML": `<i class="fa-brands fa-html5"></i>`,
+        "JavaScript": `<i class="fa-brands fa-square-js"></i>`,
+        "CSS": `<i class="fa-brands fa-css"></i>`
+    }
+    return icons[language];
+}
+
+class HorizontalScrollBar{
+    constructor(scrollarea, scrollbar, bar){
+        this.scrollarea = scrollarea;
+        this.scrollbar = scrollbar;
+        this.bar = bar;
+        this.rect = this.scrollbar.getBoundingClientRect();
+        this.barPos = this.rect.left;
+        this.scrollBarWidth = this.scrollbar.offsetWidth;
+        this.scrollBarRight = this.scrollbar.getBoundingClientRect().right;
+        this.renderWidth = this.scrollarea.offsetWidth //taille affichée a l'écran
+        this.scrollWidth = this.scrollarea.scrollWidth; //taille totale de l'élément
+        this.scrollLeft = Math.floor(this.scrollWidth) - Math.floor(this.renderWidth);
+        this.bar.style.width = `${this.renderWidth*this.scrollBarWidth/this.scrollWidth}px`;
+        this.barRight = Math.floor(this.bar.getBoundingClientRect().right);
+        this.maxSpaceLeft = this.scrollBarRight - this.barRight;
+        this.setTransform();
+        this.onScroll();
+
+        let updatesbBind = this.#updatescrollbar.bind(this);
+        let updatebarBind = this.#updateCursor.bind(this);
+
+
+        scrollarea.addEventListener("scroll", updatesbBind);
+        
+        
+        //clic support pour la touchbar sur pc
+        scrollbar.addEventListener("mousedown", (e)=>{
+            scrollarea.removeEventListener("scroll", updatesbBind);
+            scrollbar.addEventListener("mousemove", updatebarBind);
+        })
     
-    switch(language){
-        case("Java"):
-            return `<i class="fa-brands fa-java"></i>`
-            break;
-        case("HTML"):
-            return `<i class="fa-brands fa-html5"></i>`
-            break;
-        case("JavaScript"):
-            return `<i class="fa-brands fa-square-js"></i>`
-            break;
-        case("CSS"):
-            return `<i class="fa-brands fa-css"></i>`
-            break;
+        document.addEventListener("mouseup", ()=>{
+            scrollbar.removeEventListener("mousemove", updatebarBind);
+            scrollarea.addEventListener("scroll", updatesbBind);
+        })
+    
+        //touch support pour la scrollbar sur mobile
+        scrollbar.addEventListener("touchstart", (e)=>{
+            scrollarea.removeEventListener("scroll", updatesbBind);
+            scrollbar.addEventListener("touchmove", updatebarBind);
+        })
+    
+        document.addEventListener("touchend", (e)=>{
+            scrollbar.removeEventListener("touchmove", updatebarBind);
+            scrollarea.addEventListener("scroll", updatesbBind);
+        })
+    }
+
+    onScroll(fun = (barCenter, barEnd)=>{}){
+        this.styleFun = fun;
+        this.#updatescrollbar();
+    }
+
+    setTransform(fun = (barposition) => `translate(${barposition}px, -50%)`){
+        this.transform = fun;
+    }
+
+
+    #updateCursor(e){
+        let cursorPos;
+        if(e.type == "touchmove"){
+            cursorPos = e.changedTouches[0].clientX;
+        } else {
+            cursorPos = e.clientX;
+        }
+        let cursorRelativePos = cursorPos-this.barPos; //position du curseur par rapport a la scrollbar
+        let actualBarRightPos = Math.floor(this.bar.getBoundingClientRect().right); //position de l'extremité gauche de la barre de la scrollbar
+        let actualSpaceLeft = this.scrollBarRight - actualBarRightPos; //espace restant entre l'extrémité gauche de la barre de scroll et l'extrémité gauche de la scrollbar
+        let spaceTotal = this.scrollBarWidth - this.bar.offsetWidth; //espace total pour calculer le ratio en % de scroll
+        let trueOffset = actualSpaceLeft*100/this.maxSpaceLeft; //ratio en % d'a quel point la scrollbar a été scroll
+        trueOffset = Math.abs(trueOffset-100); //j'inverse le % car si il reste 0% d'espace a scroll on veut que le carrousel soit scroll a 100%
+        trueOffset = (trueOffset*this.scrollLeft/100); //je prends le % pixel du carrousel a scroll
+        let barposition = cursorRelativePos-(this.bar.offsetWidth/2); //on deplace la barre vers le curseur - la moitié de la taille de la barre afin de la centrer
+        let barCenter = cursorRelativePos;
+        let barEnd = this.bar.offsetWidth/2;
+        //on gere les extrémités
+        if(cursorRelativePos-(this.bar.offsetWidth/2) < 0){
+            barposition = 0;
+            barCenter = this.bar.offsetWidth/2-5;
+        } else if (cursorRelativePos-(this.bar.offsetWidth/2) > spaceTotal){
+            barposition = spaceTotal;
+            barCenter = this.scrollbar.offsetWidth - this.bar.offsetWidth/2 + 5;
+        }
+        this.bar.style.transform = this.transform(barposition);
+        this.styleFun(barCenter, barEnd)
+        this.scrollarea.scrollTo(trueOffset, 0);
+    }
+
+    #updatescrollbar(){
+        let scrollBarWidth = this.scrollbar.offsetWidth; //taille du scrollbar
+        let scrollPos = this.scrollarea.scrollLeft //a quel pt l'élément a été scroll
+        let offset = scrollPos*scrollBarWidth/this.scrollWidth;
+        this.bar.style.transform = this.transform(offset);
+        let barCenter = offset+(this.bar.offsetWidth/2)
+        let barEnd = this.bar.offsetWidth/2+4
+        this.styleFun(barCenter, barEnd)
     }
 }
 
-
+let intervalAnim;
+let stoptt = false;
 let carrousel = get("#carProjet");
-addEvt(carrousel, "scroll", scrollbar);
+let bar = get("#projScroll");
+
+intervalAnim = setInterval(() => {
+                    autoScroll();
+                }, 7777);
+
 addEvt(carrousel, "touchstart", cancelCarAnim);
 addEvt(carrousel, "mousedown", cancelCarAnim);
+addEvt(bar, "mousedown", cancelCarAnim)
 
-let stoptt = false;
-//clic support pour la touchbar sur pc
-addEvt(scrollBar, "mousedown", function(e){
-    cancelCarAnim();
-    delEvt(carrousel, "scroll", scrollbar);
-    addEvt(scrollBar, "mousemove", updateCursor);
+addEvt(bar, "touchstart", function(e){
+    cancelCarAnim(); 
+    get("#cursor").classList.add("touched");  
+})
+document.addEventListener("touchend", (e)=>{
+    get("#cursor").classList.remove("touched");
 })
 
-addEvt(document, "mouseup", function(){
-    delEvt(scrollBar, "mousemove", updateCursor);
-    addEvt(carrousel, "scroll", scrollbar);
-})
-
-//touch support pour la scrollbar sur mobile
-addEvt(scrollBar, "touchstart", function(e){
-    cancelCarAnim();
-    delEvt(carrousel, "scroll", scrollbar);
-    addEvt(scrollBar, "touchmove", updateCursor);
-    cursor.classList.toggle("touched");    
-})
-
-addEvt(document, "touchend", function(e){
-    delEvt(scrollBar, "touchmove", updateCursor);
-    cursor.classList.toggle("touched");
-    addEvt(carrousel, "scroll", scrollbar);
-})
 
 function cancelCarAnim(){
     stoptt = true;
     clearInterval(intervalAnim);
     cancelAnimationFrame(animId);
     cancelAnimationFrame(animId2);
-}
-
-function updateCursor(e){
-    let cursorPos;
-    if(e.type == "touchmove"){
-        cursorPos = e.changedTouches[0].clientX;
-    } else {
-        cursorPos = e.clientX;
-    }
-    let cursorRelativePos = cursorPos-barPos;
-    let actualCursorRight = Math.floor(cursor.getBoundingClientRect().right);
-    let actualSpaceLeft = scrollBarRight - actualCursorRight;
-    let spaceTotal = scrollBarWidth - cursor.offsetWidth;
-    let trueOffset = actualSpaceLeft*100/maxSpaceLeft;
-    // console.log(actualSpaceLeft, maxSpaceLeft);
-    
-    trueOffset = Math.abs(trueOffset-100);
-    trueOffset = (trueOffset*scrollLeft/100);
-    let barposition = cursorRelativePos-(cursor.offsetWidth/2);
-    let gradientPos = cursorRelativePos;
-    if(cursorRelativePos-(cursor.offsetWidth/2) < 0){
-        barposition = 0;
-        gradientPos = cursor.offsetWidth/2-5;
-    } else if (cursorRelativePos-(cursor.offsetWidth/2) > spaceTotal){
-        barposition = spaceTotal;
-        gradientPos = scrollBar.offsetWidth - cursor.offsetWidth/2 + 5;
-    }
-    get("#elements").style = `background-image : radial-gradient(circle at ${gradientPos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
-    get("#line").style = `background-image : radial-gradient(circle at ${gradientPos}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)-5}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)}px) !important;`
-    cursor.style.transform = `translate(${barposition}px, -50%)`;
-    carrousel.scrollTo(trueOffset, 0);
-}
-
-let firstSetup = true;
-let intervalAnim;
-
-function scrollbar(){
-    // let scrollBar = document.querySelector("#elements")
-    let scrollBarWidth = scrollBar.offsetWidth; //taille du scrollbar
-    let scrollWidth = carrousel.scrollWidth; //taille totale de l'élément
-    let scrollPos = carrousel.scrollLeft //a quel pt l'élément a été scroll
-    let renderWidth = carrousel.offsetWidth //taille affichée a l'écran
-    let cursor = document.querySelector("#cursor")
-    if(firstSetup){        
-        cursor.style.width = `${renderWidth*scrollBarWidth/scrollWidth}px`;
-        setupScrollBarSpaceLeft();
-        
-        intervalAnim = setInterval(() => {
-                autoScroll();
-            }, 7777);
-        firstSetup = false;
-    }
-    let offset = scrollPos*scrollBarWidth/scrollWidth;
-    cursor.style.transform = `translate(${offset}px, -50%)`
-
-    get("#elements").style = `background-image : radial-gradient(circle at ${offset+(cursor.offsetWidth/2)-1}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)+2}px) !important;`
-    get("#line").style = `background-image : radial-gradient(circle at ${offset+(cursor.offsetWidth/2)-1}px,rgba(255, 221, 235, 1) ${(cursor.offsetWidth/2)}px, rgba(31, 0, 23, 1) ${(cursor.offsetWidth/2)+2}px) !important;`
-}
-
-function scrollbarSetup(){
-    rect = scrollBar.getBoundingClientRect();
-    barPos = rect.left;
-    scrollBarWidth = scrollBar.offsetWidth; 
-    scrollBarRight = scrollBar.getBoundingClientRect().right
-    scrollLeft = Math.floor(carrousel.scrollWidth) - Math.floor(carrousel.offsetWidth);
-}
-
-function setupScrollBarSpaceLeft(){
-    cursorRight = Math.floor(cursor.getBoundingClientRect().right);
-    maxSpaceLeft = scrollBarRight - cursorRight;
+    delEvt(carrousel, "touchstart", cancelCarAnim);
+    delEvt(carrousel, "mousedown", cancelCarAnim);
+    delEvt(bar, "mousedown", cancelCarAnim)
 }
 
 let target = 0;

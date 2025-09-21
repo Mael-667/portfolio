@@ -560,32 +560,19 @@ ul:has(>li:hover)>.active{
     box-shadow: inset 0px 0px 5px 0px rgb(255 255 255);
 }
 
-#projScroll:has(>#elements:hover) #cursor::before{
-    border-radius: 1.3em;
+#projScroll:has(>#elements:hover) #cursor::before, .touched::before{
+    border-radius: 1.3em !important;
 }
 
-#projScroll:has(>#elements:hover) #cursor{
-    height: 1.6em;
-    border-radius: 1.3em;
+#projScroll:has(>#elements:hover) #cursor, .touched{
+    height: 1.6em !important;
+    border-radius: 1.3em !important;
 }
 
-#projScroll:has(>#elements:hover) #cursor::after{
-    box-shadow: inset 0px 0px 0.7rem 1px rgb(255 255 255);
-    border-radius: 1.3em;
+#projScroll:has(>#elements:hover) #cursor::after, .touched::after{
+    box-shadow: inset 0px 0px 0.7rem 1px rgb(255 255 255) !important;
+    border-radius: 1.3em !important;
 }
-
-.touched{
-    height: 1.7em;
-    border-radius: 1.3em;
-}
-.touched::after{
-    box-shadow: inset 0px 0px 0.7rem 1px rgb(255 255 255);
-    border-radius: 1.3em;
-}
-.touched::before{
-    border-radius: 1.3em;
-}
-
 
 .notInFocus{
     background-color: gray;
