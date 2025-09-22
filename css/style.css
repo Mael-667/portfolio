@@ -169,11 +169,11 @@ section>h2{
 }
 
 section h2,section h3, section p{
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.35));
 }
 
 section p{
-    text-shadow: 0 0 3px #000000e2;
+    text-shadow: 0 0 3px #000000;
 }
 
 section>h2::after{
@@ -259,11 +259,12 @@ section h3::after{
     z-index: 5;
     width: 60%;
     transform: translateX(33%);
+    transition: 350ms ease-out;
 }
 
 .articleFocus:after{
-    background: rgba(12, 189, 121, 0.219);
-    background: linear-gradient(132deg,#00b7ff3d 0%, rgba(12, 189, 121, 0.239) 49%, rgba(73, 207, 98, 0.199) 100%) !important;
+    background-color: rgba(0, 183, 255, 0);
+    background-image: linear-gradient(132deg,rgba(0, 204, 255, 0.3) 0%, rgba(14, 224, 144, 0.27) 49%, rgba(73, 207, 98, 0.21) 99%, black 100%) !important;
     box-shadow:inset 1px 1px 3px 1px rgba(255, 255, 255, 1), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 12px 2px rgb(0 0 0 / 46%) !important;
 }
 
@@ -272,12 +273,14 @@ section h3::after{
 }
 
 .articleRight::after, .articleLeft::after{
-    background: rgba(0, 0, 0, 0.508) !important;
+    background: rgba(0, 0, 0, 65%) !important;
+    background-image: linear-gradient(132deg,rgba(0, 204, 255, 0.3) 0%, rgba(14, 224, 144, 0.27) 49%, rgba(73, 207, 98, 0.21) 99%, black 100%) !important;
     box-shadow: none !important;
+    background-blend-mode: saturation;
 }
 
 .articleRight::after, .articleLeft::after, .articleFocus:after{
-    transition: 400ms;
+    transition: 350ms ease-out;
     will-change: transform, opacity;
 }
 
@@ -287,6 +290,7 @@ section h3::after{
 }
 
 .articleLeft, .articleRight{
+    transition: 350ms ease-out;
     text-shadow: none;
     color: rgba(255, 255, 255, 0.74);
     position: absolute;
@@ -320,13 +324,13 @@ section h3::after{
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    padding-left: 2rem;
 }
 
 .passion{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 2rem;
 }
 
 .passion img{
@@ -463,7 +467,8 @@ ul:has(>li:hover)>.active{
 }
 
 .projet::after{
-    background: rgb(44 0 59 / 18%) !important;
+    background: rgb(44 0 59 / 18%);
+    background: linear-gradient(136deg,rgba(44, 0, 94, 0.20) 0%, rgba(45, 0, 59, 0.20) 41%, rgba(67, 13, 87, 0.20) 64%, rgba(208, 20, 255, 0.20) 100%);
     box-shadow: inset 1px 1px 3px 1px rgb(240 189 255 / 56%), 0px 0px 7px 1px rgb(0 0 0 / 46%) !important;
 }
 
@@ -1087,6 +1092,15 @@ ul:has(>li:hover)>.active{
         /* left: -46%; */
         transform: translateX(-50%) perspective(100em) rotateY(-71deg) scale(0.65);
         width: 96%
+    }
+
+    .articleRight p, .articleLeft p{
+        text-shadow: none;
+        filter: none;
+    }
+
+    #passions {
+        justify-content: space-around;
     }
 
     #reseaux>div:nth-of-type(2)>a{
