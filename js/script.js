@@ -302,7 +302,7 @@ async function insertProject(data) {
     }
     let toInsert= `
                     <article class="liquidGlassLarge projet">
-                        <div class="minia" style="background-image: url('${data.img}');"> </div>
+                        <div class="minia" style="background-image: url('${data.img}');" role="img" aria-label="Image d'illustration pour mon projet ${data.name}"> </div>
                         <div class="projText">
                             <div class="projEntete">
                                 <h3>${data.name}</h3> <p>${data.languageIcon}</p>

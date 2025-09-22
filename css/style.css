@@ -262,7 +262,8 @@ section h3::after{
 }
 
 .articleFocus:after{
-    background: rgb(74 191 140 / 12%) !important;
+    background: rgba(12, 189, 121, 0.219);
+    background: linear-gradient(132deg,#00b7ff3d 0%, rgba(12, 189, 121, 0.239) 49%, rgba(73, 207, 98, 0.199) 100%) !important;
     box-shadow:inset 1px 1px 3px 1px rgba(255, 255, 255, 1), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 12px 2px rgb(0 0 0 / 46%) !important;
 }
 
@@ -306,6 +307,37 @@ section h3::after{
         margin-bottom: 0.7rem;
 }
 
+#presentation h3{
+    font-family: "Indie Flower", cursive;
+}
+
+#presentation p{
+    font-size: 1.25rem;
+    padding-left: 1rem;
+}
+
+#passions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.passion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+.passion img{
+    height: 4.5rem;
+}
+
+
+
+
+
+
 #comp, #autres{
     display: flex;
     flex-wrap: wrap;
@@ -316,13 +348,18 @@ section h3::after{
 .skill{
     width: fit-content;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     margin: 0.5rem 0.4rem;
 }
 
-.skill i{
-    font-size: 3.5rem;
+.skill p, .passion p{
+    padding-left: 0 !important;
+    margin-top: 0.4rem;
+}
+
+.skill svg{
+    height: 3.5rem;
 }
 
 #autres i{
@@ -334,14 +371,6 @@ section h3::after{
 }
 
 
-#presentation h3{
-    font-family: "Indie Flower", cursive;
-}
-
-#presentation p{
-    font-size: 1.25rem;
-    padding-left: 1rem;
-}
 
 #presentation nav{
     margin: auto;
@@ -935,14 +964,6 @@ ul:has(>li:hover)>.active{
     #presentation li{
         padding: 0 0.6rem;
         animation-timing-function: ease-out;
-    }
-
-    .skill{
-        flex-direction: column;
-    }
-    .skill p{
-        padding-left: 0 !important;
-        margin-top: 0.4rem;
     }
 
     #carProjet{
