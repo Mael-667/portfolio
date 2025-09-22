@@ -148,7 +148,7 @@ h3{
 }
 
 section{
-    height: 101vh;
+    height: 102vh;
     position: relative;
     background-size: cover;
     background-position: center;
@@ -169,7 +169,11 @@ section>h2{
 }
 
 section h2,section h3, section p{
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.425));
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.15));
+}
+
+section p{
+    text-shadow: 0 0 3px #000000e2;
 }
 
 section>h2::after{
@@ -258,7 +262,7 @@ section h3::after{
 }
 
 .articleFocus:after{
-    background: rgb(0 255 208 / 7%) !important;
+    background: rgb(74 191 140 / 12%) !important;
     box-shadow:inset 1px 1px 3px 1px rgba(255, 255, 255, 1), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 12px 2px rgb(0 0 0 / 46%) !important;
 }
 
@@ -285,7 +289,7 @@ section h3::after{
     text-shadow: none;
     color: rgba(255, 255, 255, 0.74);
     position: absolute;
-    min-width: 60%;
+    width: 60%;
 }
 
 .articleRight{
@@ -298,6 +302,36 @@ section h3::after{
     transform: translateX(-23%) perspective(100em) rotateY(-71deg) scale(0.65);
 }
 
+#skills h4{
+        margin-bottom: 0.7rem;
+}
+
+#comp, #autres{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 0 !important;
+}
+
+.skill{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.5rem 0.4rem;
+}
+
+.skill i{
+    font-size: 3.5rem;
+}
+
+#autres i{
+    font-size: 2.5rem;
+}
+
+#autres p{
+    padding-left: 0.4rem !important;
+}
 
 
 #presentation h3{
@@ -305,7 +339,7 @@ section h3::after{
 }
 
 #presentation p{
-    font-size: 1.2em;
+    font-size: 1.25rem;
     padding-left: 1rem;
 }
 
@@ -615,6 +649,7 @@ ul:has(>li:hover)>.active{
     width: 100%;
     height: 75%;
     margin: 0 auto;
+    margin-bottom: 1rem;
     align-self: center;
     justify-content: center;
     padding: 1rem 0;
@@ -762,6 +797,10 @@ ul:has(>li:hover)>.active{
     align-items: center;
 }
 
+#dlcv p{
+    margin: 0.6rem 0;
+}
+
 @media screen and (max-height: 670px){
     #carProjet article>* {
         padding: 5px calc(1rem + 5%);
@@ -783,13 +822,56 @@ ul:has(>li:hover)>.active{
     h3{
         font-size: 2.5rem;
     }
-    section p{
+    /* section p{
         font-size: 1.1rem;
-    }
+    } */
     #contact h3{
         font-size: 2rem !important;
     }
 
+}
+
+@media screen and (max-width:1024px){
+    #reseaux>div:nth-of-type(2)>a {
+        padding: 5px;
+    }
+    #dlcv{
+        flex-direction: column;
+        text-align: center;
+    }
+    #reseaux i{
+        font-size: 3rem;
+    }
+    #social{
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width:1024px) and (orientation: landscape){
+    #presentation p{
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width:1200px){
+    #contact{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #contact h2{
+        padding: 4rem 0 1rem 0;
+        width: 100%;
+        text-align: center;
+        /* bottom: 0; */
+    }
+    #presentation h3 {
+        padding-top: 0.7rem;
+    }
+    .skill p{
+        padding-left: 0.2rem !important;
+    }
 }
 
 @media screen and (max-width:768px){
@@ -829,7 +911,7 @@ ul:has(>li:hover)>.active{
     }
 
     section p{
-        font-size: 1rem !important;
+        font-size: 1.25rem !important;
         margin-bottom: 10px;
     }
 
@@ -841,26 +923,6 @@ ul:has(>li:hover)>.active{
         align-self: baseline;
         padding-top: 1rem;
     }   
-    #carrousel{
-        height: 90%;
-    }
-    .articleFocus {
-        width: 96%;
-        /* left: 2%;
-        right: 2%; */
-        transform: translateX(2%);
-    }
-    .articleRight{
-        /* left: 51%; */
-        transform: translateX(55%) perspective(100em) rotateY(71deg) scale(0.65);
-        min-width: 96%
-    }
-
-    .articleLeft{
-        /* left: -46%; */
-        transform: translateX(-50%) perspective(100em) rotateY(-71deg) scale(0.65);
-        min-width: 96%
-    }
 
     #presentation nav{
         font-size: 2.5rem;
@@ -873,6 +935,14 @@ ul:has(>li:hover)>.active{
     #presentation li{
         padding: 0 0.6rem;
         animation-timing-function: ease-out;
+    }
+
+    .skill{
+        flex-direction: column;
+    }
+    .skill p{
+        padding-left: 0 !important;
+        margin-top: 0.4rem;
     }
 
     #carProjet{
@@ -969,7 +1039,35 @@ ul:has(>li:hover)>.active{
 
 }
 
-@media screen and (max-width: 520px){
+@media screen and (max-width:768px) and (max-height:770px){
+    #skills h4{
+        margin-top: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 540px){
+
+    #carrousel{
+        height: 90%;
+    }
+    .articleFocus {
+        width: 96%;
+        /* left: 2%;
+        right: 2%; */
+        transform: translateX(2%);
+    }
+    .articleRight{
+        /* left: 51%; */
+        transform: translateX(55%) perspective(100em) rotateY(71deg) scale(0.65);
+        width: 96%
+    }
+
+    .articleLeft{
+        /* left: -46%; */
+        transform: translateX(-50%) perspective(100em) rotateY(-71deg) scale(0.65);
+        width: 96%
+    }
+
     #reseaux>div:nth-of-type(2)>a{
         margin: auto;
     }
@@ -1003,41 +1101,14 @@ ul:has(>li:hover)>.active{
     #reseaux>*>* {
         margin: 1.2rem;
     }
-}
-
-
-
-
-@media screen and (max-width:1024px){
-    #reseaux>div:nth-of-type(2)>a {
-        padding: 5px;
+    #presentation article>* {
+        margin: 1rem 1.3rem 1.1rem 1.3rem;
     }
-    #dlcv{
-        flex-direction: column;
-        text-align: center;
-    }
-    #reseaux i{
-        font-size: 3rem;
-    }
-    #social{
-        margin-top: 0;
-        margin-bottom: 1rem;
+    section p{
+        font-size: 1.1rem !important;
     }
 }
 
-@media screen and (max-width:1200px){
-    #contact{
-        display: flex;
-        flex-direction: column;
-    }
-
-    #contact h2{
-        padding: 4rem 0 1rem 0;
-        width: 100%;
-        text-align: center;
-        /* bottom: 0; */
-    }
-}
 
 @media screen and (min-width:1440px){
     #presentationMain{
