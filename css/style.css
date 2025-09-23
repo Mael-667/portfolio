@@ -148,7 +148,7 @@ h3{
 }
 
 section{
-    height: 102vh;
+    height: 105vh;
     position: relative;
     background-size: cover;
     background-position: center;
@@ -277,7 +277,7 @@ section h3::after{
 
 .articleFocus:after{
     background-color: rgba(0, 183, 255, 0);
-    background-image: linear-gradient(132deg,rgba(0, 204, 255, 0.35) 0%, rgba(8, 212, 134, 0.32) 49%, rgba(60, 197, 85, 0.26) 100%) !important;
+    background-image: linear-gradient(132deg, rgba(0, 204, 255, 0.3) 0%, rgba(8, 212, 134, 0.28) 49%, rgba(60, 197, 85, 0.22) 100%) !important;
     box-shadow:inset 1px 1px 3px 1px rgba(255, 255, 255, 1), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 12px 2px rgb(0 0 0 / 46%) !important;
 }
 
@@ -683,6 +683,8 @@ ul:has(>li:hover)>.active{
 
 #contact{
     background-image: url(../img/background/woman-8670414.jpg);
+    background-color: #00031a14;
+    background-blend-mode: hard-light;
 }
 
 #contact h2{
@@ -765,6 +767,11 @@ ul:has(>li:hover)>.active{
     height: 100%;
     padding-bottom: 2rem;
     padding-top: 1rem;
+}
+
+#email form .liquidBtn{
+    background-color: #1c194746;
+    box-shadow: 0px 1px 5px #ffffff42;
 }
 
 #email form input{
@@ -941,7 +948,7 @@ ul:has(>li:hover)>.active{
     }
 
     #contact h2{
-        padding: 4rem 0 1rem 0;
+        padding: 6rem 0 1rem 0;
         width: 100%;
         text-align: center;
         /* bottom: 0; */
@@ -1005,7 +1012,7 @@ ul:has(>li:hover)>.active{
     }
 
     #presentation h3 {
-        padding-top: 1rem;
+        padding-top: 2vh;
         padding-left: 0.7rem;
     }
 
@@ -1055,6 +1062,7 @@ ul:has(>li:hover)>.active{
         flex-direction: column;
         width: 90%;
         gap: 1rem;
+        justify-content: flex-end;
     }
     #reseaux{
         flex-direction: row;
