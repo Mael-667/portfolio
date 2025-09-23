@@ -211,6 +211,8 @@ section h3::after{
 
 #presentation{
     background-image: url(../221425.jpg);
+    background-color: #0014111a;
+    background-blend-mode: color;
 }
 
 
@@ -226,11 +228,22 @@ section h3::after{
 
 #presentation::after{
     content: "";
+    z-index: 7;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 6em;
-    background: linear-gradient(0deg,#080f12 10%, rgba(255, 255, 255, 0) 100%);
+    height: 3em;
+    background: linear-gradient(0deg,#13001e 10%, rgba(255, 255, 255, 0) 100%);
+}
+
+#projets::before{
+    content: "";
+    z-index: 7;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 3em;
+    background: linear-gradient(180deg, #13001e 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 #presentation>h2{
@@ -435,7 +448,25 @@ ul:has(>li:hover)>.active{
 
 
 
+#projets::after{
+    content: "";
+    z-index: 7;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3em;
+    background: linear-gradient(0deg,#05001e 10%, rgba(255, 255, 255, 0) 100%);
+}
 
+#contact::before{
+    content: "";
+    z-index: 7;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 3em;
+    background: linear-gradient(180deg,  #05001e 0%, rgba(255, 255, 255, 0) 100%);
+}
 
 
 
