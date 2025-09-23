@@ -512,8 +512,47 @@ function scrollAnimTo0(){
 }
 
 
+
+(function(){
+    emailjs.init({
+    publicKey: "yYpHDqxVNiasi79Ps",
+    });
+})();
+
+let mailLog = get("#mailLog")
 addEvt(get("form"), "submit", function(e){
     e.preventDefault();
-    let sujet = get("#sujet");
-    let obj = get("#text");
+    mailLog.style.backgroundColor = "";
+    mailLog.innerText = "";
+    let params = {
+        name:get("#sujet").value,
+        email:get("#mail").value,
+        message:get("#text").value
+    }
+    let complete = true;
+    for(key in params){
+        if(params[key] == ""){
+            mailLog.innerText = `Le champ ${key == "name" ? "Nom" : key} ne peut pas être vide`
+            complete = false;
+        }
+    }
+    if(!params.email.match(/.*@.*\..*/)){
+        mailLog.innerText = `Veuillez entrer une adresse mail valide`
+        complete = false;
+    }
+    if(complete){
+        mailLog.style.backgroundColor = "#68ff8494";
+        mailLog.innerText = "Envoi en cours"
+        emailjs.send("service_3942ntr", "template_vmiqhyq", params).then(
+            function (response){
+                mailLog.innerText = "Email bien envoyé."
+                get("form").reset();
+            },
+            function(error){
+                console.log(error)
+                mailLog.innerText = `L'email n'a pas pu être envoyé`
+            }
+        )
+    }
+    mailLog.style.display = "block"
 })

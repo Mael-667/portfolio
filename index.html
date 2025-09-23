@@ -61,7 +61,7 @@
                             Intéressé depuis longtemps par le développement et le design, j'ai appris la programmation en autodidacte dès l'adolescence.
                         </p>
                         <p>
-                            Aujourd'hui étudiant en informatique et développeur full stack, je souhaite approfondir mes connaissances et contribuer à des projets créatifs et ambitieux.
+                            Aujourd'hui en formation dans le domaine de l'informatique et développeur full stack, je souhaite approfondir mes connaissances et contribuer à des projets créatifs et ambitieux.
                         </p>
                         <p>
                             Ayant une bonne connaissance du JavaScript, PHP, HTML/CSS et Java, je me plais à réaliser différents sites et applications web, en explorant le coté front-end aussi bien que le back-end afin de concevoir des applications modernes et interactives.
@@ -135,7 +135,7 @@
                             <div class="projEntete">
                                 <h3>Et bien plus</h3> <p><i class="fa-solid fa-trophy"></i></p>
                             </div>
-                            <p>Étant passionné par le bidouillage et les expérimentations, j'aime réaliser des scripts et des programmes en tout genre sur mon temps libre.</p>
+                            <p>Étant passionné par la programmation et les expérimentations, j'aime réaliser des scripts et des programmes en tout genre sur mon temps libre.</p>
                         </div>
                     </article>
                 </div>
@@ -155,7 +155,9 @@
                 <div id="email" class="liquidGlassLarge">
                     <h3>N'hésitez pas à me contacter par mail</h3>
                     <form>
-                        <input type="text" name="sujet" id="sujet" placeholder="Votre sujet" class="liquidBtn">
+                        <p id="mailLog"></p>
+                        <input type="text" name="sujet" id="sujet" placeholder="Votre nom" class="liquidBtn">
+                        <input type="text" name="mail" id="mail" placeholder="Votre email" class="liquidBtn">
                         <textarea type="text" name="text" id="text" placeholder="Votre message" class="liquidBtn"></textarea>
                         <button type="submit" class="liquidGlass" id="sendMail"><i class="fa-solid fa-paper-plane"></i></button>
                     </form>
@@ -181,6 +183,7 @@
         </section>
     </main>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
