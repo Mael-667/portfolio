@@ -307,6 +307,11 @@ section h3::after{
     transform: translateX(-23%) perspective(100em) rotateY(-71deg) scale(0.65);
 }
 
+.articleRight p, .articleLeft p{
+    text-shadow: none;
+    filter: none;
+}
+
 #skills h4{
         margin-bottom: 0.7rem;
 }
@@ -360,7 +365,7 @@ section h3::after{
 
 .skill p, .passion p{
     padding-left: 0 !important;
-    margin-top: 0.4rem;
+    margin: 0.4rem 0;
 }
 
 .skill svg{
@@ -1093,11 +1098,6 @@ ul:has(>li:hover)>.active{
         /* left: -46%; */
         transform: translateX(-50%) perspective(100em) rotateY(-71deg) scale(0.65);
         width: 96%
-    }
-
-    .articleRight p, .articleLeft p{
-        text-shadow: none;
-        filter: none;
     }
 
     #passions {
