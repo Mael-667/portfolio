@@ -210,7 +210,7 @@ section h3::after{
 
 
 #presentation{
-    background-image: url(../221425.jpg);
+    background-image: url(../img/background/221425.jpg);
     background-color: #0014111a;
     background-blend-mode: color;
 }
@@ -381,7 +381,7 @@ section h3::after{
     margin: 0.4rem 0;
 }
 
-.skill svg{
+.skill svg, .skill img{
     height: 3.5rem;
 }
 
@@ -445,7 +445,9 @@ ul:has(>li:hover)>.active{
     box-shadow: inset 3px 3px 6px 0px rgba(255, 255, 255, 0.418), 0 0 0.3em black;
 }
 
-
+#presentationMain>nav i{
+    pointer-events:none;
+}
 
 
 #projets::after{
@@ -473,7 +475,7 @@ ul:has(>li:hover)>.active{
 
 
 #projets{
-    background-image: url(../bg3.webp);
+    background-image: url(../img/background/bg3.webp);
 }
 
 #projets h2, #projets h3{
