@@ -126,7 +126,7 @@ class ProjectCarrousel extends React.Component {
             <article className="liquidGlassLarge projet">
               <div
                 className="minia"
-                style={{ backgroundImage: 'url("/img/more.jpg")' }}
+                style={{ backgroundImage: 'url("./img/more.jpg")' }}
               ></div>
               <div className="projText">
                 <div className="projEntete">
