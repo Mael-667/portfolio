@@ -87,12 +87,12 @@ class ProjectCarrousel extends React.Component {
 
   getProjectIcon(project) {
     let link = {
-      Stateur: "/img/stateur.jpg",
-      Interstalla: "/img/interstella.jpg",
-      Flex: "/img/flex.jpg",
-      Diskype: "/img/diskype.jpg",
-      Portfolio: "/img/portfolio.png",
-      "Liquid-Glass-CSS": "/img/lgcss.gif",
+      Stateur: "./img/stateur.jpg",
+      Interstalla: "./img/interstella.jpg",
+      Flex: "./img/flex.jpg",
+      Diskype: "./img/diskype.jpg",
+      Portfolio: "./img/portfolio.png",
+      "Liquid-Glass-CSS": "./img/lgcss.gif",
     };
     return link[project];
   }

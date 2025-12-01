@@ -126,16 +126,16 @@ class AboutmeCarrousel extends React.Component {
             </p>
             <p>En voici une courte liste :</p>
             <div id="passions">
-              <Icon name="Piano" src="/img/piano.svg" alt="Icone de piano" />
+              <Icon name="Piano" src="./img/piano.svg" alt="Icone de piano" />
               <Icon
                 name="Informatique"
-                src="/img/code.svg"
+                src="./img/code.svg"
                 alt="Icone de code"
               />
-              <Icon name="Vélo" src="/img/velo.svg" alt="Icone de vélo" />
+              <Icon name="Vélo" src="./img/velo.svg" alt="Icone de vélo" />
               <Icon
                 name="Dessin"
-                src="/img/dessin.svg"
+                src="./img/dessin.svg"
                 alt="Icone de dessin"
               />
             </div>
