@@ -1,5 +1,5 @@
 import React from "react";
-import { get, isTargetInElement, delEvt } from "./js/utils.js";
+import { get, isTargetInElement, delEvt, animateOnSpawn } from "./js/utils.js";
 
 class Header extends React.Component {
     menuOpened = false;
@@ -18,6 +18,8 @@ class Header extends React.Component {
                     .forEach((e) => e.classList.remove("glassLightMode"));
             }
         });
+
+        // animateOnSpawn(get("header"), "scale-in-center 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both")
     }
 
     openBurger(e) {
