@@ -1,5 +1,7 @@
-# Portfolio
+# 🌐 Portfolio
 
-## Description
+Portfolio présentant mes projets et compétences en développement web.  
 
-Ce projet est une vitrine de mes compétences en matière de dévéloppement dévéloppé en React, JS, HTML, CSS
+💻 JavaScript · PHP · HTML · CSS · Java · Javascript
+
+[Voir en ligne](https://mael-667.github.io/portfolio/)
