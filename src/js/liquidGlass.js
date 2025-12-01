@@ -28,10 +28,14 @@ document.addEventListener("DOMContentLoaded", function(){
 
     
     //activate dynamic hues only if needed
+    startDynamicHue();
+});
+
+export default function startDynamicHue(){
     if(document.querySelector("[data-hue]") != null){
         dynamicLiquidGlassColor();
     };
-});
+}
 
 //add "data-hue:#hexcolor" to an element so that its color permeates liquidglasses with a parent element with the class dynamicColor that hover over it
 function dynamicLiquidGlassColor(){
@@ -39,13 +43,13 @@ function dynamicLiquidGlassColor(){
     let parents = document.querySelectorAll(".dynamicHue");
     let parentsHoverable = document.querySelectorAll(".dynamicHueHvr");
     let elmnts = [];
-    for(parent of parents){ 
-        for(enfant of parent.querySelectorAll(".liquidGlass")){
+    for(const parent of parents){ 
+        for(const enfant of parent.querySelectorAll(".liquidGlass")){
             elmnts.push({element: enfant, hoverable: false});
         };
     };
-    for(parent of parentsHoverable){ 
-        for(enfant of parent.querySelectorAll(".liquidGlass")){
+    for(const parent of parentsHoverable){ 
+        for(const enfant of parent.querySelectorAll(".liquidGlass")){
             elmnts.push({element: enfant, hoverable: true});
         };
     };
