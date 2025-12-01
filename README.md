@@ -1,7 +1,12 @@
-# 🌐 Portfolio
+# Portfolio de moi
 
-Portfolio présentant mes projets et compétences en développement web.  
+Portfolio présentant mes projets et compétences en matière de développement.  
 
-💻 JavaScript · PHP · HTML · CSS · Java · Javascript
+Il met en avant mes projets faits en : JavaScript · PHP · HTML · CSS · Java · React
 
 [Voir en ligne](https://mael-667.github.io/portfolio/)
+
+## Comment le lancer
+
+Si vous désirez cloner le projet afin de l'essayer de votre coté, vous aurez besoin de [Node JS](https://nodejs.org/en).
+Une fois node installé, vous devez effectuer la commande `npm run dev`. Cela hebergera le projet localement et vous pourrez le visionner avec le navigateur de votre choix.

@@ -1,5 +1,5 @@
 import React from "react";
-import { toggleAnim } from "./js/utils";
+import { animateOnSpawn, get, toggleAnim } from "./js/utils";
 import javaLogo from "./assets/java.svg";
 import htmlLogo from "./assets/html.svg";
 import cssLogo from "./assets/css.svg";
@@ -14,7 +14,7 @@ class AboutmeCarrousel extends React.Component {
 
   touchStartBind = ((event) => {
     this.touchstartX = event.changedTouches[0].screenX;
-    this.touchstartY = event.changedTouches[0].screenY;
+    this.touchstartY = event.changedTouches[0].screenY
   }).bind(this);
 
   touchEndBind = ((event) => {
@@ -109,6 +109,7 @@ class AboutmeCarrousel extends React.Component {
     document
       .querySelector("#carrousel")
       .addEventListener("touchend", this.touchEndBind, false);
+      animateOnSpawn(get("#carrousel"), "flip-in-hor-top 0.7s ease-out both")
   }
 
   render() {
@@ -125,16 +126,16 @@ class AboutmeCarrousel extends React.Component {
             </p>
             <p>En voici une courte liste :</p>
             <div id="passions">
-              <Icon name="Piano" src="./img/piano.svg" alt="Icone de piano" />
+              <Icon name="Piano" src="/img/piano.svg" alt="Icone de piano" />
               <Icon
                 name="Informatique"
-                src="./img/code.svg"
+                src="/img/code.svg"
                 alt="Icone de code"
               />
-              <Icon name="Vélo" src="./img/velo.svg" alt="Icone de vélo" />
+              <Icon name="Vélo" src="/img/velo.svg" alt="Icone de vélo" />
               <Icon
                 name="Dessin"
-                src="./img/dessin.svg"
+                src="/img/dessin.svg"
                 alt="Icone de dessin"
               />
             </div>
