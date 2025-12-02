@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import startDynamicHue from "./js/liquidGlass.js";
 import AboutmeCarrousel from "./aboutmeCarrousel.jsx";
 import ProjectCarrousel from "./projectCarrousel.jsx";
 import Contact from "./Contact.jsx";
-import { addEvt, animateOnSpawn, get } from "./js/utils.js";
+import Header from "./Header.jsx";
 
-class App extends React.Component {
-  componentDidMount() {
+import { addEvt, animateOnSpawn, get, isTargetInElement } from "./js/utils.js";
+
+export default function App() {
+  useEffect(() => {
     startDynamicHue();
-    animateOnSpawn(get("#titre>h1"), "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both")
-  }
+    animateOnSpawn(
+      get("#titre>h1"),
+      "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
+    );
+    switchHeaderTheme();
+  }, []);
 
-  render() {
-    return (
+  return (
+    <>
+      <Header />
       <main>
         <section id="intro">
           <div id="titre">
@@ -33,8 +40,21 @@ class App extends React.Component {
           <Contact />
         </section>
       </main>
-    );
-  }
+    </>
+  );
 }
 
-export default App;
+function switchHeaderTheme() {
+  let intro = document.querySelector("#intro");
+  document.addEventListener("scroll", function () {
+    if (isTargetInElement(get("header li"), intro)) {
+      document
+        .querySelectorAll("header .liquidGlass")
+        .forEach((e) => e.classList.add("glassLightMode"));
+    } else {
+      document
+        .querySelectorAll("header .liquidGlass")
+        .forEach((e) => e.classList.remove("glassLightMode"));
+    }
+  });
+}

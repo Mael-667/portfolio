@@ -1304,7 +1304,7 @@ ul:has(>li:hover)>.active{
 
 
 @keyframes appear {
-  0% {  
+  0% { 
     right: -100%;
   }
   60%{
