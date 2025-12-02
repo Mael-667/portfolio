@@ -1,95 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import { get, isTargetInElement, delEvt, animateOnSpawn } from "./js/utils.js";
 
-class Header extends React.Component {
-    menuOpened = false;
-    removeBurgerBind = this.removeBurger.bind(this);
-    resetBurgerBind = this.resetBurger.bind(this);
-    componentDidMount() {
-        let intro = document.querySelector("#intro");
-        document.addEventListener("scroll", function () {
-            if (isTargetInElement(get("header li"), intro)) {
-                document
-                    .querySelectorAll("header .liquidGlass")
-                    .forEach((e) => e.classList.add("glassLightMode"));
-            } else {
-                document
-                    .querySelectorAll("header .liquidGlass")
-                    .forEach((e) => e.classList.remove("glassLightMode"));
-            }
-        });
+export default function Header() {
+  const [opened, SetOpened] = useState({
+    button: "",
+    nav: "reverse-appear 0.3s both",
+  });
 
-        // animateOnSpawn(get("header"), "scale-in-center 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both")
-    }
+  const mobile = document.documentElement.clientWidth < 769;
 
-    openBurger(e) {
-        e.stopPropagation();
-        document.querySelector("#btnBurger").classList.add("rotate-out-2-ccw");
+  //   useState(() => {
 
-        let ul = document.querySelector("header ul");
-        ul.style.display = "flex";
-        ul.classList.toggle("appear");
-        this.menuOpened = true;
-        document.addEventListener("click", this.removeBurgerBind);
-    }
+  //     // animateOnSpawn(get("header"), "scale-in-center 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both")
+  //   }, []);
 
+  function openBurger(e) {
+    e.stopPropagation();
+    SetOpened({
+      button:
+        "rotate-out-2-ccw 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+      nav: "appear 0.3s both",
+    });
+    get("header ul").style.display = "flex";
+    document.addEventListener("click", removeBurger);
+  }
 
-    removeBurger(e) {
-        e.stopPropagation();
-        if (this.menuOpened) {
-            document.querySelector("#btnBurger").classList.remove("rotate-out-2-ccw");
-            document
-                .querySelector("#btnBurger")
-                .classList.add("Reverserotate-out-2-ccw");
-            let ul = document.querySelector("header ul");
+  function removeBurger(e) {
+    e.stopPropagation();
+    SetOpened({
+      button:
+        "reverse-rotate-out-2-ccw 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+      nav: "reverse-appear 0.3s both",
+    });
+    let ul = document.querySelector("header ul");
+    delEvt(document, "click", removeBurger);
+    ul.addEventListener("animationend", resetBurger);
+  }
 
-            ul.classList.toggle("appear");
-            ul.classList.add("Reverseappear");
-            
-            this.menuOpened = false;
-            delEvt(document, "click", this.removeBurger);
-            delEvt(document, "click", this.removeBurgerBind);
-            ul.addEventListener("animationend", this.resetBurgerBind);
-        }
-    }
+  function resetBurger() {
+    let ul = document.querySelector("header ul");
+    ul.style.display = "none";
+    get("#btnBurger").style.animation = "";
+    ul.removeEventListener("animationend", resetBurger);
+  }
 
-    resetBurger() {
-        let ul = document.querySelector("header ul");
-        ul.style.display = "none";
-        ul.classList.remove("Reverseappear");
-        document
-            .querySelector("#btnBurger")
-            .classList.remove("Reverserotate-out-2-ccw");
-        ul.removeEventListener("animationend", this.resetBurgerBind);
-    }
-
-    render() {
-        return (
-            <>
-                <header>
-                    <nav className="dynamicHueHvr">
-                        <button className="liquidGlass glassLightMode" id="btnBurger" onClick={(this.openBurger.bind(this))}>
-                            <i className="fa-solid fa-bars"></i>
-                        </button>
-                        <ul>
-                            <li className="liquidGlass glassLightMode">
-                                <a href="#intro">Accueil</a>
-                            </li>
-                            <li className="liquidGlass glassLightMode">
-                                <a href="#presentation">Présentation</a>
-                            </li>
-                            <li className="liquidGlass glassLightMode">
-                                <a href="#projets">Projets</a>
-                            </li>
-                            <li className="liquidGlass glassLightMode">
-                                <a href="#contact">Contact</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </header>
-            </>
-        );
-    }
+  return (
+    <>
+      <header>
+        <nav className="dynamicHueHvr">
+          <button
+            className="liquidGlass glassLightMode"
+            id="btnBurger"
+            onClick={openBurger}
+            style={{animation : (mobile && opened.button)}}
+          >
+            <i className="fa-solid fa-bars"></i>
+          </button>
+          <ul
+            style={{animation : (mobile && opened.nav)}}
+          >
+            <li className="liquidGlass glassLightMode">
+              <a href="#intro">Accueil</a>
+            </li>
+            <li className="liquidGlass glassLightMode">
+              <a href="#presentation">Présentation</a>
+            </li>
+            <li className="liquidGlass glassLightMode">
+              <a href="#projets">Projets</a>
+            </li>
+            <li className="liquidGlass glassLightMode">
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </>
+  );
 }
-
-export default Header;
