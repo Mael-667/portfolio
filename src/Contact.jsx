@@ -6,6 +6,8 @@ export default function Contact() {
   const mobileWidth = 769;
 
   return (
+    <>
+    <h2>Si mon travail a retenu votre attention</h2>
     <div id="contactCards">
       <div id="email" className="liquidGlassLarge">
         <h3>N'hésitez pas à me contacter par mail</h3>
@@ -43,6 +45,7 @@ export default function Contact() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

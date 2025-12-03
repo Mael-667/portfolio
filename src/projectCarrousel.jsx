@@ -12,14 +12,14 @@ import {
 import ProjectScrollbar from "./projectScrollbar.jsx";
 
 class ProjectCarrousel extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            cards: [],
-            cardsLength: 0,
-        };
-    }
-    
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: [],
+      cardsLength: 0,
+    };
+  }
+
   async loadGithubData() {
     const url = "https://api.github.com/users/Mael-667/repos";
     try {
@@ -78,8 +78,8 @@ class ProjectCarrousel extends React.Component {
       );
     }
 
-    if (parsedGithubData.desc.length > 300) {
-      parsedGithubData.desc = `${parsedGithubData.desc.substring(0, 300)}...`;
+    if (parsedGithubData.desc.length > 255) {
+      parsedGithubData.desc = `${parsedGithubData.desc.substring(0, 255)}...`;
     }
 
     return parsedGithubData;
@@ -111,15 +111,16 @@ class ProjectCarrousel extends React.Component {
     this.loadGithubData();
     animateOnSpawn(
       get("#carProjet"),
-      "slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both"
+      "slide-in-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both"
     );
   }
-  
+
   render() {
     return (
       <>
+        <h2>Mes projets</h2>
         <div>
-          <div id="carProjet" style={{ transform: "translateX(80vw)" }}>
+          <div id="carProjet" style={{ transform: "translateX(50vw)" }}>
             {this.state.cards.map((element) => (
               <ProjectCard data={element} />
             ))}
@@ -136,12 +137,14 @@ class ProjectCarrousel extends React.Component {
                   </p>
                 </div>
                 <p>
-                  Étant particulièrement passionné par la programmation, je me plais réaliser des programmes en tout genre et à essayer différentes technologies sur mon temps libre.
+                  Étant particulièrement passionné par la programmation, je me
+                  plais réaliser des programmes en tout genre et à essayer
+                  différentes technologies sur mon temps libre.
                 </p>
               </div>
             </article>
           </div>
-            {(this.state.cardsLength > 0) && <ProjectScrollbar length={this.state.cardsLength} />}
+          {this.state.cardsLength > 0 && (<ProjectScrollbar length={this.state.cardsLength} />)}
         </div>
       </>
     );

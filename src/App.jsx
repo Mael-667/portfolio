@@ -8,12 +8,18 @@ import Header from "./Header.jsx";
 import { addEvt, animateOnSpawn, get, isTargetInElement } from "./js/utils.js";
 
 export default function App() {
+
+  const [opacity, setOpacity] = useState(0);
+
   useEffect(() => {
     startDynamicHue();
-    animateOnSpawn(
-      get("#titre>h1"),
-      "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
-    );
+    window.onload = () => {
+      animateOnSpawn(
+        get("#titre>h1"),
+        "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
+      );
+      (() => setOpacity(1))();
+    }
     switchHeaderTheme();
   }, []);
 
@@ -22,21 +28,18 @@ export default function App() {
       <Header />
       <main>
         <section id="intro">
-          <div id="titre">
+          <div id="titre"  style={{opacity:opacity, transition:"250ms"}}>
             <h2>Développeur Web</h2>
             <h1>Mael Flament</h1>
           </div>
         </section>
         <section id="presentation" data-hue="#1c95ffff">
-          <h2>À propos de moi</h2>
           <AboutmeCarrousel />
         </section>
         <section id="projets" data-hue="#bf4de1ff">
-          <h2>Mes projets</h2>
           <ProjectCarrousel />
         </section>
         <section id="contact">
-          <h2>Si mon travail a retenu votre attention</h2>
           <Contact />
         </section>
       </main>
