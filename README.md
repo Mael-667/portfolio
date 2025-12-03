@@ -9,4 +9,4 @@ Il met en avant mes projets faits en : JavaScript · PHP · HTML · CSS · Java 
 ## Comment le lancer
 
 Si vous désirez cloner le projet afin de l'essayer de votre coté, vous aurez besoin de [Node JS](https://nodejs.org/en).
-Une fois node installé, vous devez effectuer la commande `npm run dev`. Cela hebergera le projet localement et vous pourrez le visionner avec le navigateur de votre choix.
+Une fois node installé, vous devez effectuer les commandes `npm install` et `npm run dev`. Cela installera les dépendences et cela hebergera le projet localement et vous pourrez le visionner avec le navigateur de votre choix.
