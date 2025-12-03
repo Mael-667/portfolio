@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import { addEvt, delEvt, get } from "./js/utils.js";
 
-export default function ProjectScrollbar(props) {
+export default function ProjectScrollbar({length}) {
   useEffect(() => {
     let sb = new HorizontalScrollBar(
       get("#carProjet"),
@@ -25,7 +25,7 @@ export default function ProjectScrollbar(props) {
     <div id="projScroll" className="liquidGlass no-drag">
       <div id="elements">
         <i className="fa-solid fa-circle" />
-        {[...Array(props.length)].map(() => (
+        {[...Array(length)].map(() => (
           <Line />
         ))}
       </div>
