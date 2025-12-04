@@ -13,16 +13,17 @@ export default function App() {
 
   useEffect(() => {
     startDynamicHue();
-    window.onload = () => {
-      animateOnSpawn(
-        get("#titre>h1"),
-        "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
-      );
-      (() => setOpacity(1))();
-    }
     switchHeaderTheme();
   }, []);
-
+  
+  window.addEventListener("load", () => {
+    animateOnSpawn(
+      get("#titre>h1"),
+      "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
+    );
+    setOpacity(1);
+  })
+  
   return (
     <>
       <Header />
