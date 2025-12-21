@@ -187,7 +187,7 @@ class GithubData {
 }
 
 
-function startAutoScroll(scrollarea, scrollbar, bar, duration = 4) {
+function startAutoScroll(scrollarea, scrollbar, bar, duration = 2) {
   let renderWidth = scrollarea.offsetWidth; //taille affichée a l'écran
   let scrollWidth = scrollarea.scrollWidth; //taille totale de l'élément
   let stoptt = false;

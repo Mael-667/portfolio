@@ -5,7 +5,7 @@ import ProjectCarrousel from "./projectCarrousel.jsx";
 import Contact from "./Contact.jsx";
 import Header from "./Header.jsx";
 
-import { addEvt, animateOnSpawn, get, isTargetInElement } from "./js/utils.js";
+import {animateOnSpawn, get, isTargetInElement } from "./js/utils.js";
 
 export default function App() {
 

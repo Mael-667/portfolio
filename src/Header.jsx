@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { get, isTargetInElement, delEvt, animateOnSpawn } from "./js/utils.js";
+import { get, delEvt} from "./js/utils.js";
 
 export default function Header() {
   const [opened, SetOpened] = useState({

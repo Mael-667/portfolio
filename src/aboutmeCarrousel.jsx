@@ -206,12 +206,10 @@ class AboutmeCarrousel extends React.Component {
 
 function Icon({ name, src, alt }) {
   return (
-    <>
       <div className="skill">
         <img src={src} alt={alt} />
         <p>{name}</p>
       </div>
-    </>
   );
 }
 
