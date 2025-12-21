@@ -119,12 +119,9 @@ class AboutmeCarrousel extends React.Component {
         <div id="presentationMain">
           <div id="carrousel">
             <article className="liquidGlassLarge articleLeft" id="interets">
-              <h3>Centres d'intérêt</h3>
-              <p>
-                Curieux de nature, je m'intéresse à divers univers qui
-                enrichissent mon approche du développement et du design.
-              </p>
-              <p>En voici une courte liste :</p>
+              <h3>Mes passions</h3>
+              <p>Passionné par la création sous toutes ses formes, j'aime mêler logique et créativité à travers le développement. Le code, le design et l'expérience utilisateur sont pour moi indissociables. Toujours curieux, j'explore de nouvelles idées et technologies pour enrichir ma façon de concevoir des applications modernes et intuitives.</p>
+              <p>Voici une courte liste de ces passions qui m'animent :</p>
               <div id="passions">
                 <Icon name="Piano" src="./img/piano.svg" alt="Icone de piano" />
                 <Icon
@@ -143,21 +140,9 @@ class AboutmeCarrousel extends React.Component {
 
             <article className="liquidGlassLarge articleFocus" id="aboutMe">
               <h3>Présentation</h3>
-              <p>
-                Intéressé depuis longtemps par le développement et le design,
-                j'ai appris la programmation en autodidacte dès l'adolescence.
-              </p>
-              <p>
-                Aujourd'hui en formation dans le domaine de l'informatique et
-                développeur full stack, je souhaite approfondir mes
-                connaissances et contribuer à des projets créatifs et ambitieux.
-              </p>
-              <p>
-                Ayant une bonne connaissance du JavaScript, PHP, HTML/CSS et
-                Java, je me plais à réaliser différents sites et applications
-                web, en explorant le coté front-end aussi bien que le back-end
-                afin de concevoir des applications modernes et interactives.
-              </p>
+              <p>Passionné par le développement depuis de nombreuses années, j'ai commencé à apprendre la programmation en autodidacte dès l'adolescence.</p>
+              <p>Actuellement développeur full-stack, je souhaite approfondir mes compétences et m'investir dans des projets créatifs et ambitieux.</p>
+              <p>À l'aise avec JavaScript, PHP, HTML/CSS et Java, j'aime concevoir des sites et des applications web en explorant aussi bien le front-end que le back-end, avec pour objectif de créer des applications modernes, performantes et visuellement abouties.</p>
             </article>
 
             <article className="liquidGlassLarge articleRight" id="skills">
@@ -175,6 +160,10 @@ class AboutmeCarrousel extends React.Component {
                 <div className="skill">
                   <i className="fa-brands fa-symfony" />
                   <p>Symfony</p>
+                </div>
+                <div className="skill">
+                  <i className="fa-brands fa-react" />
+                  <p>React</p>
                 </div>
                 <div className="skill">
                   <i className="fa-brands fa-bootstrap" />

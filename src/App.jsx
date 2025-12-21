@@ -16,7 +16,7 @@ export default function App() {
     switchHeaderTheme();
   }, []);
   
-  window.addEventListener("load", () => {
+  document.fonts.ready.then(() => {
     animateOnSpawn(
       get("#titre>h1"),
       "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
@@ -30,11 +30,11 @@ export default function App() {
       <main>
         <section id="intro">
           <div id="titre"  style={{opacity:opacity, transition:"250ms"}}>
-            <h2>Développeur Web</h2>
+            <h2>Développeur Full-Stack</h2>
             <h1>Mael Flament</h1>
           </div>
         </section>
-        <section id="presentation" data-hue="#1c95ffff">
+        <section id="presentation" data-hue="#0059ffff">
           <AboutmeCarrousel />
         </section>
         <section id="projets" data-hue="#bf4de1ff">

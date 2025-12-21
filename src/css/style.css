@@ -173,7 +173,7 @@ section h2,section h3, section p{
 }
 
 section p{
-    text-shadow: 0 0 3px #000000;
+    text-shadow: 0 0 4px #00000080;
 }
 
 section>h2::after{
@@ -205,13 +205,13 @@ section h3::after{
 }
 
 #presentation article>*{
-    margin: calc(0.7rem + 2%) calc(1rem + 5%) 0 calc(1rem + 5%);
+    margin: calc(0.7rem + 2%) calc(2rem + 5%) 0 calc(2rem + 5%);
 }
 
 
 #presentation{
     background-image: url(../img/background/221425.jpg);
-    background-color: #0014111a;
+    background-color: #0014111f;
     background-blend-mode: color;
 }
 
@@ -276,9 +276,10 @@ section h3::after{
 }
 
 .articleFocus:after{
-    background-color: rgba(0, 183, 255, 0);
-    background-image: linear-gradient(132deg, rgba(0, 204, 255, 0.33) 0%, rgba(8, 212, 134, 0.31) 49%, rgba(60, 197, 85, 0.25) 100%) !important;
-    box-shadow:inset 1px 1px 3px 1px rgba(255, 255, 255, 1), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 12px 2px rgb(0 0 0 / 46%) !important;
+    background-color: rgba(112, 205, 255, 0.123);
+    background-image: linear-gradient(132deg, rgba(0, 204, 255, 0.33) 0%, rgb(0 255 157 / 31%) 49%, rgb(0 255 47 / 25%) 100%) !important;
+    box-shadow: inset 1px 1px 3px 1px rgba(255, 255, 255, 1), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 12px 2px rgb(0 0 0 / 46%) !important;
+    background-blend-mode: hard-light;
 }
 
 .articleFocus::before{
@@ -335,8 +336,7 @@ section h3::after{
 }
 
 #presentation p{
-    font-size: 1.15rem;
-    padding-left: 1rem;
+    font-size: 1.40rem;
 }
 
 #passions{
@@ -357,7 +357,9 @@ section h3::after{
 }
 
 
-
+#aboutMe p{
+    margin-top: 0.9rem;
+}
 
 
 
@@ -389,9 +391,9 @@ section h3::after{
     font-size: 2.5rem;
 }
 
-#autres p{
+/* #autres p{
     padding-left: 0.4rem !important;
-}
+} */
 
 
 
@@ -938,6 +940,9 @@ ul:has(>li:hover)>.active{
         margin-top: 0;
         margin-bottom: 1rem;
     }
+    #presentation p{
+        font-size: 1.35rem;
+    }
 }
 
 @media screen and (max-width:1024px) and (orientation: landscape){
@@ -1243,9 +1248,6 @@ ul:has(>li:hover)>.active{
 @media screen and (min-width:1920px){
     #contactCards{
         width: 70%;
-    }
-    #presentation p{
-        font-size: 1.25rem;
     }
 }
 
