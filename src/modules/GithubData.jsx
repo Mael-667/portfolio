@@ -2,7 +2,7 @@ import {
   triFusion,
   capitalizeFirstLetter,
   b64DecodeUnicode,
-} from "./js/utils.js";
+} from "../js/utils.js";
 
 export default class GithubData {
   static async loadData() {
