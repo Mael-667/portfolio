@@ -7,7 +7,8 @@ export {
   isTargetInElement,
   capitalizeFirstLetter,
   b64DecodeUnicode,
-  animateOnSpawn
+  animateOnSpawn,
+  throttle
 };
 
 function addEvt(target, event, fun) {
@@ -121,4 +122,17 @@ function animateOnSpawn(target, animationStyle) {
 
   observer = new IntersectionObserver(callback, options);
   observer.observe(target);
+}
+
+function throttle (callbackFn, limit = 100) {
+    let wait = false;                  
+    return function () {              
+        if (!wait) {                  
+            callbackFn.call();           
+            wait = true;               
+            setTimeout(function () {   
+                wait = false;          
+            }, limit);
+        }
+    }
 }

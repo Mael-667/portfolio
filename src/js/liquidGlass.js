@@ -1,3 +1,5 @@
+import { throttle } from "./utils";
+
 //injects the svg filter which allows the background to be deformed when the page is loaded then injects the css
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -56,7 +58,7 @@ function dynamicLiquidGlassColor(){
 
     //for each liquidglass element with a parent class dynamicColor, the function will check if its displayed within an element with an hue. If so, it will apply the filter and mark it as selected.
     //the unselected elements at the end of the loop, therefore those which are not at all on a background, will have their leftover hue removed
-    document.addEventListener("scroll", function(){
+    document.addEventListener("scroll", throttle(function(){
         let selected = [];
 
         for(let i = 0; i < backgrounds.length; ++i){
@@ -87,7 +89,7 @@ function dynamicLiquidGlassColor(){
                 elmnts[i].element.style.setProperty('--backgroundHover', ``);
             };
         };
-    });
+    }, 50), {passive:true});
 };
 
 

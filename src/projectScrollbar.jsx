@@ -19,7 +19,7 @@ export default function ProjectScrollbar({length, onRender, carrousel}) {
 	  elements.current.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
 	  line.current.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
 	});
-  }, []);
+  }, [carrousel]);
 
 	useEffect(() => {
 		onRender();

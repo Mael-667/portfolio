@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { delEvt, isTargetInElement, addEvt} from "./js/utils.js";
+import { delEvt, isTargetInElement, addEvt, throttle} from "./js/utils.js";
 
 export default function Header({getRef}) {
   const [opened, SetOpened] = useState({
@@ -24,7 +24,7 @@ export default function Header({getRef}) {
       }
     };
 
-    addEvt(document, "scroll", switchThemeFun);  
+    addEvt(document, "scroll", throttle(switchThemeFun, 70), {passive:true});  
     return () => {
       delEvt(document, "scroll", switchThemeFun);
     }
