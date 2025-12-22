@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef} from "react";
 import startDynamicHue from "./js/liquidGlass.js";
 import AboutmeCarrousel from "./aboutmeCarrousel.jsx";
 import ProjectCarrousel from "./projectCarrousel.jsx";
 import Contact from "./Contact.jsx";
 import Header from "./Header.jsx";
 
-import {animateOnSpawn, get, isTargetInElement } from "./js/utils.js";
+import {animateOnSpawn} from "./js/utils.js";
 
 export default function App() {
-
-  const [opacity, setOpacity] = useState(0);
+  const titre = useRef(null);
+  const intro = useRef(null);
+  const h1 = useRef(null);
 
   useEffect(() => {
     startDynamicHue();
-    switchHeaderTheme();
+
+    document.fonts.ready.then(() => {
+      animateOnSpawn(
+        h1.current,
+        "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
+      );
+      titre.current.style.opacity = 1;
+    })
   }, []);
   
-  document.fonts.ready.then(() => {
-    animateOnSpawn(
-      get("#titre>h1"),
-      "tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both"
-    );
-    setOpacity(1);
-  })
   
   return (
     <>
-      <Header />
+      <Header getRef={intro} />
       <main>
-        <section id="intro">
-          <div id="titre"  style={{opacity:opacity, transition:"250ms"}}>
+        <section id="intro" ref={intro}>
+          <div id="titre" ref={titre} style={{opacity:0, transition:"250ms"}}>
             <h2>Développeur Full-Stack</h2>
-            <h1>Mael Flament</h1>
+            <h1 ref={h1}>Mael Flament</h1>
           </div>
         </section>
         <section id="presentation" data-hue="#0059ffff">
@@ -46,19 +47,4 @@ export default function App() {
       </main>
     </>
   );
-}
-
-function switchHeaderTheme() {
-  let intro = document.querySelector("#intro");
-  document.addEventListener("scroll", function () {
-    if (isTargetInElement(get("header li"), intro)) {
-      document
-        .querySelectorAll("header .liquidGlass")
-        .forEach((e) => e.classList.add("glassLightMode"));
-    } else {
-      document
-        .querySelectorAll("header .liquidGlass")
-        .forEach((e) => e.classList.remove("glassLightMode"));
-    }
-  });
 }

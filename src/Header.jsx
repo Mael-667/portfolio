@@ -1,18 +1,34 @@
-import React, { useState } from "react";
-import { get, delEvt} from "./js/utils.js";
+import React, { useEffect, useRef, useState } from "react";
+import { get, delEvt, isTargetInElement, addEvt} from "./js/utils.js";
 
-export default function Header() {
+export default function Header({getRef}) {
   const [opened, SetOpened] = useState({
     button: "",
     nav: "reverse-appear 0.3s both",
   });
 
+  const button = useRef(null);
+  const ul = useRef(null);
+
   const mobile = document.documentElement.clientWidth < 769;
+  
+  useEffect(() => {
+    let lgElmnts = [button.current, ...ul.current.children];
+    let switchThemeFun = () => {
+      for(let elmnt of lgElmnts){
+        if (isTargetInElement(elmnt, getRef.current)) {
+          elmnt.classList.add("glassLightMode")
+        } else {
+          elmnt.classList.remove("glassLightMode")
+        }
+      }
+    };
 
-  //   useState(() => {
-
-  //     // animateOnSpawn(get("header"), "scale-in-center 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both")
-  //   }, []);
+    addEvt(document, "scroll", switchThemeFun);  
+    return () => {
+      delEvt(document, "scroll", switchThemeFun);
+    }
+  }, [getRef])
 
   function openBurger(e) {
     e.stopPropagation();
@@ -21,7 +37,7 @@ export default function Header() {
         "rotate-out-2-ccw 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
       nav: "appear 0.3s both",
     });
-    get("header ul").style.display = "flex";
+    ul.current.style.display = "flex";
     document.addEventListener("click", removeBurger);
   }
 
@@ -32,16 +48,14 @@ export default function Header() {
         "reverse-rotate-out-2-ccw 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
       nav: "reverse-appear 0.3s both",
     });
-    let ul = document.querySelector("header ul");
     delEvt(document, "click", removeBurger);
-    ul.addEventListener("animationend", resetBurger);
+    ul.current.addEventListener("animationend", resetBurger);
   }
 
   function resetBurger() {
-    let ul = document.querySelector("header ul");
-    ul.style.display = "none";
-    get("#btnBurger").style.animation = "";
-    ul.removeEventListener("animationend", resetBurger);
+    ul.current.style.display = "none";
+    button.current.style.animation = "";
+    ul.current.removeEventListener("animationend", resetBurger);
   }
 
   return (
@@ -50,14 +64,17 @@ export default function Header() {
         <nav className="dynamicHueHvr">
           <button
             className="liquidGlass glassLightMode"
+            aria-label="Ouvrir le menu"
             id="btnBurger"
             onClick={openBurger}
             style={{animation : (mobile && opened.button)}}
+            ref={button}
           >
-            <i className="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars" aria-hidden="true"></i>
           </button>
           <ul
             style={{animation : (mobile && opened.nav)}}
+            ref={ul}
           >
             <li className="liquidGlass glassLightMode">
               <a href="#intro">Accueil</a>

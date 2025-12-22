@@ -3,16 +3,22 @@ import { useEffect, useRef } from "react";
 import { addEvt, delEvt, get } from "./js/utils.js";
 
 export default function ProjectScrollbar({length, onRender}) {
+
+	const cursor = useRef(null);
+	const elements = useRef(null);
+	const line = useRef(null);
+
   useEffect(() => {
+  let carrousel = get("#carProjet");
 	let sb = new HorizontalScrollBar(
-	  get("#carProjet"),
-	  get("#elements"),
-	  get("#cursor")
+	  carrousel,
+	  elements.current,
+	  cursor.current
 	);
-	let elements = get("#elements"), line = get("#line");
+
 	sb.onScroll(function (center, end) {
-	  elements.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
-	  line.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
+	  elements.current.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
+	  line.current.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
 	});
   }, []);
 
@@ -22,20 +28,20 @@ export default function ProjectScrollbar({length, onRender}) {
 
   return (
 	<div id="projScroll" className="liquidGlass no-drag">
-	  <div id="elements">
+	  <div id="elements" ref={elements}>
 		<i className="fa-solid fa-circle" />
-		{[...Array(length)].map(() => (
-		  <Line />
+		{[...Array(length)].map((_, i) => (
+		  <Line key={i} />
 		))}
 	  </div>
-	  <div id="line" />
-	  <div id="cursor" className="liquidGlass" />
+	  <div id="line" ref={line}/>
+	  <div id="cursor" className="liquidGlass" ref={cursor} />
 	</div>
   );
 }
 
-function Line() {
-  return <i className="fa-solid fa-circle" />;
+function Line({key}) {
+  return <i className="fa-solid fa-circle" id={key}/>;
 }
 
 class HorizontalScrollBar {
