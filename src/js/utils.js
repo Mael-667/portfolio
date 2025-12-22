@@ -106,11 +106,6 @@ function animateOnSpawn(target, animationStyle) {
   const callback = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        let animationEndFun = () => {
-            target.style.animation = "";
-            delEvt(target, "animationend", animationEndFun);
-        }
-        // addEvt(target, "animationend", animationEndFun);
         target.style.animation = animationStyle;
         observer.disconnect();
       }

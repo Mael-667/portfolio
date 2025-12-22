@@ -33,13 +33,11 @@ function AboutmeCarrousel() {
 
   function startScroll(e, id) {
     let steps = articlePos[id];
-    let articlePosUpdate;
     if (steps != 0) {
       let increment = (steps < 0) ? 1 : -1;
       for (let i = 0; i < Math.abs(steps); ++i) {
-        articlePosUpdate = [...articlePos].map((i) => loop(i + increment))
+        setArticlePos(prev => prev.map((i) => loop(i + increment)));
       }
-      setArticlePos(articlePosUpdate);
     } else {
       toggleAnim(e, "wobble-hor-bottom");
     }
@@ -150,7 +148,7 @@ function AboutmeCarrousel() {
           <ul>
             <li
               aria-selected={(articlePos[0] == 0)}
-              aria-controls="panel-passions"
+              aria-controls="interets"
               id="btn1"
               className={(articlePos[0] == 0) ? "active" : ""}
               onClick={(e) => startScroll(e.target, 0)}
@@ -159,7 +157,7 @@ function AboutmeCarrousel() {
             </li>
             <li
               aria-selected={(articlePos[1] == 0)}
-              aria-controls="panel-présentation"
+              aria-controls="aboutMe"
               id="btn2"
               className={(articlePos[1] == 0) ? "active" : ""}
               onClick={(e) => startScroll(e.target, 1)}
@@ -168,7 +166,7 @@ function AboutmeCarrousel() {
             </li>
             <li
               aria-selected={(articlePos[2] == 0)}
-              aria-controls="panel-skills"
+              aria-controls="skills"
               id="btn3"
               className={(articlePos[2] == 0) ? "active" : ""}
               onClick={(e) => startScroll(e.target, 2)}

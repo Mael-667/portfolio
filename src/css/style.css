@@ -417,20 +417,21 @@ section h3::after{
     animation-timing-function: ease-out;
 }
 
-#presentation li:hover{
-    transform-origin: 50% 100%;
-    transform: scale(1.4);
+@media (hover: hover) and (pointer: fine) {
+    #presentation li:hover{
+        transform-origin: 50% 100%;
+        transform: scale(1.4);
+    }
+    /* Selectionne la classe "active" dans le ul qui a un fils li qui se fait hover */
+    ul:has(>li:hover)>.active{
+        transform: scale(1);
+    }
 }
-
 #presentation li:active{
     transform-origin: 50% 100%;
     transform: scale(1.3);
 }
 
-/* Selectionne la classe "active" dans le ul qui a un fils li qui se fait hover */
-ul:has(>li:hover)>.active{
-    transform: scale(1);
-}
 
 .active{
     transform-origin: 50% 100%;
