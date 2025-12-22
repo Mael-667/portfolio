@@ -6,7 +6,7 @@ import {
   animateOnSpawn,
 } from "./js/utils.js";
 import ProjectScrollbar from "./projectScrollbar.jsx";
-import GithubData from "./modules/GithubData.js";
+import GithubData from "./modules/GithubData.jsx";
 
 function ProjectCarrousel() {
   const [cards, setCards] = useState([]);
