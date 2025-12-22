@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { get, delEvt, isTargetInElement, addEvt} from "./js/utils.js";
+import { useEffect, useRef, useState } from "react";
+import { delEvt, isTargetInElement, addEvt} from "./js/utils.js";
 
 export default function Header({getRef}) {
   const [opened, SetOpened] = useState({

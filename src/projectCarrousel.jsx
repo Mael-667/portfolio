@@ -54,7 +54,7 @@ function ProjectCarrousel() {
           </article>
         </div>
         {cards.length > 0 && (
-          <ProjectScrollbar length={cards.length} onRender={() => {startAutoScroll(get("#carProjet"), get("#elements"), get("#cursor"))}} />
+          <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={() => {startAutoScroll(get("#carProjet"), get("#elements"), get("#cursor"))}} />
         )}
       </div>
     </>

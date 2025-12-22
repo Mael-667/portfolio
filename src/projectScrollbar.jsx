@@ -2,16 +2,15 @@
 import { useEffect, useRef } from "react";
 import { addEvt, delEvt, get } from "./js/utils.js";
 
-export default function ProjectScrollbar({length, onRender}) {
+export default function ProjectScrollbar({length, onRender, carrousel}) {
 
 	const cursor = useRef(null);
 	const elements = useRef(null);
 	const line = useRef(null);
 
   useEffect(() => {
-  let carrousel = get("#carProjet");
 	let sb = new HorizontalScrollBar(
-	  carrousel,
+	  carrousel.current,
 	  elements.current,
 	  cursor.current
 	);
@@ -31,7 +30,7 @@ export default function ProjectScrollbar({length, onRender}) {
 	  <div id="elements" ref={elements}>
 		<i className="fa-solid fa-circle" />
 		{[...Array(length)].map((_, i) => (
-		  <Line key={i} />
+		  <Line />
 		))}
 	  </div>
 	  <div id="line" ref={line}/>
@@ -40,8 +39,8 @@ export default function ProjectScrollbar({length, onRender}) {
   );
 }
 
-function Line({key}) {
-  return <i className="fa-solid fa-circle" id={key}/>;
+function Line() {
+  return <i className="fa-solid fa-circle"/>;
 }
 
 class HorizontalScrollBar {

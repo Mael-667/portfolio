@@ -144,7 +144,7 @@ h3{
 #intro h2{
     filter: none;
     text-indent: -4rem;
-    margin: 1.8rem 0;
+    margin: 1.5rem 0;
 }
 
 section{
@@ -343,7 +343,7 @@ section h3::after{
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    padding-left: 2rem;
+    /* padding-left: 2rem; */
 }
 
 .passion{
@@ -1000,7 +1000,7 @@ section h3::after{
     }
 
     h2{
-        font-size: 1.5em;
+        font-size: 1.8em;
         margin: 0.8rem 0;
     }
 
@@ -1022,7 +1022,7 @@ section h3::after{
     }
 
     section>h2 {
-        align-self: baseline;
+        /* align-self: baseline; */
         padding-top: 1rem;
     }
 
@@ -1137,11 +1137,14 @@ section h3::after{
     .articleRight::before, .articleLeft::before{
         backdrop-filter: none;
         filter: none;
+        transform:none;
+        display: none;
     }
     .articleRight::after, .articleLeft::after{
         /* background: rgba(0, 0, 0, 0.14) !important; */
         border: 1px solid rgba(0, 0, 0, 0.63);
         /* box-shadow: none !important; */
+        background-blend-mode: unset;
     }  
     #presentation nav i {
         filter: none;
@@ -1183,7 +1186,8 @@ section h3::after{
     }
 
     #passions {
-        justify-content: space-around;
+        justify-content: space-around;  
+        gap: 0;
     }
 
     #reseaux>div:nth-of-type(2)>a{
@@ -1220,7 +1224,10 @@ section h3::after{
         margin: 1.2rem;
     }
     #presentation article>* {
-        margin: 1rem 1.3rem 1.1rem 1.3rem;
+        margin: 1rem 1.3rem 0.8rem 1.3rem;
+    }
+    .skill svg, .skill img {
+        height: 3rem;
     }
     section p{
         font-size: 1.1rem !important;
