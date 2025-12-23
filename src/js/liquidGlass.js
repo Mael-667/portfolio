@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     
     //activate dynamic hues only if needed
-    startDynamicHue();
+    // startDynamicHue();
 });
 
 export default function startDynamicHue(){

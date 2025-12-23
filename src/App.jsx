@@ -1,20 +1,21 @@
 import React, { createContext, useEffect, useRef} from "react";
-import startDynamicHue from "./js/liquidGlass.js";
 import AboutmeCarrousel from "./aboutmeCarrousel.jsx";
 import ProjectCarrousel from "./projectCarrousel.jsx";
 import Contact from "./Contact.jsx";
 import Header from "./Header.jsx";
 
 import {animateOnSpawn} from "./js/utils.js";
+import './css/style.css'
+import useLiquidGlass from "./hooks/useLiquidGlass.jsx";
 
 export default function App() {
   const titre = useRef(null);
   const intro = useRef(null);
   const h1 = useRef(null);
 
-  useEffect(() => {
-    startDynamicHue();
+  useLiquidGlass();
 
+  useEffect(() => {
     document.fonts.ready.then(() => {
       animateOnSpawn(
         h1.current,
