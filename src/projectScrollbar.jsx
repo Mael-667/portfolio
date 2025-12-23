@@ -19,20 +19,18 @@ export default function ProjectScrollbar({length, onRender, carrousel}) {
 	  elements.current.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
 	  line.current.style = `background-image : radial-gradient(circle at ${center}px,rgba(255, 221, 235, 1) ${end - 5}px, rgba(31, 0, 23, 1) ${end}px) !important;`;
 	});
-  }, [carrousel]);
 
-	useEffect(() => {
-		let cleanup = onRender();
-		return () => {
-			cleanup();
-		}
-	}, [onRender])
+	let cleanup = onRender(carrousel.current, elements.current, cursor.current);
+	return () => {
+		cleanup();
+	}
+  }, [carrousel, onRender]);
 
   return (
 	<div id="projScroll" className="liquidGlass no-drag">
 	  <div id="elements" ref={elements}>
 		<i className="fa-solid fa-circle" />
-		{[...Array(length)].map((_, i) => (
+		{[...Array(length)].map(() => (
 		  <Line />
 		))}
 	  </div>

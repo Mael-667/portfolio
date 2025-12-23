@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   addEvt,
   delEvt,
-  get,
   animateOnSpawn,
 } from "./js/utils.js";
 import ProjectScrollbar from "./projectScrollbar.jsx";
@@ -63,7 +62,7 @@ function ProjectCarrousel() {
           </article>
         </div>
         {cards.length > 0 && (
-          <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={() => startAutoScroll(get("#carProjet"), get("#elements"), get("#cursor"))} />
+          <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={startAutoScroll} />
         )}
       </div>
     </>

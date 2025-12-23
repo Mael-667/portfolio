@@ -278,7 +278,7 @@ section h3::after{
 .articleFocus:after{
     background-color: rgba(112, 205, 255, 0.123);
     background-image: linear-gradient(132deg, rgba(0, 204, 255, 0.33) 0%, rgb(0 255 157 / 31%) 49%, rgb(0 255 47 / 25%) 100%) !important;
-    box-shadow: inset 1px 1px 3px 1px rgba(255, 255, 255, 1), inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 12px 2px rgb(0 0 0 / 46%) !important;
+    box-shadow: inset 1px 1px 8px 2px #b8ffef, inset -1px -2px 4px 1px #000000ad, 0 0 12px 2px #00000075 !important;
     background-blend-mode: hard-light;
 }
 
