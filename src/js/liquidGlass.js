@@ -89,7 +89,7 @@ function dynamicLiquidGlassColor(){
                 elmnts[i].element.style.setProperty('--backgroundHover', ``);
             };
         };
-    }, 50), {passive:true});
+    }, 60), {passive:true});
 };
 
 

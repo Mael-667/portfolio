@@ -555,6 +555,36 @@ section h3::after{
     justify-self: center;
 }
 
+.loading{
+    background-image: linear-gradient(90deg, #26005517, rgb(50 0 71 / 60%), #26005517);
+    background-size: 1000% 100%;
+    min-height: 1em;
+    min-width: 70%;
+    border-radius: 1rem;
+    animation: bg-pan-left 6s infinite both;
+    &::after{
+        display: none;
+    }
+}
+div.loading{
+    margin: 1.4rem 1.8rem 0 1.8rem;
+    box-sizing: border-box;
+    border-radius: inherit;
+}
+
+p.loading{
+    height: 80%;
+}
+
+@keyframes bg-pan-left {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .projet a{
     padding: 0 0.8em !important;
     height: 2.2em;

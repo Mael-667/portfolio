@@ -24,7 +24,7 @@ export default function Header({getRef}) {
       }
     };
 
-    addEvt(document, "scroll", throttle(switchThemeFun, 70), {passive:true});  
+    addEvt(document, "scroll", throttle(switchThemeFun, 80), {passive:true});  
     return () => {
       delEvt(document, "scroll", switchThemeFun);
     }

@@ -8,13 +8,14 @@ import {
 import ProjectScrollbar from "./projectScrollbar.jsx";
 import GithubData from "./modules/GithubData.jsx";
 
+
 function ProjectCarrousel() {
   const [cards, setCards] = useState([]);
   const carProjet = useRef(null);
 
   useEffect(() => {
     GithubData.loadData().then((value) => {
-      if (value){
+      if (value) {
         setCards(value);
       }
     });
@@ -25,14 +26,21 @@ function ProjectCarrousel() {
     );
   }, [])
 
+
   return (
     <>
       <h2>Mes projets</h2>
       <div>
         <div id="carProjet" style={{ transform: "translateX(50vw)" }} ref={carProjet}>
-          {cards.map((element) => (
-            <ProjectCard data={element} />
-          ))}
+          {(() => {   
+            if (cards && cards.length == 0) {
+              return <FallbackCard />
+            } else if (cards && cards.length > 0) {
+              return cards.map((element) => (
+                <ProjectCard data={element} />
+              ))
+            }
+          })()}
           <article className="liquidGlassLarge projet">
             <div
               className="minia"
@@ -54,7 +62,7 @@ function ProjectCarrousel() {
           </article>
         </div>
         {cards.length > 0 && (
-          <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={() => {startAutoScroll(get("#carProjet"), get("#elements"), get("#cursor"))}} />
+          <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={() => { startAutoScroll(get("#carProjet"), get("#elements"), get("#cursor")) }} />
         )}
       </div>
     </>
@@ -85,12 +93,23 @@ function ProjectCard(data) {
   );
 }
 
+function FallbackCard() {
+  return <article className="liquidGlassLarge projet">
+    <div className="loading" />
+    <div className="projText">
+      <div className="projEntete">
+        <h3 className="loading" />
+      </div>
+      <p className="loading" />
+    </div>
+  </article>
+}
 
 function startAutoScroll(scrollarea, scrollbar, bar, duration = 2) {
   let renderWidth = scrollarea.offsetWidth; //taille affichée a l'écran
   let scrollWidth = scrollarea.scrollWidth; //taille totale de l'élément
   let stoptt = false;
-  let decr = scrollWidth / (60*duration);
+  let decr = scrollWidth / (60 * duration);
   let target = 0;
   let animId = 0;
   let animId2 = 0;
@@ -154,7 +173,7 @@ function startAutoScroll(scrollarea, scrollbar, bar, duration = 2) {
     if (target > scrollWidth - renderWidth) {
       target = scrollWidth - renderWidth;
     }
-    incr = nextStep / (60*duration);
+    incr = nextStep / (60 * duration);
     scrollAnim();
   }
   function scrollAnim() {

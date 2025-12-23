@@ -20,11 +20,10 @@ export default class GithubData {
       for (let index = 0; index < limit; index++) {
         ans.push(await this.#parseGithubProj(result[index], index));
       }
-
       return ans;
     } catch (error) {
       console.error(error.message);
-      return false;
+      return [];
     }
   }
 
