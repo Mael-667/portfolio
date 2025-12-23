@@ -1,9 +1,9 @@
 import EmailForm from "./EmailForm";
+import useIsMobile from "./hooks/useIsMobile";
 
 export default function Contact() {
 
-  const width = document.documentElement.clientWidth;
-  const mobileWidth = 769;
+  const mobile = useIsMobile();
 
   return (
     <>
@@ -13,8 +13,8 @@ export default function Contact() {
         <h3>N'hésitez pas à me contacter par mail</h3>
         <EmailForm />
       </div>
-      <div id="reseaux" className={(width < mobileWidth) ? "liquidGlassLarge" : ""}>
-        <div className={(width > mobileWidth) ? "liquidGlassLarge" : ""}>
+      <div id="reseaux" className={mobile ? "liquidGlassLarge" : ""}>
+        <div className={!mobile ? "liquidGlassLarge" : ""}>
           <h3>Mes réseaux</h3>
           <div id="social">
             <a href="https://github.com/Mael-667" target="_blank">
@@ -30,7 +30,7 @@ export default function Contact() {
             </a>
           </div>
         </div>
-        <div className={(width > mobileWidth) ? "liquidGlassLarge" : ""}>
+        <div className={!mobile ? "liquidGlassLarge" : ""}>
           <h3>Mon cv</h3>
           <a
             href="./files/CV_2025-09-19_Maël_Flament.pdf"

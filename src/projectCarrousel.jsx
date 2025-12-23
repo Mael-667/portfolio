@@ -106,7 +106,7 @@ function FallbackCard() {
   </article>
 }
 
-function startAutoScroll(scrollarea, scrollbar, bar, duration = 4) {
+function startAutoScroll(scrollarea, scrollbar, bar, duration = 2.5) {
   let renderWidth = scrollarea.offsetWidth; //taille affichée a l'écran
   let scrollWidth = scrollarea.scrollWidth; //taille totale de l'élément
   let stoptt = false;
@@ -131,7 +131,7 @@ function startAutoScroll(scrollarea, scrollbar, bar, duration = 4) {
       if (entry.isIntersecting) {
         intervalAnim = setInterval(() => {
           autoScroll();
-        }, 5777);
+        }, 7777);
         observer.disconnect();
       }
     });

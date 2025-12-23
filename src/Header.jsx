@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { delEvt, isTargetInElement, addEvt, throttle} from "./js/utils.js";
+import useIsMobile from "./hooks/useIsMobile.jsx";
 
 export default function Header({getRef}) {
   const [opened, SetOpened] = useState({
@@ -10,7 +11,7 @@ export default function Header({getRef}) {
   const button = useRef(null);
   const ul = useRef(null);
 
-  const mobile = document.documentElement.clientWidth < 769;
+  const mobile = useIsMobile();
   
   useEffect(() => {
     let lgElmnts = [button.current, ...ul.current.children];
