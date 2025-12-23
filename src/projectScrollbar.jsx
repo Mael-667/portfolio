@@ -22,7 +22,10 @@ export default function ProjectScrollbar({length, onRender, carrousel}) {
   }, [carrousel]);
 
 	useEffect(() => {
-		onRender();
+		let cleanup = onRender();
+		return () => {
+			cleanup();
+		}
 	}, [onRender])
 
   return (

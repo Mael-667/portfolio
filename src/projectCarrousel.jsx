@@ -26,21 +26,22 @@ function ProjectCarrousel() {
     );
   }, [])
 
+  function showProjectCards() {
+    if (cards && cards.length == 0) {
+      return <FallbackCard />
+    } else if (cards && cards.length > 0) {
+      return cards.map((element) => (
+        <ProjectCard data={element} />
+      ))
+    }
+  }
 
   return (
     <>
       <h2>Mes projets</h2>
       <div>
         <div id="carProjet" style={{ transform: "translateX(50vw)" }} ref={carProjet}>
-          {(() => {   
-            if (cards && cards.length == 0) {
-              return <FallbackCard />
-            } else if (cards && cards.length > 0) {
-              return cards.map((element) => (
-                <ProjectCard data={element} />
-              ))
-            }
-          })()}
+          {showProjectCards()}
           <article className="liquidGlassLarge projet">
             <div
               className="minia"
@@ -62,7 +63,7 @@ function ProjectCarrousel() {
           </article>
         </div>
         {cards.length > 0 && (
-          <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={() => { startAutoScroll(get("#carProjet"), get("#elements"), get("#cursor")) }} />
+          <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={() => startAutoScroll(get("#carProjet"), get("#elements"), get("#cursor"))} />
         )}
       </div>
     </>
@@ -105,7 +106,7 @@ function FallbackCard() {
   </article>
 }
 
-function startAutoScroll(scrollarea, scrollbar, bar, duration = 2) {
+function startAutoScroll(scrollarea, scrollbar, bar, duration = 4) {
   let renderWidth = scrollarea.offsetWidth; //taille affichée a l'écran
   let scrollWidth = scrollarea.scrollWidth; //taille totale de l'élément
   let stoptt = false;
@@ -130,7 +131,7 @@ function startAutoScroll(scrollarea, scrollbar, bar, duration = 2) {
       if (entry.isIntersecting) {
         intervalAnim = setInterval(() => {
           autoScroll();
-        }, 9777);
+        }, 5777);
         observer.disconnect();
       }
     });
@@ -151,7 +152,7 @@ function startAutoScroll(scrollarea, scrollbar, bar, duration = 2) {
   addEvt(scrollbar, "mousedown", cancelCarAnim);
 
   function touchStartBind() {
-    cancelCarAnim;
+    cancelCarAnim();
     bar.classList.add("touched");
   }
   addEvt(scrollbar, "touchstart", touchStartBind);
@@ -195,4 +196,6 @@ function startAutoScroll(scrollarea, scrollbar, bar, duration = 2) {
       animId2 = requestAnimationFrame(scrollAnimTo0);
     }
   }
+  
+  return cancelCarAnim;
 }

@@ -1255,6 +1255,7 @@ p.loading{
     }
     #presentation article>* {
         margin: 1rem 1.3rem 0.8rem 1.3rem;
+        text-shadow: 0 0 4px #000000bf;
     }
     .skill svg, .skill img {
         height: 3rem;
