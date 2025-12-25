@@ -54,10 +54,12 @@ export function LiquidGlass({as: Component = 'div', children, className = '', ho
 
   const ref = useRef(null);
   const lqContext = useContext(LidquidGlassContext);
-
+  
   useEffect(() => {
+    if(!dynamic) return;
+    
     let entry = { element: ref, hoverable: hoverable };
-    if(dynamic) lqContext.balises.push(entry)-1;
+    lqContext.balises.push(entry)-1;
 
     return () => {
       const index = lqContext.balises.indexOf(entry);
@@ -66,7 +68,8 @@ export function LiquidGlass({as: Component = 'div', children, className = '', ho
   }, [dynamic, hoverable, lqContext.balises])
 
   return (
-    <Component ref={ref} className={`${large ? "liquidGlassLarge" : "liquidGlass"} ${className}`} {...props}>
+    // eslint-disable-next-line react-hooks/immutability
+    <Component className={`${large ? "liquidGlassLarge" : "liquidGlass"} ${className}`} {...props} ref={(el) => {ref.current = el; if(props.ref) props.ref.current = el;}}>
       {children}
     </Component>
   );
@@ -85,6 +88,7 @@ function useDynamicHue() {
     let wait = false;
     let DynamicHue = () => {
       if (!wait) {
+        wait = true;
         let selected = [];
         for (let i = 0; i < backgrounds.length; ++i) {
           let color = backgrounds[i].getAttribute("data-hue");
@@ -102,20 +106,20 @@ function useDynamicHue() {
           };
         };
         for (let i = 0; i < elmnts.length; ++i) {
-          let euh = true;
+          let inbg = true;
           for (let j = 0; j < selected.length; j++) {
             if (i == selected[j]) {
-              euh = false;
+              inbg = false;
             };
           };
-          if (euh) {
+          if (inbg) {
+            if(elmnts[i].element.current == null) continue;
             elmnts[i].element.current.classList.remove("dynamic");
             elmnts[i].element.current.style.setProperty('--background', "");
             elmnts[i].element.current.style.setProperty('--shadow', ``);
             elmnts[i].element.current.style.setProperty('--backgroundHover', ``);
           };
         };
-        wait = true;
         setTimeout(function () {
           wait = false;
         }, 70);

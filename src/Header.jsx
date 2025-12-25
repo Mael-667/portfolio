@@ -63,17 +63,19 @@ export default function Header({getRef}) {
   return (
     <>
       <header>
-        <nav className="dynamicHueHvr">
-          <button
-            className="liquidGlass glassLightMode"
+        <nav>
+          <LiquidGlass as="button"
+            className="glassLightMode"
             aria-label="Ouvrir le menu"
             id="btnBurger"
             onClick={openBurger}
             style={{animation : (mobile && opened.button)}}
             ref={button}
+            hoverable
+            dynamic
           >
             <i className="fa-solid fa-bars" aria-hidden="true"></i>
-          </button>
+          </LiquidGlass>
           <ul
             style={{animation : (mobile && opened.nav)}}
             ref={ul}
