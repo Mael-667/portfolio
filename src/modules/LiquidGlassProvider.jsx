@@ -59,7 +59,7 @@ export function LiquidGlass({as: Component = 'div', children, className = '', ho
     if(!dynamic) return;
     
     let entry = { element: ref, hoverable: hoverable };
-    lqContext.balises.push(entry)-1;
+    lqContext.balises.push(entry);
 
     return () => {
       const index = lqContext.balises.indexOf(entry);
@@ -83,7 +83,7 @@ export function Tint({as: Component = 'div', children, hue, ...props}){
   
   useEffect(() => {
     let entry = { element: ref, shade: hue};
-    lqContext.backgrounds.push(entry)-1;
+    lqContext.backgrounds.push(entry);
 
     return () => {
       const index = lqContext.backgrounds.indexOf(entry);
@@ -130,13 +130,13 @@ function useDynamicHue() {
           };
         };
         for (let i = 0; i < elmnts.length; ++i) {
-          let inbg = true;
+          let notinbg = true;
           for (let j = 0; j < selected.length; j++) {
             if (i == selected[j]) {
-              inbg = false;
+              notinbg = false;
             };
           };
-          if (inbg) {
+          if (notinbg) {
             if(elmnts[i].element.current == null) continue;
             elmnts[i].element.current.classList.remove("dynamic");
             elmnts[i].element.current.style.setProperty('--background', "");
