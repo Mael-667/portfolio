@@ -75,6 +75,30 @@ export function LiquidGlass({as: Component = 'div', children, className = '', ho
   );
 }
 
+// eslint-disable-next-line no-unused-vars
+export function Tint({as: Component = 'div', children, hue, ...props}){
+
+  const ref = useRef(null);
+  const lqContext = useContext(LiquidGlassContext);
+  
+  useEffect(() => {
+    let entry = { element: ref, shade: hue};
+    lqContext.backgrounds.push(entry)-1;
+
+    return () => {
+      const index = lqContext.backgrounds.indexOf(entry);
+      if (index > -1) lqContext.backgrounds.splice(index, 1);
+    }
+  }, [lqContext.backgrounds, hue])
+
+  return (
+    // eslint-disable-next-line react-hooks/immutability
+    <Component {...props} ref={(el) => {ref.current = el; if(props.ref) props.ref.current = el;}}>
+      {children}
+    </Component>
+  );
+}
+
 
 
 function useDynamicHue() {
@@ -82,7 +106,7 @@ function useDynamicHue() {
   const lqContext = useContext(LiquidGlassContext);
   
   useEffect(() => {
-    let backgrounds = document.querySelectorAll("[data-hue]");
+    let backgrounds = lqContext.backgrounds;
     let elmnts = lqContext.balises;
 
     let wait = false;
@@ -91,10 +115,10 @@ function useDynamicHue() {
         wait = true;
         let selected = [];
         for (let i = 0; i < backgrounds.length; ++i) {
-          let color = backgrounds[i].getAttribute("data-hue");
+          let color = backgrounds[i].shade;
           for (let j = 0; j < elmnts.length; j++) {
-            if(elmnts[j].element.current === null) continue;
-            if (isTargetInElement(elmnts[j].element.current, backgrounds[i])) {
+            if(elmnts[j].element.current === null || backgrounds[i].element.current === null) continue;
+            if (isTargetInElement(elmnts[j].element.current, backgrounds[i].element.current)) {
               elmnts[j].element.current.classList.add("dynamic");
               elmnts[j].element.current.style.setProperty('--background', `${colorAdjust(color, -0.2)}32`);
               elmnts[j].element.current.style.setProperty('--shadow', `inset 1px 1px 3px 1px ${colorAdjust(color, 0.2)}47, inset -1px -2px 3px 1px rgb(49 49 49 / 30%), 0px 0px 7px 1px rgb(0 0 0 / 41%)`);
@@ -131,7 +155,7 @@ function useDynamicHue() {
     return () => {
       document.removeEventListener("scroll", DynamicHue)
     }
-  }, [lqContext.balises])
+  }, [lqContext.backgrounds, lqContext.balises])
 };
 
 

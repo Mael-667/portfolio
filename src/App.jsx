@@ -3,7 +3,7 @@ import AboutmeCarrousel from "./aboutmeCarrousel.jsx";
 import ProjectCarrousel from "./projectCarrousel.jsx";
 import Contact from "./Contact.jsx";
 import Header from "./Header.jsx";
-import {LiquidGlassProvider } from "./modules/LiquidGlassProvider.jsx";
+import {Tint, LiquidGlassProvider } from "./modules/LiquidGlassProvider.jsx";
 
 import {animateOnSpawn} from "./js/utils.js";
 import './css/style.css'
@@ -34,12 +34,12 @@ export default function App() {
             <h1 ref={h1}>Mael Flament</h1>
           </div>
         </section>
-        <section id="presentation" data-hue="#0059ffff">
+        <Tint as="section" id="presentation" hue="#0059ffff">
           <AboutmeCarrousel />
-        </section>
-        <section id="projets" data-hue="#bf4de1ff">
+        </Tint>
+        <Tint as="section" id="projets" hue="#bf4de1ff">
           <ProjectCarrousel />
-        </section>
+        </Tint>
         <section id="contact">
           <Contact />
         </section>
