@@ -41,9 +41,9 @@ export function LiquidGlassProvider({children}){
 
     const context = useContext(LiquidGlassContext);
 
-    return <LidquidGlassContext.Provider value={context}>
+    return <LiquidGlassContext.Provider value={context}>
               {children}
-           </LidquidGlassContext.Provider>
+           </LiquidGlassContext.Provider>
 }
 
 
