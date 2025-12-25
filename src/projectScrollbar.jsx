@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef } from "react";
 import { addEvt, delEvt, get } from "./js/utils.js";
+import { LiquidGlass } from "./modules/LiquidGlassProvider.jsx";
 
 export default function ProjectScrollbar({length, onRender, carrousel}) {
 
@@ -27,7 +28,7 @@ export default function ProjectScrollbar({length, onRender, carrousel}) {
   }, [carrousel, onRender]);
 
   return (
-	<div id="projScroll" className="liquidGlass no-drag">
+	<LiquidGlass id="projScroll" className="no-drag">
 	  <div id="elements" ref={elements}>
 		<i className="fa-solid fa-circle" />
 		{[...Array(length)].map(() => (
@@ -35,8 +36,8 @@ export default function ProjectScrollbar({length, onRender, carrousel}) {
 		))}
 	  </div>
 	  <div id="line" ref={line}/>
-	  <div id="cursor" className="liquidGlass" ref={cursor} />
-	</div>
+	  <LiquidGlass id="cursor" ref={cursor} />
+	</LiquidGlass>
   );
 }
 

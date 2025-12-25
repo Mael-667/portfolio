@@ -1,19 +1,17 @@
-import React, { createContext, useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import AboutmeCarrousel from "./aboutmeCarrousel.jsx";
 import ProjectCarrousel from "./projectCarrousel.jsx";
 import Contact from "./Contact.jsx";
 import Header from "./Header.jsx";
+import {LiquidGlassProvider } from "./modules/LiquidGlassProvider.jsx";
 
 import {animateOnSpawn} from "./js/utils.js";
 import './css/style.css'
-import useLiquidGlass from "./hooks/useLiquidGlass.jsx";
 
 export default function App() {
   const titre = useRef(null);
   const intro = useRef(null);
   const h1 = useRef(null);
-
-  useLiquidGlass();
 
   useEffect(() => {
     document.fonts.ready.then(() => {
@@ -27,7 +25,7 @@ export default function App() {
   
   
   return (
-    <>
+    <LiquidGlassProvider>
       <Header getRef={intro} />
       <main>
         <section id="intro" ref={intro}>
@@ -46,6 +44,6 @@ export default function App() {
           <Contact />
         </section>
       </main>
-    </>
+    </LiquidGlassProvider>
   );
 }

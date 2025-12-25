@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { delEvt, isTargetInElement, addEvt, throttle} from "./js/utils.js";
 import useIsMobile from "./hooks/useIsMobile.jsx";
+import { LiquidGlass } from "./modules/LiquidGlassProvider.jsx";
 
 export default function Header({getRef}) {
   const [opened, SetOpened] = useState({
@@ -77,18 +78,18 @@ export default function Header({getRef}) {
             style={{animation : (mobile && opened.nav)}}
             ref={ul}
           >
-            <li className="liquidGlass glassLightMode">
+            <LiquidGlass as="li" className="glassLightMode" hoverable dynamic>
               <a href="#intro">Accueil</a>
-            </li>
-            <li className="liquidGlass glassLightMode">
+            </LiquidGlass>
+            <LiquidGlass as="li" className="glassLightMode" hoverable dynamic>
               <a href="#presentation">Présentation</a>
-            </li>
-            <li className="liquidGlass glassLightMode">
+            </LiquidGlass>
+            <LiquidGlass as="li" className="glassLightMode" hoverable dynamic>
               <a href="#projets">Projets</a>
-            </li>
-            <li className="liquidGlass glassLightMode">
+            </LiquidGlass>
+            <LiquidGlass as="li" className="glassLightMode" hoverable dynamic>
               <a href="#contact">Contact</a>
-            </li>
+            </LiquidGlass>
           </ul>
         </nav>
       </header>

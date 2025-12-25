@@ -6,6 +6,7 @@ import {
 } from "./js/utils.js";
 import ProjectScrollbar from "./projectScrollbar.jsx";
 import GithubData from "./modules/GithubData.jsx";
+import { LiquidGlass } from "./modules/LiquidGlassProvider.jsx";
 
 
 function ProjectCarrousel() {
@@ -41,9 +42,10 @@ function ProjectCarrousel() {
       <div>
         <div id="carProjet" style={{ transform: "translateX(50vw)" }} ref={carProjet}>
           {showProjectCards()}
-          <article className="liquidGlassLarge projet">
+          <LiquidGlass as="article" className="projet" large>
             <div
               className="minia"
+              loading="lazy"
               style={{ backgroundImage: 'url("./img/more.jpg")' }}
             ></div>
             <div className="projText">
@@ -59,7 +61,7 @@ function ProjectCarrousel() {
                 différentes technologies sur mon temps libre.
               </p>
             </div>
-          </article>
+          </LiquidGlass>
         </div>
         {cards.length > 0 && (
           <ProjectScrollbar length={cards.length} carrousel={carProjet} onRender={startAutoScroll} />
@@ -73,7 +75,7 @@ export default ProjectCarrousel;
 function ProjectCard(data) {
   data = data.data;
   return (
-    <article className="liquidGlassLarge projet" key={data.key}>
+    <LiquidGlass as="article" className="projet" large key={data.key}>
       <div
         className="minia"
         style={{ backgroundImage: `url(${data.img}` }}
@@ -89,12 +91,12 @@ function ProjectCard(data) {
       <a href={data.url} target="_blank" className="liquidBtn">
         En voir plus
       </a>
-    </article>
+    </LiquidGlass>
   );
 }
 
 function FallbackCard() {
-  return <article className="liquidGlassLarge projet">
+  return <LiquidGlass as="article" className="projet" large>
     <div className="loading" />
     <div className="projText">
       <div className="projEntete">
@@ -102,7 +104,7 @@ function FallbackCard() {
       </div>
       <p className="loading" />
     </div>
-  </article>
+  </LiquidGlass>
 }
 
 function startAutoScroll(scrollarea, scrollbar, bar, duration = 2.5) {

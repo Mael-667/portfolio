@@ -1,5 +1,6 @@
 import EmailForm from "./EmailForm";
 import useIsMobile from "./hooks/useIsMobile";
+import { LiquidGlass } from "./modules/LiquidGlassProvider";
 
 export default function Contact() {
 
@@ -9,10 +10,10 @@ export default function Contact() {
     <>
     <h2>Si mon travail a retenu votre attention</h2>
     <div id="contactCards">
-      <div id="email" className="liquidGlassLarge">
+      <LiquidGlass id="email" large>
         <h3>N'hésitez pas à me contacter par mail</h3>
         <EmailForm />
-      </div>
+      </LiquidGlass>
       <div id="reseaux" className={mobile ? "liquidGlassLarge" : ""}>
         <div className={!mobile ? "liquidGlassLarge" : ""}>
           <h3>Mes réseaux</h3>

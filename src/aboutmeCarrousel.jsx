@@ -5,6 +5,7 @@ import htmlLogo from "./assets/html.svg";
 import cssLogo from "./assets/css.svg";
 import jsLogo from "./assets/js.svg";
 import phpLogo from "./assets/php.svg";
+import { LiquidGlass } from "./modules/LiquidGlassProvider";
 
 function AboutmeCarrousel() {
 
@@ -89,7 +90,7 @@ function AboutmeCarrousel() {
       <h2>À propos de moi</h2>
       <div id="presentationMain">
         <div id="carrousel" ref={carrousel}>
-          <article className={getPos(articlePos[0]) + " liquidGlassLarge"} id="interets">
+          <LiquidGlass as="article" large className={getPos(articlePos[0])} id="interets">
             <h3>Mes passions</h3>
             <p>Passionné par la création sous toutes ses formes, j'aime mêler logique et créativité à travers le développement. Le code, le design et l'expérience utilisateur sont pour moi indissociables. Toujours curieux, j'explore de nouvelles idées et technologies pour enrichir ma façon de concevoir des applications modernes et intuitives.</p>
             <p>Voici une courte liste de ces passions qui m'animent :</p>
@@ -107,16 +108,16 @@ function AboutmeCarrousel() {
                 alt="Icone de dessin"
               />
             </div>
-          </article>
+          </LiquidGlass>
 
-          <article className={getPos(articlePos[1]) + " liquidGlassLarge"} id="aboutMe">
+          <LiquidGlass as="article" large className={getPos(articlePos[1])} id="aboutMe">
             <h3>Présentation</h3>
             <p>Passionné par le développement depuis de nombreuses années, j'ai commencé à apprendre la programmation en autodidacte dès l'adolescence.</p>
             <p>Actuellement développeur full-stack, je souhaite approfondir mes compétences et m'investir dans des projets créatifs et ambitieux.</p>
             <p>À l'aise avec JavaScript, PHP, HTML/CSS et Java, j'aime concevoir des sites et des applications web en explorant aussi bien le front-end que le back-end, avec pour objectif de créer des applications modernes, performantes et visuellement abouties.</p>
-          </article>
+          </LiquidGlass>
 
-          <article className={getPos(articlePos[2]) + " liquidGlassLarge"} id="skills">
+          <LiquidGlass as="article" large className={getPos(articlePos[2])} id="skills">
             <h3>Mes compétences</h3>
             <h4>Langages</h4>
             <div id="comp">
@@ -141,7 +142,7 @@ function AboutmeCarrousel() {
                 <p>Bootstrap</p>
               </div>
             </div>
-          </article>
+          </LiquidGlass>
         </div>
 
         <nav className="liquidGlass" aria-label="Navigation du carrousel">
