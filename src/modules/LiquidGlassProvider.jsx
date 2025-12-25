@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useInsertionEffect, useRef } from "react";
 
-export const LidquidGlassContext = createContext({
+export const LiquidGlassContext = createContext({
       balises: [],
       backgrounds: []
     });
@@ -39,7 +39,7 @@ export function LiquidGlassProvider({children}){
 
     useDynamicHue();
 
-    const context = useContext(LidquidGlassContext);
+    const context = useContext(LiquidGlassContext);
 
     return <LidquidGlassContext.Provider value={context}>
               {children}
@@ -53,7 +53,7 @@ export function LiquidGlassProvider({children}){
 export function LiquidGlass({as: Component = 'div', children, className = '', hoverable = false, dynamic = false, large = false ,...props}){
 
   const ref = useRef(null);
-  const lqContext = useContext(LidquidGlassContext);
+  const lqContext = useContext(LiquidGlassContext);
   
   useEffect(() => {
     if(!dynamic) return;
@@ -79,7 +79,7 @@ export function LiquidGlass({as: Component = 'div', children, className = '', ho
 
 function useDynamicHue() {
 
-  const lqContext = useContext(LidquidGlassContext);
+  const lqContext = useContext(LiquidGlassContext);
   
   useEffect(() => {
     let backgrounds = document.querySelectorAll("[data-hue]");
