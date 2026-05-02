@@ -75,7 +75,7 @@ export default class GithubData {
       Diskype: "./img/diskype.jpg",
       Portfolio: "./img/portfolio.png",
       "Liquid-Glass-CSS": "./img/lgcss.gif",
-      Harmonie: "./img/portfolio.jpg",
+      Harmonie: "./img/harmonie.jpg",
     };
     return link[project];
   }
